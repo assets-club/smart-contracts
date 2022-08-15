@@ -2,18 +2,15 @@
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 /**
  * @title TheAssetsClubOZ
  * @author Mathieu Bour
  * @dev The Assets Club NFT collection implementation based on OpenZeppelin's ERC721Enumerable contract.
  */
-contract TheAssetsClubOZ is ERC721, Ownable {
+contract TheAssetsClubOZEnumerable is ERC721Enumerable, Ownable {
   uint256 public constant MAX_SUPPLY = 10000;
-
-  /// @dev The token id tracker, starts at zero.
-  uint256 private _minted = 0;
 
   constructor() ERC721("The Assets Club", "TAC") {}
 
@@ -21,19 +18,13 @@ contract TheAssetsClubOZ is ERC721, Ownable {
     return "https://theassets.club/api/nft/";
   }
 
-  function totalSupply() public view returns (uint256) {
-    return _minted;
-  }
-
   function mint(uint256 count) external payable {
     uint256 minted = totalSupply();
-    require(minted + count < MAX_SUPPLY, "TheAssetsClub: minting count exceeds maxSupply");
+    require(totalSupply() + count < MAX_SUPPLY, "TheAssetsClub: minting count exceeds maxSupply");
 
     for (uint256 i = 0; i < count; i++) {
       _safeMint(_msgSender(), minted++);
     }
-
-    _minted = minted;
   }
 
   function withdraw() external virtual onlyOwner {

@@ -26,4 +26,4 @@ jobs:
       - name: Run Hardhat tests with gas estimator
         run: pnpm test:gas
         env:
-          COINMARKEPCAP_API_KEY: ${{ secrets.COINMARKEPCAP_API_KEY }}
+          COINMARKETCAP_API_KEY: ${{ secrets.COINMARKETCAP_API_KEY }}

@@ -57,6 +57,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TheAssetsClubOZ__factory>;
     getContractFactory(
+      name: "TheAssetsClubOZ",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TheAssetsClubOZ__factory>;
+    getContractFactory(
+      name: "TheAssetsClubOZEnumerable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TheAssetsClubOZEnumerable__factory>;
+    getContractFactory(
       name: "TheAssetsClubPsi",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TheAssetsClubPsi__factory>;
@@ -132,6 +140,16 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TheAssetsClubOZ>;
+    getContractAt(
+      name: "TheAssetsClubOZ",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TheAssetsClubOZ>;
+    getContractAt(
+      name: "TheAssetsClubOZEnumerable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TheAssetsClubOZEnumerable>;
     getContractAt(
       name: "TheAssetsClubPsi",
       address: string,

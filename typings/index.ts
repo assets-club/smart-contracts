@@ -32,6 +32,8 @@ export type { TheAssetsClubA } from "./contracts/TheAssetsClubA";
 export { TheAssetsClubA__factory } from "./factories/contracts/TheAssetsClubA__factory";
 export type { TheAssetsClubOZ } from "./contracts/TheAssetsClubOZ";
 export { TheAssetsClubOZ__factory } from "./factories/contracts/TheAssetsClubOZ__factory";
+export type { TheAssetsClubOZEnumerable } from "./contracts/TheAssetsClubOZEnumerable.sol/TheAssetsClubOZEnumerable";
+export { TheAssetsClubOZEnumerable__factory } from "./factories/contracts/TheAssetsClubOZEnumerable.sol/TheAssetsClubOZEnumerable__factory";
 export type { TheAssetsClubPsi } from "./contracts/TheAssetsClubPsi";
 export { TheAssetsClubPsi__factory } from "./factories/contracts/TheAssetsClubPsi__factory";
 export type { ERC721A__IERC721Receiver } from "./erc721a/contracts/ERC721A.sol/ERC721A__IERC721Receiver";

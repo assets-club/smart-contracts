@@ -6,11 +6,18 @@ import {
   TheAssetsClubA__factory,
   TheAssetsClubOZ,
   TheAssetsClubOZ__factory,
+  TheAssetsClubOZEnumerable,
+  TheAssetsClubOZEnumerable__factory,
   TheAssetsClubPsi,
   TheAssetsClubPsi__factory,
 } from '../typings';
 
-const factories = [TheAssetsClubOZ__factory, TheAssetsClubA__factory, TheAssetsClubPsi__factory];
+const factories = [
+  TheAssetsClubOZ__factory,
+  TheAssetsClubOZEnumerable__factory,
+  TheAssetsClubA__factory,
+  TheAssetsClubPsi__factory,
+];
 const cases = factories.map((factory) => ({
   name: factory.name.replace('__factory', ''),
   deploy: async (deployer: SignerWithAddress) => {
@@ -24,7 +31,7 @@ for (const { name, deploy } of cases) {
   describe(name, () => {
     let deployer: SignerWithAddress;
     let accounts: SignerWithAddress[];
-    let contract: TheAssetsClubOZ | TheAssetsClubA | TheAssetsClubPsi;
+    let contract: TheAssetsClubOZ | TheAssetsClubOZEnumerable | TheAssetsClubA | TheAssetsClubPsi;
 
     beforeEach(async () => {
       accounts = await ethers.getSigners();
