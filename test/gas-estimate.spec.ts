@@ -14,7 +14,7 @@ const factories = [TheAssetsClubOZ__factory, TheAssetsClubA__factory, TheAssetsC
 const cases = factories.map((factory) => ({
   name: factory.name.replace('__factory', ''),
   deploy: async (deployer: SignerWithAddress) => {
-    const contract = await new factory(deployer).deploy(10000);
+    const contract = await new factory(deployer).deploy();
     await contract.deployed();
     return contract;
   },

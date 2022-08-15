@@ -2,6 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { TheAssetsClubA } from "./TheAssetsClubA";
-export type { TheAssetsClubBase } from "./TheAssetsClubBase";
 export type { TheAssetsClubOZ } from "./TheAssetsClubOZ";
 export type { TheAssetsClubPsi } from "./TheAssetsClubPsi";

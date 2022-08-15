@@ -30,8 +30,6 @@ export type { IERC165 } from "./@openzeppelin/contracts/utils/introspection/IERC
 export { IERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory";
 export type { TheAssetsClubA } from "./contracts/TheAssetsClubA";
 export { TheAssetsClubA__factory } from "./factories/contracts/TheAssetsClubA__factory";
-export type { TheAssetsClubBase } from "./contracts/TheAssetsClubBase";
-export { TheAssetsClubBase__factory } from "./factories/contracts/TheAssetsClubBase__factory";
 export type { TheAssetsClubOZ } from "./contracts/TheAssetsClubOZ";
 export { TheAssetsClubOZ__factory } from "./factories/contracts/TheAssetsClubOZ__factory";
 export type { TheAssetsClubPsi } from "./contracts/TheAssetsClubPsi";

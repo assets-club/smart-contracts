@@ -30,11 +30,11 @@ import type {
 
 export interface TheAssetsClubOZInterface extends utils.Interface {
   functions: {
+    "MAX_SUPPLY()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "maxSupply()": FunctionFragment;
     "mint(uint256)": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -56,11 +56,11 @@ export interface TheAssetsClubOZInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "MAX_SUPPLY"
       | "approve"
       | "balanceOf"
       | "getApproved"
       | "isApprovedForAll"
-      | "maxSupply"
       | "mint"
       | "name"
       | "owner"
@@ -81,6 +81,10 @@ export interface TheAssetsClubOZInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
+    functionFragment: "MAX_SUPPLY",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "approve",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
@@ -96,7 +100,6 @@ export interface TheAssetsClubOZInterface extends utils.Interface {
     functionFragment: "isApprovedForAll",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "maxSupply", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "mint",
     values: [PromiseOrValue<BigNumberish>]
@@ -167,6 +170,7 @@ export interface TheAssetsClubOZInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "withdraw", values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: "MAX_SUPPLY", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
@@ -177,7 +181,6 @@ export interface TheAssetsClubOZInterface extends utils.Interface {
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "maxSupply", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -314,6 +317,8 @@ export interface TheAssetsClubOZ extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    MAX_SUPPLY(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -335,8 +340,6 @@ export interface TheAssetsClubOZ extends BaseContract {
       operator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
-
-    maxSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     mint(
       count: PromiseOrValue<BigNumberish>,
@@ -419,6 +422,8 @@ export interface TheAssetsClubOZ extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  MAX_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
+
   approve(
     to: PromiseOrValue<string>,
     tokenId: PromiseOrValue<BigNumberish>,
@@ -440,8 +445,6 @@ export interface TheAssetsClubOZ extends BaseContract {
     operator: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
-
-  maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   mint(
     count: PromiseOrValue<BigNumberish>,
@@ -524,6 +527,8 @@ export interface TheAssetsClubOZ extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    MAX_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -545,8 +550,6 @@ export interface TheAssetsClubOZ extends BaseContract {
       operator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     mint(
       count: PromiseOrValue<BigNumberish>,
@@ -670,6 +673,8 @@ export interface TheAssetsClubOZ extends BaseContract {
   };
 
   estimateGas: {
+    MAX_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -691,8 +696,6 @@ export interface TheAssetsClubOZ extends BaseContract {
       operator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     mint(
       count: PromiseOrValue<BigNumberish>,
@@ -776,6 +779,8 @@ export interface TheAssetsClubOZ extends BaseContract {
   };
 
   populateTransaction: {
+    MAX_SUPPLY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     approve(
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
@@ -797,8 +802,6 @@ export interface TheAssetsClubOZ extends BaseContract {
       operator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    maxSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     mint(
       count: PromiseOrValue<BigNumberish>,
