@@ -1,0 +1,12 @@
+.idea
+node_modules
+
+coverage
+artifacts
+cache
+dist
+
+coverage.json
+
+# Secrets
+.env.local

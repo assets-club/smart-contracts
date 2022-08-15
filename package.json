@@ -1,0 +1,80 @@
+{
+  "name": "@assets-club/smart-contracts",
+  "version": "0.0.1",
+  "description": "The Assets Club smart contracts ethers.js v5 definition package.",
+  "keywords": [
+    "nft",
+    "assets",
+    "assets-club",
+    "art",
+    "erc721",
+    "ethereum",
+    "freemint",
+    "smart-contract",
+    "solidity",
+    "ethers",
+    "ethers-v5",
+    "hardhat"
+  ],
+  "homepage": "https://theassets.club",
+  "bugs": "https://github.com/assets-club/smart-contracts/issues",
+  "license": "MIT",
+  "maintainers": [
+    "Mathieu Bour <mathieu.tin.bour@gmail.com> (https://github.com/mathieu-bour)"
+  ],
+  "funding": "https://theassets.club/donate",
+  "files": [
+    "dist/**"
+  ],
+  "repository": "github:assets-club/smart-contracts",
+  "scripts": {
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,css,less,sass,scss,json,json5,yml,yaml,md,mdx,graphql,sol}'",
+    "format:check": "prettier --check '**/*.{js,jsx,ts,tsx,css,less,sass,scss,json,json5,yml,yaml,md,mdx,graphql,sol}'",
+    "lint": "solhint 'contracts/**/*.sol'",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "test:gas": "REPORT_GAS=true hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "build": "rimraf dist/ && tsc -p tsconfig.package.json"
+  },
+  "devDependencies": {
+    "@ethersproject/abi": "^5.6.4",
+    "@ethersproject/bytes": "^5.6.1",
+    "@ethersproject/providers": "^5.6.8",
+    "@mathieu-bour/prettier-config": "github:mathieu-bour/prettier-config",
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.2",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.3",
+    "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.1.0",
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
+    "@openzeppelin/contracts": "^4.7.3",
+    "@typechain/ethers-v5": "^10.1.0",
+    "@typechain/hardhat": "^6.1.2",
+    "@types/chai": "^4.3.3",
+    "@types/lodash": "^4.14.182",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^18.7.3",
+    "chai": "^4.3.6",
+    "dotenv": "^16.0.1",
+    "erc721a": "^4.2.2",
+    "erc721psi": "^0.6.1",
+    "ethers": "^5.6.9",
+    "hardhat": "^2.10.1",
+    "hardhat-gas-reporter": "^1.0.8",
+    "lodash": "^4.17.21",
+    "prettier": "^2.7.1",
+    "prettier-plugin-solidity": "1.0.0-beta.24",
+    "rimraf": "^3.0.2",
+    "solhint": "^3.3.7",
+    "solidity-bits": "^0.3.2",
+    "solidity-coverage": "^0.7.21",
+    "ts-node": "^10.9.1",
+    "tslog": "^3.3.3",
+    "typechain": "^8.1.0",
+    "typescript": "^4.7.4"
+  },
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=7"
+  }
+}
