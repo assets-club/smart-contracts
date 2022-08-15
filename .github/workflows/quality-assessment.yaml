@@ -25,3 +25,5 @@ jobs:
         uses: pooky-labs/actions/setup-node@main
       - name: Run Hardhat tests with gas estimator
         run: pnpm test:gas
+        env:
+          COINMARKEPCAP_API_KEY: ${{ secrets.COINMARKEPCAP_API_KEY }}
