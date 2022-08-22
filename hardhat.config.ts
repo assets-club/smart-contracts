@@ -13,6 +13,13 @@ const config: HardhatUserConfig = {
       optimizer: {
         enabled: true,
       },
+
+      // Required by smock, see https://smock.readthedocs.io/en/latest/getting-started.html#required-config-for-mocks
+      outputSelection: {
+        '*': {
+          '*': ['storageLayout'],
+        },
+      },
     },
   },
   networks: {

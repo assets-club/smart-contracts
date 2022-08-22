@@ -1,34 +1,30 @@
+import { parseEther } from 'ethers/lib/utils';
 import { ethers, network, run } from 'hardhat';
 import { Logger } from 'tslog';
-import { TheAssetsClubA__factory, TheAssetsClubOZ__factory, TheAssetsClubPsi__factory } from '../typings';
+import { TheAssetsClub__factory } from '../typings';
 
 const logger = new Logger({
   displayFunctionName: false,
   displayFilePath: 'hidden',
 });
 
+const MAX_SUPPLY = 10000;
+const MIN_ETH_BALANCE = parseEther('0.1');
+const MAX_TAC_BALANCE = 3;
+const LIMITS = [2000, 5000];
+const QUANTITIES = [3, 2];
+
 async function main() {
   const [deployer] = await ethers.getSigners();
+  const args = [MAX_SUPPLY, MIN_ETH_BALANCE, MAX_TAC_BALANCE, LIMITS, QUANTITIES] as const;
 
   // OpenZeppelin
-  const tacOZ = await new TheAssetsClubOZ__factory(deployer).deploy();
-  await tacOZ.deployed();
-  logger.info('TheAssetsClubOZ deployed to', tacOZ.address);
-
-  // Azuki's ERC721A
-  const tacA = await new TheAssetsClubA__factory(deployer).deploy();
-  await tacA.deployed();
-  logger.info('TheAssetsClubA deployed to', tacA.address);
-
-  // Mediaval DAO ERC721Psi
-  const tacPsi = await new TheAssetsClubPsi__factory(deployer).deploy();
-  await tacPsi.deployed();
-  logger.info('TheAssetsClubPsi deployed to', tacPsi.address);
+  const tac = await new TheAssetsClub__factory(deployer).deploy(...args);
+  await tac.deployed();
+  logger.info('TheAssetsClubOZ deployed to', tac.address);
 
   if (network.name !== 'hardhat') {
-    await run('verify:verify', { address: tacOZ.address, constructorArguments: [] });
-    await run('verify:verify', { address: tacA.address, constructorArguments: [] });
-    await run('verify:verify', { address: tacPsi.address, constructorArguments: [] });
+    await run('verify:verify', { address: tac.address, constructorArguments: args });
   }
 }
 
