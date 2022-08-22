@@ -17,7 +17,20 @@ jobs:
       - name: Lint the code with Solhint
         run: pnpm lint
 
-  test:
+  test_coverage:
+    name: Run the tests with gas estimator
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Setup environment
+        uses: pooky-labs/actions/setup-node@main
+      - name: Run Hardhat tests with gas estimator
+        run: pnpm test:coverage
+      - name: Send coverage report to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  test_gas:
     name: Run the tests with gas estimator
     runs-on: ubuntu-22.04
     steps:
