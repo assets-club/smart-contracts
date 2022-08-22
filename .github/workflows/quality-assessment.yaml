@@ -18,7 +18,7 @@ jobs:
         run: pnpm lint
 
   test_coverage:
-    name: Run the tests with gas estimator
+    name: Run the tests with coverage support
     runs-on: ubuntu-22.04
     steps:
       - name: Setup environment
