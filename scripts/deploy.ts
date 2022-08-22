@@ -18,10 +18,10 @@ async function main() {
   const [deployer] = await ethers.getSigners();
   const args = [MAX_SUPPLY, MIN_ETH_BALANCE, MAX_TAC_BALANCE, LIMITS, QUANTITIES] as const;
 
-  // OpenZeppelin
   const tac = await new TheAssetsClub__factory(deployer).deploy(...args);
   await tac.deployed();
-  logger.info('TheAssetsClubOZ deployed to', tac.address);
+  await tac.deployTransaction.wait(3);
+  logger.info('TheAssetsClub deployed to', tac.address);
 
   if (network.name !== 'hardhat') {
     await run('verify:verify', { address: tac.address, constructorArguments: args });
