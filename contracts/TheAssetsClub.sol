@@ -3,6 +3,13 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "erc721a/contracts/ERC721A.sol";
+import "./SimpleWhitelist.sol";
+
+enum Phase {
+  EARLY,
+  OPEN,
+  CLOSED
+}
 
 /**
  * @title TheAssetsClub NFT Collection
@@ -21,13 +28,17 @@ contract TheAssetsClub is ERC721A, Ownable {
   uint256 public immutable maxTACBalance;
   Threshold[] public thresholds;
 
-  bool public closed = false;
+  /** @dev Internal state which holds if an account is the allow to mint during the private sale. */
+  Phase state = Phase.EARLY;
   string private baseURI = "https://theassets.club/api/nft/";
+  SimpleWhitelist whitelist;
+  uint256 publicAt = 0;
 
   constructor(
     uint256 _maxSupply,
     uint256 _minETHBalance,
     uint256 _maxTACBalance,
+    SimpleWhitelist _whitelist,
     uint256[] memory _thresholdLimits,
     uint256[] memory _thresholdQuantities
   ) ERC721A("The Assets Club", "TAC") {
@@ -39,6 +50,7 @@ contract TheAssetsClub is ERC721A, Ownable {
     maxSupply = _maxSupply;
     minETHBalance = _minETHBalance;
     maxTACBalance = _maxTACBalance;
+    whitelist = _whitelist;
 
     for (uint256 i = 0; i < _thresholdLimits.length; i++) {
       thresholds.push(Threshold(_thresholdLimits[i], _thresholdQuantities[i]));
@@ -85,6 +97,23 @@ contract TheAssetsClub is ERC721A, Ownable {
   }
 
   /**
+   * @dev Open the mint process.
+   * @param _publicAt specifies when the mint become public (e.g. does not require to be whitelisted).
+   */
+  function open(uint256 _publicAt) external onlyOwner {
+    require(state == Phase.EARLY, "TheAssetsClub: state must be Phase.EARLY");
+    state = Phase.OPEN;
+    publicAt = _publicAt;
+  }
+
+  /**
+   * @dev Close the mint process, forever; the collection will stay at is current supply.
+   */
+  function close() external onlyOwner {
+    state = Phase.CLOSED;
+  }
+
+  /**
    * @dev Allow users to mint NFTs. Users might send some ethers during the mint as tip.
    * Requirements:
    * - mint process must not be closed
@@ -93,22 +122,24 @@ contract TheAssetsClub is ERC721A, Ownable {
    * - totalSupply + mint count should not exceed
    */
   function mint() external payable {
-    require(!closed, "TheAssetsClub: minting is closed (forever!)");
-    require(address(_msgSender()).balance >= minETHBalance, "TheAssetsClub: minting requires to hold ethers");
+    address minter = _msgSender();
+
+    if (state == Phase.EARLY) {
+      revert("TheAssetsClub: mint is not yet open");
+    } else if (state == Phase.OPEN && block.timestamp < publicAt && !whitelist.isWhitelisted(minter)) {
+      revert("TheAssetsClub: account is not whitelisted");
+    } else if (state == Phase.CLOSED) {
+      revert("TheAssetsClub: mint is closed (forever!)");
+    }
+
+    require(address(minter).balance >= minETHBalance, "TheAssetsClub: minting requires to hold ethers");
 
     uint256 willMint = quantity();
 
-    require(balanceOf(_msgSender()) + willMint <= maxTACBalance, "TheAssetsClub: maximum mint reached!");
+    require(balanceOf(minter) + willMint <= maxTACBalance, "TheAssetsClub: maximum mint reached!");
     require(totalSupply() + willMint <= maxSupply, "TheAssetsClub: minting quantity exceeds maxSupply");
 
-    _mint(msg.sender, willMint);
-  }
-
-  /**
-   * @dev Close the mint process, forever; the collection will stay at is current supply.
-   */
-  function close() external onlyOwner {
-    closed = true;
+    _mint(minter, willMint);
   }
 
   /**

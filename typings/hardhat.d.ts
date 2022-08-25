@@ -17,9 +17,17 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Ownable__factory>;
     getContractFactory(
+      name: "SimpleWhitelist",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SimpleWhitelist__factory>;
+    getContractFactory(
       name: "TheAssetsClub",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TheAssetsClub__factory>;
+    getContractFactory(
+      name: "Whitelist",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Whitelist__factory>;
     getContractFactory(
       name: "ERC721A__IERC721Receiver",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -39,10 +47,20 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Ownable>;
     getContractAt(
+      name: "SimpleWhitelist",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SimpleWhitelist>;
+    getContractAt(
       name: "TheAssetsClub",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TheAssetsClub>;
+    getContractAt(
+      name: "Whitelist",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Whitelist>;
     getContractAt(
       name: "ERC721A__IERC721Receiver",
       address: string,

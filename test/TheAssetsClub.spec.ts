@@ -5,7 +5,7 @@ import { ethers } from 'hardhat';
 import { smock } from '@defi-wonderland/smock';
 import { setBalance } from '@nomicfoundation/hardhat-network-helpers';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
-import { TheAssetsClub__factory } from '../typings';
+import { TheAssetsClub, TheAssetsClub__factory, Whitelist, Whitelist__factory } from '../typings';
 
 use(smock.matchers);
 
@@ -17,27 +17,42 @@ interface DeployOptions {
     limit: number;
     quantity: number;
   }[];
+  open?: boolean | number;
+  whitelist?: string[];
 }
 
 describe('TheAssetsClub', () => {
   let deployer: SignerWithAddress;
   let accounts: SignerWithAddress[];
+  let tac: TheAssetsClub;
+  let whitelist: Whitelist;
 
   async function deploy(options?: Partial<DeployOptions>) {
+    whitelist = await new Whitelist__factory(deployer).deploy();
+    await whitelist.deployed();
+    await whitelist.add(options?.whitelist ?? [accounts[0].address, accounts[1].address, accounts[2].address]);
+
     const thresholds = options?.thresholds ?? [
       { limit: 2000, quantity: 3 },
       { limit: 5000, quantity: 2 },
     ];
 
-    const tac = await new TheAssetsClub__factory(deployer).deploy(
+    tac = await new TheAssetsClub__factory(deployer).deploy(
       options?.maxSupply ?? 10000,
       options?.minETHBalance ?? parseEther('0.1'),
       options?.maxTACBalance ?? 3,
+      whitelist.address,
       thresholds.map((t) => t.limit),
       thresholds.map((t) => t.quantity),
     );
 
-    return await tac.deployed();
+    await tac.deployed();
+
+    if (typeof options?.open === 'number') {
+      await tac.open(options.open);
+    } else if (options?.open ?? true) {
+      await tac.open(Math.floor(Date.now() / 1000) - 3600);
+    }
   }
 
   beforeEach(async () => {
@@ -46,7 +61,7 @@ describe('TheAssetsClub', () => {
 
   describe('constructor', () => {
     it('should deploy the contract properly', async () => {
-      const tac = await deploy();
+      await deploy();
       expect(tac.address).to.not.be.null;
     });
 
@@ -56,6 +71,7 @@ describe('TheAssetsClub', () => {
         10000,
         parseEther('0.1'),
         3,
+        '0x0000000000000000000000000000000000000000',
         [4, 3, 2], // limits.length === 3
         [],
       );
@@ -64,9 +80,16 @@ describe('TheAssetsClub', () => {
     });
   });
 
+  describe('open', async () => {
+    it('should revert if mint is closed', async () => {
+      await tac.close();
+      await expect(tac.open(0)).to.revertedWith('TheAssetsClub: state must be State.EARLY');
+    });
+  });
+
   describe('setBaseURI', () => {
     it('should change the tokenURI via the baseURI', async () => {
-      const tac = await deploy();
+      await deploy();
       await tac.mint();
       expect(await tac.tokenURI(1)).to.eq('https://theassets.club/api/nft/1.json');
 
@@ -77,7 +100,7 @@ describe('TheAssetsClub', () => {
 
   describe('tokenURI', () => {
     it('should return the online tokenURI', async () => {
-      const tac = await deploy();
+      await deploy();
       await tac.mint();
       expect(await tac.tokenURI(1)).to.eq('https://theassets.club/api/nft/1.json');
     });
@@ -85,14 +108,14 @@ describe('TheAssetsClub', () => {
 
   describe('quantity', () => {
     it('should allow to mint 3 NFTs at the beginning of the mint phase', async () => {
-      const tac = await deploy();
+      await deploy();
       expect(await tac.quantity()).to.eq(3);
     });
   });
 
   describe('mint', () => {
     it('should mint properly with maxSupply=20', async () => {
-      const tac = await deploy({
+      await deploy({
         maxSupply: 20,
         thresholds: [
           { limit: 8, quantity: 3 },
@@ -133,13 +156,13 @@ describe('TheAssetsClub', () => {
     });
 
     it('should revert if minting is closed', async () => {
-      const tac = await deploy();
+      await deploy();
       await tac.close();
-      await expect(tac.connect(accounts[0]).mint()).to.be.revertedWith('TheAssetsClub: minting is closed (forever!)');
+      await expect(tac.connect(accounts[0]).mint()).to.be.revertedWith('TheAssetsClub: mint is closed (forever!)');
     });
 
     it('should revert if the account owns less than 0.1 ether', async () => {
-      const tac = await deploy();
+      await deploy();
 
       const prevBalance = await accounts[0].getBalance();
       await setBalance(accounts[0].address, parseEther('0.05')); // Not enough to mint
@@ -152,13 +175,13 @@ describe('TheAssetsClub', () => {
     });
 
     it('should revert if the account tries to mint too much tokens', async () => {
-      const tac = await deploy();
+      await deploy();
       await tac.connect(accounts[0]).mint(); // mint 3 tokens => limit reached
       await expect(tac.connect(accounts[0]).mint()).to.be.revertedWith('TheAssetsClub: maximum mint reached!');
     });
 
     it('should revert if the lint would exceed the maximum supply', async () => {
-      const tac = await deploy({ maxSupply: 6 });
+      await deploy({ maxSupply: 6 });
       await tac.connect(accounts[0]).mint(); // account 0 mints 3 tokens => 3 left
       await tac.connect(accounts[1]).mint(); // account 1 mints 3 tokens => 0 left: sold out
 
@@ -167,13 +190,29 @@ describe('TheAssetsClub', () => {
         'TheAssetsClub: minting quantity exceeds maxSupply',
       );
     });
+
+    it('should revert if the mint is not yet open', async () => {
+      await deploy({ open: false });
+      await expect(tac.connect(accounts[0]).mint()).to.be.revertedWith('TheAssetsClub: mint is not yet open');
+    });
+
+    it('should revert if the minter is not whitelisted', async () => {
+      await deploy({ open: Math.floor(Date.now() / 1000) + 3600 });
+      await expect(tac.connect(accounts[4]).mint()).to.be.revertedWith('TheAssetsClub: account is not whitelisted');
+    });
+
+    it('should allow to mint if mint is public, even if account is not whitelisted', async () => {
+      await deploy({ open: Math.floor(Date.now() / 1000) - 3600 });
+      await tac.connect(accounts[4]).mint();
+      expect(await tac.balanceOf(accounts[4].address)).to.eq(3);
+    });
   });
 
   describe('withdraw', () => {
     it('should allow the owner to withdraw the balance of the contract', async () => {
       // We allow users to send some ether as a tip during the mint process
       const tip = parseEther('0.2');
-      const tac = await deploy();
+      await deploy();
       await tac.connect(accounts[0]).mint({ value: tip });
 
       expect(await ethers.provider.getBalance(tac.address)).to.eq(tip);
@@ -184,7 +223,7 @@ describe('TheAssetsClub', () => {
     it('should revert if the owner cannot receive ether', async () => {
       // A contract without a payable function cannot receive ethers except using the self-destruct opcode.
       // We create a dummy contract that cannot receive the withdrew ether.
-      const tac = await deploy();
+      await deploy();
       const recipient = await (await smock.mock('Void')).deploy();
       await setBalance(recipient.address, parseEther('1'));
 

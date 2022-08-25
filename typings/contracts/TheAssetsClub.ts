@@ -33,7 +33,6 @@ export interface TheAssetsClubInterface extends utils.Interface {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "close()": FunctionFragment;
-    "closed()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "maxSupply()": FunctionFragment;
@@ -41,6 +40,7 @@ export interface TheAssetsClubInterface extends utils.Interface {
     "minETHBalance()": FunctionFragment;
     "mint()": FunctionFragment;
     "name()": FunctionFragment;
+    "open(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "quantity()": FunctionFragment;
@@ -64,7 +64,6 @@ export interface TheAssetsClubInterface extends utils.Interface {
       | "approve"
       | "balanceOf"
       | "close"
-      | "closed"
       | "getApproved"
       | "isApprovedForAll"
       | "maxSupply"
@@ -72,6 +71,7 @@ export interface TheAssetsClubInterface extends utils.Interface {
       | "minETHBalance"
       | "mint"
       | "name"
+      | "open"
       | "owner"
       | "ownerOf"
       | "quantity"
@@ -99,7 +99,6 @@ export interface TheAssetsClubInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "close", values?: undefined): string;
-  encodeFunctionData(functionFragment: "closed", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getApproved",
     values: [PromiseOrValue<BigNumberish>]
@@ -119,6 +118,10 @@ export interface TheAssetsClubInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "mint", values?: undefined): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "open",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
@@ -188,7 +191,6 @@ export interface TheAssetsClubInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "close", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "closed", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
     data: BytesLike
@@ -208,6 +210,7 @@ export interface TheAssetsClubInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "open", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "quantity", data: BytesLike): Result;
@@ -368,8 +371,6 @@ export interface TheAssetsClub extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    closed(overrides?: CallOverrides): Promise<[boolean]>;
-
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -392,6 +393,11 @@ export interface TheAssetsClub extends BaseContract {
     ): Promise<ContractTransaction>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
+
+    open(
+      _publicAt: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -485,8 +491,6 @@ export interface TheAssetsClub extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  closed(overrides?: CallOverrides): Promise<boolean>;
-
   getApproved(
     tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -509,6 +513,11 @@ export interface TheAssetsClub extends BaseContract {
   ): Promise<ContractTransaction>;
 
   name(overrides?: CallOverrides): Promise<string>;
+
+  open(
+    _publicAt: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -600,8 +609,6 @@ export interface TheAssetsClub extends BaseContract {
 
     close(overrides?: CallOverrides): Promise<void>;
 
-    closed(overrides?: CallOverrides): Promise<boolean>;
-
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -622,6 +629,11 @@ export interface TheAssetsClub extends BaseContract {
     mint(overrides?: CallOverrides): Promise<void>;
 
     name(overrides?: CallOverrides): Promise<string>;
+
+    open(
+      _publicAt: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -769,8 +781,6 @@ export interface TheAssetsClub extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    closed(overrides?: CallOverrides): Promise<BigNumber>;
-
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -793,6 +803,11 @@ export interface TheAssetsClub extends BaseContract {
     ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
+
+    open(
+      _publicAt: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -885,8 +900,6 @@ export interface TheAssetsClub extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    closed(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -909,6 +922,11 @@ export interface TheAssetsClub extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    open(
+      _publicAt: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
