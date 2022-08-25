@@ -83,7 +83,7 @@ describe('TheAssetsClub', () => {
   describe('open', async () => {
     it('should revert if mint is closed', async () => {
       await tac.close();
-      await expect(tac.open(0)).to.revertedWith('TheAssetsClub: state must be State.EARLY');
+      await expect(tac.open(0)).to.revertedWith('TheAssetsClub: state must be Phase.EARLY');
     });
   });
 
