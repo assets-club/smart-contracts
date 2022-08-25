@@ -28,6 +28,7 @@
   ],
   "repository": "github:assets-club/smart-contracts",
   "scripts": {
+    "clean": "hardhat clean && rimraf dist/",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,css,less,sass,scss,json,json5,yml,yaml,md,mdx,graphql,sol}'",
     "format:check": "prettier --check '**/*.{js,jsx,ts,tsx,css,less,sass,scss,json,json5,yml,yaml,md,mdx,graphql,sol}'",
     "lint": "solhint 'contracts/**/*.sol'",
@@ -36,7 +37,7 @@
     "test:coverage": "hardhat coverage",
     "test:gas": "REPORT_GAS=true hardhat test",
     "deploy": "hardhat run scripts/deploy.ts",
-    "build": "rimraf dist/ && tsc -p tsconfig.package.json"
+    "build": "pnpm clean && pnpm compile && tsc -p tsconfig.package.json"
   },
   "devDependencies": {
     "@defi-wonderland/smock": "^2.2.0",
