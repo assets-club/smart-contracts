@@ -1,6 +1,6 @@
 {
   "name": "@assets-club/smart-contracts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The Assets Club smart contracts ethers.js v5 definition package.",
   "keywords": [
     "nft",
@@ -26,6 +26,7 @@
   "files": [
     "dist/**"
   ],
+  "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": "github:assets-club/smart-contracts",
   "scripts": {
