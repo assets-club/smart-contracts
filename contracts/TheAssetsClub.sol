@@ -1,60 +1,83 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.17;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 import "erc721a/contracts/ERC721A.sol";
-import "./SimpleWhitelist.sol";
-
-enum Phase {
-  EARLY,
-  OPEN,
-  CLOSED
-}
 
 /**
  * @title TheAssetsClub NFT Collection
  * @author Mathieu "Windyy" Bour
- * @dev The Assets Club NFT collection implementation based Azuki's ERC721A contract.
+ * @notice The Assets Club NFT collection implementation based Azuki's ERC721A contract.
  * Less gas, more assets, thanks Azuki <3!
+ * @dev Implemented roles
+ * - DEFAULT_ADMIN_ROLE assigned to the deployer account only and will be renounced shorty after successful deployment
+ * - MINTER assigned to the TheAssetsClubMint contract, will be renounced as soon as the mint is finished
+ * - MAINTAINER assign to TheAssetsClub multisig wallet, allows to perform exceptional maintained of the metadata URIs,
+ *   for example if the domain theassets.club is hijacked.
  */
-contract TheAssetsClub is ERC721A, Ownable {
-  struct Threshold {
-    uint256 limit;
-    uint256 quantity;
-  }
+contract TheAssetsClub is ERC721A, AccessControl, VRFConsumerBaseV2 {
+  uint256 public constant MAXIMUM_MINTS = 5777;
 
-  uint256 public immutable maxSupply;
-  uint256 public immutable minETHBalance;
-  uint256 public immutable maxTACBalance;
-  Threshold[] public thresholds;
+  // Roles
+  bytes32 public constant MINTER = keccak256("MINTER");
+  bytes32 public constant OPERATOR = keccak256("OPERATOR");
 
-  /** @dev Internal state which holds if an account is the allow to mint during the private sale. */
-  Phase state = Phase.EARLY;
+  string private _contractURI = "https://theassets.club/api/contract";
   string private baseURI = "https://theassets.club/api/nft/";
-  SimpleWhitelist whitelist;
-  uint256 publicAt = 0;
+
+  // State
+  mapping(uint256 => uint256) tokenMap;
+  bool public revealed = false;
+  uint256 public seed;
+
+  // Chainlink VRF parameters
+  VRFCoordinatorV2Interface public coordinator;
+  bytes32 keyHash;
+  uint64 subId;
+  uint16 constant minimumRequestConfirmations = 10;
+  uint32 constant callbackGasLimit = 2500000;
+  uint256 requestId;
+
+  error OnlyUnrevealed();
+  error MaximumMintsReached(uint256 wanted, uint256 totalSupply);
+  error InvalidVRFRequestId(uint256 expected, uint256 actual);
 
   constructor(
-    uint256 _maxSupply,
-    uint256 _minETHBalance,
-    uint256 _maxTACBalance,
-    SimpleWhitelist _whitelist,
-    uint256[] memory _thresholdLimits,
-    uint256[] memory _thresholdQuantities
-  ) ERC721A("The Assets Club", "TAC") {
-    require(
-      _thresholdLimits.length == _thresholdQuantities.length,
-      "TheAssetsClub: threshold parameters length mismatch"
-    );
+    address _coordinator,
+    bytes32 _keyHash,
+    uint64 _subId
+  ) ERC721A("The Assets Club", "TAC") VRFConsumerBaseV2(_coordinator) {
+    coordinator = VRFCoordinatorV2Interface(_coordinator);
+    keyHash = _keyHash;
+    subId = _subId;
+    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+  }
 
-    maxSupply = _maxSupply;
-    minETHBalance = _minETHBalance;
-    maxTACBalance = _maxTACBalance;
-    whitelist = _whitelist;
-
-    for (uint256 i = 0; i < _thresholdLimits.length; i++) {
-      thresholds.push(Threshold(_thresholdLimits[i], _thresholdQuantities[i]));
+  /**
+   * @notice Ensure that the function cannot be called after reveal.
+   */
+  modifier onlyUnrevealed() {
+    if (revealed) {
+      revert OnlyUnrevealed();
     }
+    _;
+  }
+
+  /**
+   * @dev The base URI for the tokens.
+   */
+  function contractURI() public view returns (string memory) {
+    return _contractURI;
+  }
+
+  /**
+   * @dev Allow to change the collection contractURI, most likely due to URL migration.
+   * We wil try not use this method and use HTTP redirects instead, but we keep it as an escape hatch.
+   */
+  function setContractURI(string memory newContractURI) external onlyRole(OPERATOR) {
+    _contractURI = newContractURI;
   }
 
   /**
@@ -68,86 +91,60 @@ contract TheAssetsClub is ERC721A, Ownable {
    * @dev Allow to change the collection baseURI, most likely due to URL migration.
    * We wil try not use this method and use HTTP redirects instead, but we keep it as an escape hatch.
    */
-  function setBaseURI(string memory newBaseURI) external onlyOwner {
+  function setBaseURI(string memory newBaseURI) external onlyRole(OPERATOR) {
     baseURI = newBaseURI;
   }
 
   /**
-   * @dev Returns the Uniform Resource Identifier (URI) for `tokenId` token.
-   * We append a .json extension to host the metadata as JSON files.
+   * @notice Returns the Uniform Resource Identifier (URI) for `tokenId` token.
+   * @dev We append a .json extension to host the metadata as JSON files.
+   * @param tokenId The token numeric id.
    */
   function tokenURI(uint256 tokenId) public view override returns (string memory) {
-    return string(abi.encodePacked(super.tokenURI(tokenId), ".json"));
+    uint256 mappedTokenId = tokenMap[tokenId];
+    return string(abi.encodePacked(super.tokenURI(mappedTokenId), ".json"));
   }
 
   /**
-   * @dev Returns the tokens count that will be minted during the next transaction.
+   * @notice Mint {quantity} tokens {to} account.
+   * @param to The recipient account address.
+   * @param quantity The number opf tokens to mint.
    */
-  function quantity() public view returns (uint256) {
-    uint256 willMint = 1;
+  function mint(address to, uint256 quantity) external onlyRole(MINTER) {
     uint256 totalMinted = _totalMinted();
 
-    for (uint256 i = 0; i < thresholds.length; i++) {
-      if (totalMinted < thresholds[i].limit && willMint < thresholds[i].quantity) {
-        willMint = thresholds[i].quantity;
-      }
+    if (totalMinted + quantity > MAXIMUM_MINTS) {
+      revert MaximumMintsReached(quantity, totalMinted);
     }
 
-    return willMint;
+    _mint(to, quantity);
   }
 
   /**
-   * @dev Open the mint process.
-   * @param _publicAt specifies when the mint become public (e.g. does not require to be whitelisted).
+   * @notice Trigger the reveal.
+   * @dev Requirements:
+   * - reveal should not have started yet
+   * - only MAINTAINER role can call this function
    */
-  function open(uint256 _publicAt) external onlyOwner {
-    require(state == Phase.EARLY, "TheAssetsClub: state must be Phase.EARLY");
-    state = Phase.OPEN;
-    publicAt = _publicAt;
+  function reveal() external onlyUnrevealed onlyRole(OPERATOR) {
+    revealed = true;
+    requestId = coordinator.requestRandomWords(keyHash, subId, minimumRequestConfirmations, callbackGasLimit, 1);
   }
 
   /**
-   * @dev Close the mint process, forever; the collection will stay at is current supply.
+   * @notice Receive the entropy from Chainlink VRF coordinator and shuffle the tokens using the Fisher-Yates algorithm.
    */
-  function close() external onlyOwner {
-    state = Phase.CLOSED;
-  }
-
-  /**
-   * @dev Allow users to mint NFTs. Users might send some ethers during the mint as tip.
-   * Requirements:
-   * - mint process must not be closed
-   * - minter must own at least `minETHBalance` ethers
-   * - minter must not own more than `maxTACBalance` tokens
-   * - totalSupply + mint count should not exceed
-   */
-  function mint() external payable {
-    address minter = _msgSender();
-
-    if (state == Phase.EARLY) {
-      revert("TheAssetsClub: mint is not yet open");
-    } else if (state == Phase.OPEN && block.timestamp < publicAt && !whitelist.isWhitelisted(minter)) {
-      revert("TheAssetsClub: account is not whitelisted");
-    } else if (state == Phase.CLOSED) {
-      revert("TheAssetsClub: mint is closed (forever!)");
+  function fulfillRandomWords(uint256 _requestId, uint256[] memory randomWords) internal override {
+    if (requestId != _requestId) {
+      revert InvalidVRFRequestId(requestId, _requestId);
     }
-
-    require(address(minter).balance >= minETHBalance, "TheAssetsClub: minting requires to hold ethers");
-
-    uint256 willMint = quantity();
-
-    require(balanceOf(minter) + willMint <= maxTACBalance, "TheAssetsClub: maximum mint reached!");
-    require(totalSupply() + willMint <= maxSupply, "TheAssetsClub: minting quantity exceeds maxSupply");
-
-    _mint(minter, willMint);
+    seed = randomWords[0];
   }
 
   /**
-   * @dev Allow to withdraw the contract balance to the owner, in case of someone sends some ether as tip.
+   * @notice Mark ERC721 and AccessControl as supported interfaces.
    */
-  function withdraw() external onlyOwner {
-    // solhint-disable-next-line avoid-low-level-calls
-    (bool sent, ) = payable(owner()).call{ value: address(this).balance }("");
-    require(sent, "TheAssetsClub: withdraw failure");
+  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721A, AccessControl) returns (bool) {
+    return super.supportsInterface(interfaceId);
   }
 }

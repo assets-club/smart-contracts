@@ -5,6 +5,7 @@ coverage
 artifacts
 cache
 dist
+typings
 
 coverage.json
 

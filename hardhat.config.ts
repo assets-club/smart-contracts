@@ -1,4 +1,5 @@
 import { config as loadConfig } from 'dotenv';
+import 'hardhat-dependency-compiler';
 import { HardhatUserConfig } from 'hardhat/config';
 import { set } from 'lodash';
 import { join } from 'path';
@@ -8,17 +9,10 @@ loadConfig({ path: join(process.cwd(), '.env.local') });
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: '0.8.9',
+    version: '0.8.17',
     settings: {
       optimizer: {
         enabled: true,
-      },
-
-      // Required by smock, see https://smock.readthedocs.io/en/latest/getting-started.html#required-config-for-mocks
-      outputSelection: {
-        '*': {
-          '*': ['storageLayout'],
-        },
       },
     },
   },
@@ -36,11 +30,9 @@ const config: HardhatUserConfig = {
       chainId: 5,
       accounts: process.env.GOERLI_PRIVATE_KEY ? [process.env.GOERLI_PRIVATE_KEY] : [],
     },
-    fuji: {
-      url: 'https://api.avax-test.network/ext/bc/C/rpc',
-      chainId: 43113,
-      accounts: process.env.FUJI_PRIVATE_KEY ? [process.env.FUJI_PRIVATE_KEY] : [],
-    },
+  },
+  dependencyCompiler: {
+    paths: ['@chainlink/contracts/src/v0.8/mocks/VRFCoordinatorV2Mock.sol'],
   },
   typechain: {
     outDir: 'typings',
@@ -56,11 +48,6 @@ const config: HardhatUserConfig = {
 if (process.env.ETHERSCAN_API_KEY) {
   set(config, 'etherscan.apiKey.mainnet', process.env.ETHERSCAN_API_KEY);
   set(config, 'etherscan.apiKey.goerli', process.env.ETHERSCAN_API_KEY);
-}
-
-if (process.env.SNOWTRACE_API_KEY) {
-  set(config, 'etherscan.apiKey.avalanche', process.env.SNOWTRACE_API_KEY);
-  set(config, 'etherscan.apiKey.avalancheFujiTestnet', process.env.SNOWTRACE_API_KEY);
 }
 
 export default config;
