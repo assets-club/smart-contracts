@@ -5,9 +5,9 @@ coverage
 artifacts
 cache
 dist
-typings
+typechain-types
 
 coverage.json
 
 # Secrets
-.env.local
+.env

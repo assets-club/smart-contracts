@@ -41,7 +41,7 @@
     "deploy": "hardhat run scripts/deploy.ts",
     "build": "pnpm clean && pnpm compile && tsc -p tsconfig.package.json"
   },
-  "devDependencies": {
+  "dependencies": {
     "@chainlink/contracts": "^0.5.1",
     "@defi-wonderland/smock": "^2.3.4",
     "@ethersproject/abi": "^5.7.0",
@@ -71,6 +71,7 @@
     "hardhat-dependency-compiler": "^1.1.3",
     "hardhat-gas-reporter": "^1.0.9",
     "lodash": "^4.17.21",
+    "operator-filter-registry": "^1.4.0",
     "prettier": "^2.7.1",
     "prettier-plugin-solidity": "1.0.0-beta.24",
     "rimraf": "^3.0.2",
@@ -83,7 +84,7 @@
     "typescript": "^4.9.3"
   },
   "engines": {
-    "node": ">=16",
+    "node": "^18",
     "pnpm": ">=7"
   }
 }

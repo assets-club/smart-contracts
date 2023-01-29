@@ -6,4 +6,6 @@ import "erc721a/contracts/IERC721A.sol";
 
 interface ITheAssetsClub is IERC721A, IAccessControl {
   function mint(address to, uint256 quantity) external;
+
+  function remaining() external view returns (uint256);
 }

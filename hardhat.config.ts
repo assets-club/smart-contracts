@@ -2,10 +2,9 @@ import { config as loadConfig } from 'dotenv';
 import 'hardhat-dependency-compiler';
 import { HardhatUserConfig } from 'hardhat/config';
 import { set } from 'lodash';
-import { join } from 'path';
 import '@nomicfoundation/hardhat-toolbox';
 
-loadConfig({ path: join(process.cwd(), '.env.local') });
+loadConfig();
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -20,22 +19,14 @@ const config: HardhatUserConfig = {
     hardhat: {
       chainId: 1337,
     },
-    mainnet: {
-      url: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-      chainId: 1,
-      accounts: process.env.MAINNET_PRIVATE_KEY ? [process.env.MAINNET_PRIVATE_KEY] : [],
-    },
-    goerli: {
-      url: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-      chainId: 5,
-      accounts: process.env.GOERLI_PRIVATE_KEY ? [process.env.GOERLI_PRIVATE_KEY] : [],
-    },
   },
   dependencyCompiler: {
-    paths: ['@chainlink/contracts/src/v0.8/mocks/VRFCoordinatorV2Mock.sol'],
+    paths: [
+      '@chainlink/contracts/src/v0.8/mocks/VRFCoordinatorV2Mock.sol',
+      '@openzeppelin/contracts/finance/PaymentSplitter.sol',
+    ],
   },
   typechain: {
-    outDir: 'typings',
     target: 'ethers-v5',
   },
   gasReporter: {
@@ -44,6 +35,22 @@ const config: HardhatUserConfig = {
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
   },
 };
+
+if (process.env.MAINNET_RPC_URL) {
+  set(config, 'networks.mainnet', {
+    url: process.env.MAINNET_RPC_URL,
+    chainId: 1,
+    accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
+  });
+}
+
+if (process.env.GOERLI_RPC_URL) {
+  set(config, 'networks.goerli', {
+    url: process.env.GOERLI_RPC_URL,
+    chainId: 1,
+    accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
+  });
+}
 
 if (process.env.ETHERSCAN_API_KEY) {
   set(config, 'etherscan.apiKey.mainnet', process.env.ETHERSCAN_API_KEY);

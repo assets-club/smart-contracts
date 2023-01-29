@@ -7,7 +7,3 @@ import { ethers } from 'hardhat';
 export default function hashRole(role: string): string {
   return ethers.utils.solidityKeccak256(['string'], [role]);
 }
-
-export const DEFAULT_ADMIN_ROLE = '0x0000000000000000000000000000000000000000000000000000000000000000';
-export const OPERATOR = hashRole('OPERATOR');
-export const MINTER = hashRole('MINTER');

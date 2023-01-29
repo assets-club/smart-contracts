@@ -1,31 +1,40 @@
-import { Signer } from 'ethers';
-import { TheAssetsClub__factory, TheAssetsClubMinter__factory } from '../typings';
-import { DEFAULT_ADMIN_ROLE, MINTER, OPERATOR } from './roles';
-import Config from './types/Config';
+import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
+import { PaymentSplitter__factory, TheAssetsClub__factory, TheAssetsClubMinter__factory } from '../typechain-types';
+import Config from './config/Config';
+import { DEFAULT_ADMIN_ROLE, MINTER } from './constants';
+import createDeployer from './utils/createDeployer';
 import waitTx from './utils/waitTx';
 
-export default async function deployContracts(deployer: Signer, config: Config) {
-  const deployerAddress = await deployer.getAddress();
+export default async function deployContracts(signer: SignerWithAddress, config: Config) {
+  const deploy = createDeployer(signer, { verify: config.verify, confirmations: config.confirmations });
 
-  // Step 1: deploy the contracts
-  const TheAssetsClub = await new TheAssetsClub__factory()
-    .connect(deployer)
-    .deploy(config.vrf.coordinator, config.vrf.keyHash, config.vrf.subId);
-  await TheAssetsClub.deployed();
+  const TheAssetsClub = await deploy(
+    TheAssetsClub__factory,
+    config.vrf.coordinator,
+    config.vrf.keyHash,
+    config.vrf.subId,
+    config.admin,
+    config.treasury,
+  );
 
-  const TheAssetsClubMinter = await new TheAssetsClubMinter__factory()
-    .connect(deployer)
-    .deploy(TheAssetsClub.address, config.treasury);
-  await TheAssetsClub.deployed();
+  const TheAssetsClubSplitter = await deploy(
+    PaymentSplitter__factory,
+    Object.keys(config.shares),
+    Object.values(config.shares),
+  );
 
-  // Step 2: set the permissions
+  const TheAssetsClubMinter = await deploy(
+    TheAssetsClubMinter__factory,
+    TheAssetsClub.address,
+    TheAssetsClubSplitter.address,
+    Object.keys(config.reservations),
+    Object.values(config.reservations),
+    config.admin,
+  );
+
+  // Grant roles
   await waitTx(TheAssetsClub.grantRole(MINTER, TheAssetsClubMinter.address));
-  await waitTx(TheAssetsClub.grantRole(OPERATOR, config.treasury));
-  await waitTx(TheAssetsClubMinter.grantRole(OPERATOR, config.treasury));
+  await waitTx(TheAssetsClub.renounceRole(DEFAULT_ADMIN_ROLE, signer.address));
 
-  // Step 3: renounce admin privileges
-  await waitTx(TheAssetsClub.renounceRole(DEFAULT_ADMIN_ROLE, deployerAddress));
-  await waitTx(TheAssetsClubMinter.renounceRole(DEFAULT_ADMIN_ROLE, deployerAddress));
-
-  return { TheAssetsClub, TheAssetsClubMinter };
+  return { TheAssetsClub, TheAssetsClubSplitter, TheAssetsClubMinter, config };
 }

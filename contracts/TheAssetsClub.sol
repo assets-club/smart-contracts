@@ -4,31 +4,41 @@ pragma solidity ^0.8.17;
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "erc721a/contracts/ERC721A.sol";
+import "operator-filter-registry/src/DefaultOperatorFilterer.sol";
 
 /**
  * @title TheAssetsClub NFT Collection
  * @author Mathieu "Windyy" Bour
  * @notice The Assets Club NFT collection implementation based Azuki's ERC721A contract.
  * Less gas, more assets, thanks Azuki <3!
- * @dev Implemented roles
- * - DEFAULT_ADMIN_ROLE assigned to the deployer account only and will be renounced shorty after successful deployment
- * - MINTER assigned to the TheAssetsClubMint contract, will be renounced as soon as the mint is finished
- * - MAINTAINER assign to TheAssetsClub multisig wallet, allows to perform exceptional maintained of the metadata URIs,
- *   for example if the domain theassets.club is hijacked.
+ *
+ * In order to enforce the creator fees on secondary sales, we chose to adhere to the Operator Filter Registry
+ * standard that was initially developed by OpenSea.
+ * For more information, see https://github.com/ProjectOpenSea/operator-filter-registry
+ *
+ * Implemented roles:
+ * - DEFAULT_ADMIN_ROLE assigned to the deployer account only and will be renounced quickly after successful deployment.
+ * - MINTER assigned to the TheAssetsClubMinter contract, will be renounced as soon as the mint is finished.
+ * - OPERATOR assign to TheAssetsClub multi-signature wallet, allows to perform exceptional maintained of the metadata
+ *   URIs, for example if the domain theassets.club is hijacked.
  */
-contract TheAssetsClub is ERC721A, AccessControl, VRFConsumerBaseV2 {
+contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, DefaultOperatorFilterer {
+  /// The maximum Assets mints, which effectively caps the total supply
   uint256 public constant MAXIMUM_MINTS = 5777;
+  /// Royalties 5% on secondary sales
+  uint96 public constant ROYALTIES = 500;
 
   // Roles
   bytes32 public constant MINTER = keccak256("MINTER");
   bytes32 public constant OPERATOR = keccak256("OPERATOR");
 
-  string private _contractURI = "https://theassets.club/api/contract";
-  string private baseURI = "https://theassets.club/api/nft/";
+  // Token URIs
+  string private _contractURI = "https://static.theassets.club/contract.json";
+  string private baseURI = "https://static.theassets.club/tokens/";
 
   // State
-  mapping(uint256 => uint256) tokenMap;
   bool public revealed = false;
   uint256 public seed;
 
@@ -47,22 +57,25 @@ contract TheAssetsClub is ERC721A, AccessControl, VRFConsumerBaseV2 {
   constructor(
     address _coordinator,
     bytes32 _keyHash,
-    uint64 _subId
+    uint64 _subId,
+    address admin,
+    address treasury
   ) ERC721A("The Assets Club", "TAC") VRFConsumerBaseV2(_coordinator) {
     coordinator = VRFCoordinatorV2Interface(_coordinator);
     keyHash = _keyHash;
     subId = _subId;
+
+    _setDefaultRoyalty(treasury, ROYALTIES);
+
     _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    _grantRole(OPERATOR, admin);
   }
 
   /**
-   * @notice Ensure that the function cannot be called after reveal.
+   * @notice The next token ID to be minted.
    */
-  modifier onlyUnrevealed() {
-    if (revealed) {
-      revert OnlyUnrevealed();
-    }
-    _;
+  function nextTokenId() external view returns (uint256) {
+    return _nextTokenId();
   }
 
   /**
@@ -101,8 +114,20 @@ contract TheAssetsClub is ERC721A, AccessControl, VRFConsumerBaseV2 {
    * @param tokenId The token numeric id.
    */
   function tokenURI(uint256 tokenId) public view override returns (string memory) {
-    uint256 mappedTokenId = tokenMap[tokenId];
-    return string(abi.encodePacked(super.tokenURI(mappedTokenId), ".json"));
+    uint256 tokenId_ = tokenId;
+
+    if (revealed) {
+      tokenId_ = (tokenId + seed) % _totalMinted();
+    }
+
+    return string(abi.encodePacked(super.tokenURI(tokenId_), ".json"));
+  }
+
+  /**
+   * @notice The number of remaining Asset tokens.
+   */
+  function remaining() external view returns (uint256) {
+    return MAXIMUM_MINTS - _totalMinted();
   }
 
   /**
@@ -121,18 +146,31 @@ contract TheAssetsClub is ERC721A, AccessControl, VRFConsumerBaseV2 {
   }
 
   /**
+   * @notice Burn a token.
+   * @dev Requirements:
+   * - Sender must be the owner of the token or should have approved the burn.
+   */
+  function burn(uint256 tokenId) external {
+    _burn(tokenId, true);
+  }
+
+  /**
    * @notice Trigger the reveal.
    * @dev Requirements:
    * - reveal should not have started yet
-   * - only MAINTAINER role can call this function
+   * - only OPERATOR role can call this function
    */
-  function reveal() external onlyUnrevealed onlyRole(OPERATOR) {
+  function reveal() external onlyRole(OPERATOR) {
+    if (revealed) {
+      revert OnlyUnrevealed();
+    }
+
     revealed = true;
     requestId = coordinator.requestRandomWords(keyHash, subId, minimumRequestConfirmations, callbackGasLimit, 1);
   }
 
   /**
-   * @notice Receive the entropy from Chainlink VRF coordinator and shuffle the tokens using the Fisher-Yates algorithm.
+   * @notice Receive the entropy from Chainlink VRF coordinator
    */
   function fulfillRandomWords(uint256 _requestId, uint256[] memory randomWords) internal override {
     if (requestId != _requestId) {
@@ -142,9 +180,20 @@ contract TheAssetsClub is ERC721A, AccessControl, VRFConsumerBaseV2 {
   }
 
   /**
-   * @notice Mark ERC721 and AccessControl as supported interfaces.
+   * @notice IERC165 declaration.
+   * @dev Supports the following `interfaceId`s:
+   * - IERC165: 0x01ffc9a7
+   * - IERC721: 0x80ac58cd
+   * - IERC721Metadata: 0x5b5e139f
+   * - IERC2981: 0x2a55205a
    */
-  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721A, AccessControl) returns (bool) {
-    return super.supportsInterface(interfaceId);
+  function supportsInterface(bytes4 interfaceId)
+    public
+    view
+    virtual
+    override(ERC721A, ERC2981, AccessControl)
+    returns (bool)
+  {
+    return super.supportsInterface(interfaceId) || ERC721A.supportsInterface(interfaceId);
   }
 }
