@@ -7,6 +7,7 @@ import mainnet from './mainnet';
  */
 const testing: Omit<Config, 'accounts'> = {
   ...mainnet,
+  log: false,
   confirmations: 0,
   verify: false,
 

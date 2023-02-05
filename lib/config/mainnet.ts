@@ -1,12 +1,12 @@
 import Config from './Config';
 
 const mainnet: Config = {
+  log: true,
   verify: true,
   confirmations: 10,
 
   admin: '', // TBD
   treasury: '', // TBD
-  operators: ['0xe73B648F6DE254101052e126C0499c32ed736a37'],
 
   vrf: {
     coordinator: '0x271682DEB8C4E0901D1a1550aD2e64D568E69909',
@@ -14,9 +14,6 @@ const mainnet: Config = {
     subId: 0, // TBD
   },
 
-  reservations: {
-    '0xe73B648F6DE254101052e126C0499c32ed736a37': 5,
-  },
   shares: {
     '0xe73B648F6DE254101052e126C0499c32ed736a37': 5,
     '0x793DA7e448729d9638c4C9540a89C9099B01e93C': 5,

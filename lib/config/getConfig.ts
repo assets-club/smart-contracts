@@ -9,7 +9,7 @@ import mainnet from './mainnet';
 export default function getConfig(): Config {
   switch (network.name) {
     case 'hardhat':
-      return { ...mainnet, verify: false, confirmations: 0 };
+      return { ...goerli, verify: false, confirmations: 0 };
     case 'local':
       return { ...goerli, verify: false, confirmations: 0 };
     case 'goerli':

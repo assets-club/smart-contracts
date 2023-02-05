@@ -1,10 +1,10 @@
 export default interface Config {
+  log: boolean;
   verify: boolean;
   confirmations: number;
 
   admin: string;
   treasury: string;
-  operators: string[];
 
   vrf: {
     coordinator: string;
@@ -12,6 +12,5 @@ export default interface Config {
     subId: number;
   };
 
-  reservations: Record<string, number>;
   shares: Record<string, number>;
 }

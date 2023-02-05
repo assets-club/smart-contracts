@@ -16,25 +16,32 @@ export default async function deployContracts(signer: SignerWithAddress, config:
     config.admin,
     config.treasury,
   );
+  if (config.log) {
+    console.log('TheAssetsClub deployed to', TheAssetsClub.address);
+  }
 
-  const TheAssetsClubSplitter = await deploy(
+  const PaymentSplitter = await deploy(
     PaymentSplitter__factory,
     Object.keys(config.shares),
     Object.values(config.shares),
   );
+  if (config.log) {
+    console.log('PaymentSplitter deployed to', PaymentSplitter.address);
+  }
 
   const TheAssetsClubMinter = await deploy(
     TheAssetsClubMinter__factory,
     TheAssetsClub.address,
-    TheAssetsClubSplitter.address,
-    Object.keys(config.reservations),
-    Object.values(config.reservations),
+    PaymentSplitter.address,
     config.admin,
   );
+  if (config.log) {
+    console.log('TheAssetsClubMinter deployed to', TheAssetsClubMinter.address);
+  }
 
   // Grant roles
   await waitTx(TheAssetsClub.grantRole(MINTER, TheAssetsClubMinter.address));
   await waitTx(TheAssetsClub.renounceRole(DEFAULT_ADMIN_ROLE, signer.address));
 
-  return { TheAssetsClub, TheAssetsClubSplitter, TheAssetsClubMinter, config };
+  return { TheAssetsClub, TheAssetsClubMinter, Treasury: PaymentSplitter, config };
 }

@@ -47,7 +47,7 @@ if (process.env.MAINNET_RPC_URL) {
 if (process.env.GOERLI_RPC_URL) {
   set(config, 'networks.goerli', {
     url: process.env.GOERLI_RPC_URL,
-    chainId: 1,
+    chainId: 5,
     accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
   });
 }

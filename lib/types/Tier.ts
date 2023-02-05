@@ -1,6 +1,6 @@
 enum Tier {
   PUBLIC,
-  WAITLIST,
+  WL,
   OG,
   LOCKED,
 }
