@@ -1,0 +1,23 @@
+name: Quality Assessment
+
+on:
+  push:
+    branches: [main]
+    tags: ['**']
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  upload-merkle-tree:
+    name: Upload Merkle Tree
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Setup environment
+        uses: pooky-labs/actions/setup-node@main
+      - name: Build MerkleTree
+        run: pnpm run tree
+      - name: Install Wrangler
+        uses: cloudflare/wrangler-action@2.0.0
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: r2 object put theassetsclub/tree.json --file=data/tree.json

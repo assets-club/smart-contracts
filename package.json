@@ -37,7 +37,8 @@
     "test:coverage": "hardhat coverage",
     "test:gas": "REPORT_GAS=true hardhat test",
     "deploy": "hardhat run scripts/deploy.ts",
-    "build": "pnpm clean && pnpm compile && tsc -p tsconfig.package.json"
+    "build": "pnpm clean && pnpm compile && tsc -p tsconfig.package.json",
+    "tree": "ts-node scripts/merkle.ts"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.6.0",

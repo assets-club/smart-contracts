@@ -5,6 +5,7 @@ coverage
 artifacts
 cache
 dist
+data/tree.json
 typechain-types
 
 coverage.json

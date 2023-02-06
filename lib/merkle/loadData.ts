@@ -1,3 +1,4 @@
+import { utils } from 'ethers';
 import { readFile } from 'fs/promises';
 import neatCsv from 'neat-csv';
 import { join } from 'path';
@@ -8,6 +9,8 @@ export default async function loadData(): Promise<MerkleTreeData> {
   const claimsData = await neatCsv<{ address: string; quantity: number }>(await readFile(claimsFile), {
     mapValues({ header, value }) {
       switch (header) {
+        case 'address':
+          return utils.getAddress(value.toString().trim());
         case 'quantity':
           return Number(value);
         default:
