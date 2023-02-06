@@ -1,4 +1,4 @@
-name: Quality Assessment
+name: Deploy
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
         uses: pooky-labs/actions/setup-node@main
       - name: Build MerkleTree
         run: pnpm run tree
-      - name: Install Wrangler
+      - name: Upload Merkle Tree to Cloudflare R2
         uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
