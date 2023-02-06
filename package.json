@@ -37,7 +37,8 @@
     "test:coverage": "hardhat coverage",
     "test:gas": "REPORT_GAS=true hardhat test",
     "deploy": "hardhat run scripts/deploy.ts",
-    "build": "pnpm clean && pnpm compile && tsc -p tsconfig.package.json"
+    "build": "pnpm clean && pnpm compile && tsc -p tsconfig.package.json",
+    "tree": "ts-node scripts/merkle.ts"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.6.0",
@@ -78,7 +79,8 @@
     "solidity-coverage": "^0.8.2",
     "ts-node": "^10.9.1",
     "typechain": "^8.1.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "wrangler": "^2.9.0"
   },
   "engines": {
     "node": "^18",
