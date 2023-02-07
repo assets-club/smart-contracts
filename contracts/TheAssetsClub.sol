@@ -102,7 +102,7 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
 
   /**
    * @dev Allow to change the collection baseURI, most likely due to URL migration.
-   * We wil try not use this method and use HTTP redirects instead, but we keep it as an escape hatch.
+   * We will try not use this method and use HTTP redirects instead, but we keep it as an escape hatch.
    */
   function setBaseURI(string memory newBaseURI) external onlyRole(OPERATOR) {
     baseURI = newBaseURI;
