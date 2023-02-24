@@ -31,6 +31,8 @@ describe('TheAssetsClubMinter', () => {
 
   let now: number;
 
+  // These constants are hardcoded because they are used into the test names
+  const MAXIMUM_MINTS = 5;
   const PRIVATE_SALE_PRICE = utils.parseEther('0.05');
   const PUBLIC_SALE_PRICE = utils.parseEther('0.07');
   let WL_DURATION: number;
@@ -168,16 +170,16 @@ describe('TheAssetsClubMinter', () => {
     });
 
     function testOG() {
-      it('should revert if an OG tries to mint 4 tokens', async () => {
+      it(`should revert if an OG tries to mint ${MAXIMUM_MINTS + 1} tokens`, async () => {
         const proof = tree.getProof([userOG.address, Proof.MINT, Tier.OG]);
 
         await expect(
-          TheAssetsClubMinter.connect(userOG).mintTo(userOG.address, 4, Tier.OG, proof, {
+          TheAssetsClubMinter.connect(userOG).mintTo(userOG.address, MAXIMUM_MINTS + 1, Tier.OG, proof, {
             value: PRIVATE_SALE_PRICE.sub(3),
           }),
         )
           .to.be.revertedWithCustomError(TheAssetsClubMinter, 'InvalidPricing')
-          .withArgs(Tier.OG, 4, 0);
+          .withArgs(Tier.OG, MAXIMUM_MINTS + 1, 0);
       });
 
       it('should revert if an OG tries to mint 3 tokens for less than 1xPRIVATE_SALE_PRICE', async () => {
@@ -213,16 +215,16 @@ describe('TheAssetsClubMinter', () => {
     }
 
     function testWL() {
-      it('should revert if an WL tries to mint 4 tokens', async () => {
+      it(`should revert if an WL tries to mint ${MAXIMUM_MINTS + 1} tokens`, async () => {
         const proof = tree.getProof([userWL.address, Proof.MINT, Tier.WL]);
 
         await expect(
-          TheAssetsClubMinter.connect(userWL).mintTo(userWL.address, 4, Tier.WL, proof, {
+          TheAssetsClubMinter.connect(userWL).mintTo(userWL.address, MAXIMUM_MINTS + 1, Tier.WL, proof, {
             value: PRIVATE_SALE_PRICE.sub(3),
           }),
         )
           .to.be.revertedWithCustomError(TheAssetsClubMinter, 'InvalidPricing')
-          .withArgs(Tier.WL, 4, 0);
+          .withArgs(Tier.WL, MAXIMUM_MINTS + 1, 0);
       });
 
       it('should revert if a WL tries to mint 2 tokens for less than 1xPRIVATE_SALE_PRICE', async () => {

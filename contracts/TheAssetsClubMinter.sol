@@ -24,6 +24,7 @@ enum Tier {
  * @dev Four phases are planned (see {Tier} above)
  */
 contract TheAssetsClubMinter is Ownable {
+  uint256 public constant MAXIMUM_MINTS = 5;
   uint256 public constant PRIVATE_SALE_PRICE = 0.05 ether;
   uint256 public constant PUBLIC_SALE_PRICE = 0.07 ether;
   uint256 public constant OG_DURATION = 24 * 3600; // in seconds
@@ -132,7 +133,7 @@ contract TheAssetsClubMinter is Ownable {
    * @return The price in Ether wei.
    */
   function getPrice(Tier tier, uint256 quantity, uint256 skip) public pure returns (uint256) {
-    if (tier >= Tier.LOCKED || quantity == 0 || quantity + skip > 3) {
+    if (tier >= Tier.LOCKED || quantity == 0 || quantity + skip > MAXIMUM_MINTS) {
       revert InvalidPricing(tier, quantity, skip);
     }
 
