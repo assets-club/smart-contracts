@@ -5,9 +5,14 @@
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/assets-club/smart-contracts/main?style=for-the-badge)
 ![Codecov](https://img.shields.io/codecov/c/gh/assets-club/smart-contracts?style=for-the-badge&token=oW4DQ9MuUh)
 
-## Mission
+## NFT Paris
 
-Soon!
+We are at the NFT Paris on February 24-25 2023! For this event, we deployed a special collection dedicated to NFT Paris.
+
+Related links:
+
+- [Etherscan](https://etherscan.io/address/0xd13fbe29dbd15bd0175122a4f8c90072c568511d)
+- [OpenSea collection](https://opensea.io/collection/theassetsclub-at-nft-paris)
 
 ## Maintainers
 
