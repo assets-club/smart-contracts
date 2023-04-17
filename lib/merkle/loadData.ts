@@ -1,16 +1,18 @@
-import { utils } from 'ethers';
+import { getAddress } from 'ethers';
 import { readFile } from 'fs/promises';
 import neatCsv from 'neat-csv';
 import { join } from 'path';
 import MerkleTreeData from '../types/MerkleTreeData';
 
+const data = join(__dirname, '../../data');
+
 export default async function loadData(): Promise<MerkleTreeData> {
-  const claimsFile = join(__dirname, '../../data/claims.csv');
+  const claimsFile = join(data, 'claims.csv');
   const claimsData = await neatCsv<{ address: string; quantity: number }>(await readFile(claimsFile), {
     mapValues({ header, value }) {
       switch (header) {
         case 'address':
-          return utils.getAddress(value.toString().trim());
+          return getAddress(value.toString().trim());
         case 'quantity':
           return Number(value);
         default:
@@ -18,10 +20,10 @@ export default async function loadData(): Promise<MerkleTreeData> {
       }
     },
   });
-  const ogFile = join(__dirname, '../../data/og.csv');
+  const ogFile = join(data, 'og.csv');
   const ogData = await neatCsv<{ address: string }>(await readFile(ogFile));
 
-  const waitlistFile = join(__dirname, '../../data/waitlist.csv');
+  const waitlistFile = join(data, 'access_list.csv');
   const waitlistData = await neatCsv<{ address: string }>(await readFile(waitlistFile));
 
   return {
