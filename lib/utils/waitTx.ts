@@ -1,4 +1,4 @@
-import { ContractReceipt, ContractTransaction } from 'ethers';
+import { ContractTransactionResponse } from 'ethers';
 
 /**
  * Wait for an {@see ContractTransaction}. This function allows to write the contract interactions more fluently.
@@ -12,8 +12,8 @@ import { ContractReceipt, ContractTransaction } from 'ethers';
  *   await waitTx(POK.grantRole(POOKY_CONTRACT, PookyMintEvent.address));
  */
 export default async function waitTx(
-  tx: ContractTransaction | Promise<ContractTransaction>,
+  tx: ContractTransactionResponse | Promise<ContractTransactionResponse>,
   confirmations?: number,
-): Promise<ContractReceipt> {
+) {
   return await (await tx).wait(confirmations);
 }

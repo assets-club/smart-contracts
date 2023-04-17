@@ -1,146 +1,154 @@
 import { expect } from 'chai';
+import { Signer, parseEther } from 'ethers';
 import { ethers } from 'hardhat';
 import { describe } from 'mocha';
 import { faker } from '@faker-js/faker';
 import { loadFixture, setBalance } from '@nomicfoundation/hardhat-network-helpers';
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
-import { MINTER, OPERATOR } from '../lib/constants';
+import connect from '../lib/connect';
 import getTestAccounts from '../lib/testing/getTestAccounts';
-import { expectHasRole, expectMissingRole } from '../lib/testing/roles';
 import stackFixture from '../lib/testing/stackFixture';
-import parseEther from '../lib/utils/parseEther';
 import { TheAssetsClub, TheAssetsClubMinter, VRFCoordinatorV2Mock } from '../typechain-types';
 
 describe('TheAssetsClub', () => {
-  let admin: SignerWithAddress;
-  let user1: SignerWithAddress;
-  let user2: SignerWithAddress;
-  let minter: SignerWithAddress;
+  let admin: Signer;
+  let treasury: Signer;
+  let user1: Signer;
+  let user2: Signer;
+  let minter: Signer;
 
   let TheAssetsClub: TheAssetsClub;
   let TheAssetsClubMinter: TheAssetsClubMinter;
   let VRFCoordinatorV2: VRFCoordinatorV2Mock;
 
   beforeEach(async () => {
-    ({ admin, user1, user2 } = await getTestAccounts());
+    ({ admin, treasury, user1, user2 } = await getTestAccounts());
     ({ TheAssetsClub, TheAssetsClubMinter, VRFCoordinatorV2 } = await loadFixture(stackFixture));
 
     // Mint a token to be able to call tokenURI
-    minter = await ethers.getImpersonatedSigner(TheAssetsClubMinter.address);
-    await setBalance(minter.address, parseEther(10));
+    minter = await ethers.getImpersonatedSigner(TheAssetsClubMinter.target as string);
+    await setBalance(await minter.getAddress(), parseEther('10'));
   });
 
   describe('configuration', () => {
-    it('should have granted the OPERATOR role to the admin wallet', async () => {
-      await expectHasRole(TheAssetsClub, admin, OPERATOR);
-    });
-
-    it('should have granted the MINTER role to the TheAssetsClubMinter contract', async () => {
-      await expectHasRole(TheAssetsClub, TheAssetsClubMinter, MINTER);
+    it('should have ERC2981 creator earning recipient and value properly configured', async () => {
+      const value = parseEther('1');
+      const result = await TheAssetsClub.royaltyInfo(1, parseEther('1'));
+      expect(result[0]).to.eq(await treasury.getAddress());
+      expect(result[1]).to.eq((value * (await TheAssetsClub.ROYALTIES())) / 10000n);
     });
   });
 
   describe('setContractURI', () => {
-    it('should revert if a non-OPERATOR tries to set the contract URI', async () => {
-      await expectMissingRole(TheAssetsClub.connect(user1).setContractURI('foobar'), user1, OPERATOR);
+    it('should revert if a non-owner tries to set the contract URI', async () => {
+      await expect(connect(TheAssetsClub, user1).setContractURI('http://foobar')).to.be.revertedWith(
+        'Ownable: caller is not the owner',
+      );
     });
 
-    it('should allow an OPERATOR account to set the contract URI', async () => {
+    it('should allow a the owner account to set the contract URI', async () => {
       const newContractURI = `${faker.internet.url()}/`;
-      expect(await TheAssetsClub.connect(admin).setContractURI(newContractURI)).to.not.be.reverted;
+      await connect(TheAssetsClub, admin).setContractURI(newContractURI);
       expect(await TheAssetsClub.contractURI()).to.equal(newContractURI);
     });
   });
 
   describe('setBaseURI', () => {
-    it('should revert if a non-OPERATOR tries to set the base URI', async () => {
-      await expectMissingRole(TheAssetsClub.connect(user1).setBaseURI('foobar'), user1, OPERATOR);
+    it('should revert if a non-owner tries to set the base URI', async () => {
+      await expect(connect(TheAssetsClub, user1).setBaseURI('http://foobar')).to.be.revertedWith(
+        'Ownable: caller is not the owner',
+      );
     });
 
-    it('should allow an OPERATOR account to set the base URI', async () => {
-      const newBaseURI = `${faker.internet.url()}/`;
-      expect(await TheAssetsClub.connect(admin).setBaseURI(newBaseURI)).to.not.be.reverted;
-      await TheAssetsClub.connect(minter).mint(admin.address, 1);
-      expect(await TheAssetsClub.tokenURI(0)).to.equal(`${newBaseURI}0.json`);
+    it('should allow a the owner account to set the contract URI', async () => {
+      const newContractURI = `${faker.internet.url()}/`;
+      await connect(TheAssetsClub, admin).setContractURI(newContractURI);
+      expect(await TheAssetsClub.contractURI()).to.equal(newContractURI);
     });
   });
 
   describe('remaining', () => {
     it('should reduce the number of remaining tokens when calling mint', async () => {
       const current = await TheAssetsClub.remaining();
-      const quantity = faker.datatype.number(10) + 1;
-      await TheAssetsClub.connect(minter).mint(user1.address, quantity);
-      expect(current.sub(quantity)).to.equal(await TheAssetsClub.remaining());
+      const quantity = BigInt(faker.datatype.number(10) + 1);
+      await connect(TheAssetsClub, minter).mint(user1, quantity);
+      expect(current - quantity).to.equal(await TheAssetsClub.remaining());
     });
   });
 
   describe('burn', () => {
-    let lastTokenId: number;
+    let lastTokenId: bigint;
 
     beforeEach(async () => {
-      await TheAssetsClub.connect(minter).mint(user1.address, 1);
-      lastTokenId = (await TheAssetsClub.nextTokenId()).toNumber() - 1;
+      await connect(TheAssetsClub, minter).mint(user1, 1);
+      lastTokenId = (await TheAssetsClub.nextTokenId()) - 1n;
     });
 
-    it('should revert if account tries top mint non-existent token', async () => {
-      await expect(TheAssetsClub.connect(user1).burn(lastTokenId + 5))
+    it('should revert if account tries top burn non-existent token', async () => {
+      const nonExistingTokenId = lastTokenId + 5n;
+      await expect(connect(TheAssetsClub, user1).burn(nonExistingTokenId))
         .to.be.revertedWithCustomError(TheAssetsClub, 'OwnerQueryForNonexistentToken')
         .withArgs();
     });
 
-    it('should revert if account tries top mint non-existent token', async () => {
-      await expect(TheAssetsClub.connect(user2).burn(lastTokenId))
+    it('should revert if account tries to burn a token it does not own', async () => {
+      await expect(connect(TheAssetsClub, user2).burn(lastTokenId))
         .to.be.revertedWithCustomError(TheAssetsClub, 'TransferCallerNotOwnerNorApproved')
         .withArgs();
     });
   });
 
+  describe('mint', () => {});
+
   describe('reveal', () => {
     beforeEach(async () => {
-      await TheAssetsClub.connect(minter).mint(user1.address, 1000);
+      await connect(TheAssetsClub, minter).mint(user1, 1000);
     });
 
-    it('should revert if a non-OPERATOR tries to trigger the reveal', async () => {
-      await expectMissingRole(TheAssetsClub.connect(user1).reveal(), user1, OPERATOR);
+    it('should revert if a non-owner tries to set the base URI', async () => {
+      await expect(connect(TheAssetsClub, user1).setBaseURI('http://foobar')).to.be.revertedWith(
+        'Ownable: caller is not the owner',
+      );
     });
 
-    it('should revert if an OPERATOR to trigger the reveal twice', async () => {
-      await TheAssetsClub.connect(admin).reveal(); // pass
-      await expect(TheAssetsClub.connect(admin).reveal())
+    it('should revert if the owner attempts to trigger the reveal twice', async () => {
+      await connect(TheAssetsClub, admin).reveal(); // pass
+      await expect(connect(TheAssetsClub, admin).reveal())
         .to.be.revertedWithCustomError(TheAssetsClub, 'OnlyUnrevealed')
         .withArgs();
     });
 
-    it('should allow an OPERATOR to trigger the reveal', async () => {
-      await TheAssetsClub.connect(admin).reveal();
+    it('should allow the owner to trigger the reveal', async () => {
+      await connect(TheAssetsClub, admin).reveal();
     });
   });
 
   describe('fulfillRandomWords', () => {
+    let seed: bigint;
+
     beforeEach(async () => {
-      await TheAssetsClub.connect(minter).mint(user1.address, 5777);
-      await TheAssetsClub.connect(admin).reveal();
+      await connect(TheAssetsClub, minter).mint(user1, await TheAssetsClubMinter.MAXIMUM_MINTS());
+      await connect(TheAssetsClub, admin).reveal();
+      seed = await faker.datatype.bigInt(2n ** 256n - 1n);
     });
 
     it('should revert if passed VRF requestId is invalid', async () => {
       const invalidRequestId = faker.datatype.number();
-      const VRFCoordinatorV2Signer = await ethers.getImpersonatedSigner(VRFCoordinatorV2.address);
+      const VRFCoordinatorV2Signer = await ethers.getImpersonatedSigner(VRFCoordinatorV2.target as string);
       await setBalance(VRFCoordinatorV2Signer.address, parseEther('10'));
 
-      await expect(TheAssetsClub.connect(VRFCoordinatorV2Signer).rawFulfillRandomWords(invalidRequestId, [4040]))
+      await expect(connect(TheAssetsClub, VRFCoordinatorV2Signer).rawFulfillRandomWords(invalidRequestId, [seed]))
         .to.be.revertedWithCustomError(TheAssetsClub, 'InvalidVRFRequestId')
         .withArgs(1, invalidRequestId);
     });
 
     it('should revert if a non-VRFCoordinatorV2 tries to trigger the reveal', async () => {
-      await expect(TheAssetsClub.connect(user1).rawFulfillRandomWords(1, [4242]))
+      await expect(connect(TheAssetsClub, user1).rawFulfillRandomWords(1, [seed]))
         .to.be.revertedWithCustomError(TheAssetsClub, 'OnlyCoordinatorCanFulfill')
-        .withArgs(user1.address, VRFCoordinatorV2.address);
+        .withArgs(await user1.getAddress(), VRFCoordinatorV2.target);
     });
 
     it('should allow VRFCoordinatorV2 to reveal the collection', async () => {
-      const seed = faker.datatype.number({ min: 0, max: Number.MAX_SAFE_INTEGER });
-      await VRFCoordinatorV2.fulfillRandomWordsWithOverride(1, TheAssetsClub.address, [seed]);
+      await VRFCoordinatorV2.fulfillRandomWordsWithOverride(1, TheAssetsClub.target as string, [seed]);
       expect(await TheAssetsClub.seed()).to.equal(seed);
     });
   });

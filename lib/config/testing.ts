@@ -1,4 +1,4 @@
-import { ethers } from 'hardhat';
+import { ethers } from 'ethers';
 import Config from './Config';
 import mainnet from './mainnet';
 
@@ -13,7 +13,7 @@ const testing: Omit<Config, 'accounts'> = {
 
   vrf: {
     ...mainnet.vrf,
-    keyHash: ethers.utils.solidityKeccak256(['string'], ['RANDOM_KEY_HASH']),
+    keyHash: ethers.solidityPackedKeccak256(['string'], ['RANDOM_KEY_HASH']),
   },
 };
 

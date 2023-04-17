@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.18;
 
-import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
-import "@openzeppelin/contracts/access/AccessControl.sol";
-import "@openzeppelin/contracts/token/common/ERC2981.sol";
-import "erc721a/contracts/ERC721A.sol";
-import "operator-filter-registry/src/DefaultOperatorFilterer.sol";
+import { VRFConsumerBaseV2 } from "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import { VRFCoordinatorV2Interface } from "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
+import { ERC2981 } from "@openzeppelin/contracts/token/common/ERC2981.sol";
+import { ERC721A } from "erc721a/contracts/ERC721A.sol";
+import { DefaultOperatorFilterer } from "operator-filter-registry/src/DefaultOperatorFilterer.sol";
 
 /**
  * @title TheAssetsClub NFT Collection
@@ -18,28 +18,27 @@ import "operator-filter-registry/src/DefaultOperatorFilterer.sol";
  * standard that was initially developed by OpenSea.
  * For more information, see https://github.com/ProjectOpenSea/operator-filter-registry
  *
- * Implemented roles:
- * - DEFAULT_ADMIN_ROLE assigned to the deployer account only and will be renounced quickly after successful deployment.
- * - MINTER assigned to the TheAssetsClubMinter contract, will be renounced as soon as the mint is finished.
- * - OPERATOR assign to TheAssetsClub multi-signature wallet, allows to perform exceptional maintained of the metadata
- *   URIs, for example if the domain theassets.club is hijacked.
+ * Governance:
+ * - TheAssetsClub owner can update the tokens base incase of the theassets.club domain is lost.
  */
-contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, DefaultOperatorFilterer {
+contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultOperatorFilterer {
   /// The maximum Assets mints, which effectively caps the total supply
   uint256 public constant MAXIMUM_MINTS = 5777;
-  /// Royalties 5% on secondary sales
-  uint96 public constant ROYALTIES = 500;
+  uint256 public constant MAXIMUM_PER_WALLET = 5;
 
-  // Roles
-  bytes32 public constant MINTER = keccak256("MINTER");
-  bytes32 public constant OPERATOR = keccak256("OPERATOR");
+  /// Royalties 7.7% on secondary sales
+  uint96 public constant ROYALTIES = 770;
+
+  // Contracts
+  address public minter;
 
   // Token URIs
   string private _contractURI = "https://static.theassets.club/contract.json";
   string private baseURI = "https://static.theassets.club/tokens/";
 
-  // State
-  bool public revealed = false;
+  /// If the collectioon has been reveal.
+  /// This state has to seperated from seed since VRF request and fullfilment are written in seperate transactions.
+  bool revealed = false;
   uint256 public seed;
 
   // Chainlink VRF parameters
@@ -53,12 +52,13 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
   error OnlyUnrevealed();
   error MaximumMintsReached(uint256 wanted, uint256 totalSupply);
   error InvalidVRFRequestId(uint256 expected, uint256 actual);
+  error MinterAlreadySet();
+  error OnlyMinter(address expected, address actual);
 
   constructor(
     address _coordinator,
     bytes32 _keyHash,
     uint64 _subId,
-    address admin,
     address treasury
   ) ERC721A("The Assets Club", "TAC") VRFConsumerBaseV2(_coordinator) {
     coordinator = VRFCoordinatorV2Interface(_coordinator);
@@ -66,9 +66,32 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
     subId = _subId;
 
     _setDefaultRoyalty(treasury, ROYALTIES);
+    _transferOwnership(msg.sender);
+  }
 
-    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-    _grantRole(OPERATOR, admin);
+  modifier onlyMinter() {
+    if (msg.sender != minter) {
+      revert OnlyMinter(minter, msg.sender);
+    }
+    _;
+  }
+
+  /**
+   * @dev Since the ERC721 token and the minter are deployed sequentially, the ERC721 contract does not know the minter address in advance.
+   * This function allow to finish the contract initialization:
+   * 1. Set the minter contract address.
+   * 2. Transfer ownership the the final admin.
+   *
+   * @param admin The new admin address.
+   * @param _minter The {TheAssetsClubMinter} contract address
+   */
+  function initialize(address admin, address _minter) external onlyOwner {
+    if (minter != address(0)) {
+      revert MinterAlreadySet();
+    }
+
+    minter = _minter;
+    _transferOwnership(admin);
   }
 
   /**
@@ -89,7 +112,7 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
    * @dev Allow to change the collection contractURI, most likely due to URL migration.
    * We wil try not use this method and use HTTP redirects instead, but we keep it as an escape hatch.
    */
-  function setContractURI(string memory newContractURI) external onlyRole(OPERATOR) {
+  function setContractURI(string memory newContractURI) external onlyOwner {
     _contractURI = newContractURI;
   }
 
@@ -104,7 +127,7 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
    * @dev Allow to change the collection baseURI, most likely due to URL migration.
    * We wil try not use this method and use HTTP redirects instead, but we keep it as an escape hatch.
    */
-  function setBaseURI(string memory newBaseURI) external onlyRole(OPERATOR) {
+  function setBaseURI(string memory newBaseURI) external onlyOwner {
     baseURI = newBaseURI;
   }
 
@@ -114,13 +137,7 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
    * @param tokenId The token numeric id.
    */
   function tokenURI(uint256 tokenId) public view override returns (string memory) {
-    uint256 tokenId_ = tokenId;
-
-    if (revealed) {
-      tokenId_ = (tokenId + seed) % _totalMinted();
-    }
-
-    return string(abi.encodePacked(super.tokenURI(tokenId_), ".json"));
+    return string(abi.encodePacked(super.tokenURI(tokenId), ".json"));
   }
 
   /**
@@ -135,7 +152,7 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
    * @param to The recipient account address.
    * @param quantity The number opf tokens to mint.
    */
-  function mint(address to, uint256 quantity) external onlyRole(MINTER) {
+  function mint(address to, uint256 quantity) external onlyMinter {
     uint256 totalMinted = _totalMinted();
 
     if (totalMinted + quantity > MAXIMUM_MINTS) {
@@ -146,7 +163,7 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
   }
 
   /**
-   * @notice Burn a token.
+   * @notice Burn a existing token.
    * @dev Requirements:
    * - Sender must be the owner of the token or should have approved the burn.
    */
@@ -157,10 +174,10 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
   /**
    * @notice Trigger the reveal.
    * @dev Requirements:
-   * - reveal should not have started yet
-   * - only OPERATOR role can call this function
+   * - Sender must be the owner of the contract
+   * - Reveal should not have started yet
    */
-  function reveal() external onlyRole(OPERATOR) {
+  function reveal() external onlyOwner {
     if (revealed) {
       revert OnlyUnrevealed();
     }
@@ -187,13 +204,7 @@ contract TheAssetsClub is ERC721A, ERC2981, AccessControl, VRFConsumerBaseV2, De
    * - IERC721Metadata: 0x5b5e139f
    * - IERC2981: 0x2a55205a
    */
-  function supportsInterface(bytes4 interfaceId)
-    public
-    view
-    virtual
-    override(ERC721A, ERC2981, AccessControl)
-    returns (bool)
-  {
+  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC2981, ERC721A) returns (bool) {
     return super.supportsInterface(interfaceId) || ERC721A.supportsInterface(interfaceId);
   }
 }

@@ -30,6 +30,6 @@ export default async function loadData(): Promise<MerkleTreeData> {
       return map;
     }, {} as Record<string, number>),
     og: ogData.map((og) => og.address),
-    waitlist: waitlistData.map((w) => w.address),
+    accessList: waitlistData.map((w) => w.address),
   };
 }

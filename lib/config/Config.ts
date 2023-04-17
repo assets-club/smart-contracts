@@ -1,3 +1,5 @@
+import { AddressLike } from 'ethers';
+
 export default interface Config {
   log: boolean;
   verify: boolean;

@@ -1,8 +1,7 @@
 enum Tier {
   PUBLIC,
-  WL,
+  ACCESS_LIST,
   OG,
-  LOCKED,
 }
 
 export default Tier;

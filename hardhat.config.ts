@@ -1,14 +1,21 @@
 import { config as loadConfig } from 'dotenv';
+import 'hardhat-abi-exporter';
 import 'hardhat-dependency-compiler';
+import 'hardhat-gas-reporter';
+import 'hardhat-ignore-warnings';
 import { HardhatUserConfig } from 'hardhat/config';
 import { set } from 'lodash';
-import '@nomicfoundation/hardhat-toolbox';
+import 'solidity-coverage';
+import '@nomicfoundation/hardhat-chai-matchers';
+import '@nomiclabs/hardhat-ethers';
+import '@nomiclabs/hardhat-etherscan';
+import '@typechain/hardhat';
 
 loadConfig();
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: '0.8.17',
+    version: '0.8.18',
     settings: {
       optimizer: {
         enabled: true,
@@ -18,16 +25,28 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       chainId: 1337,
+      initialDate: '2023-04-01 00:00:00',
     },
   },
   dependencyCompiler: {
-    paths: [
-      '@chainlink/contracts/src/v0.8/mocks/VRFCoordinatorV2Mock.sol',
-      '@openzeppelin/contracts/finance/PaymentSplitter.sol',
-    ],
+    paths: ['@chainlink/contracts/src/v0.8/mocks/VRFCoordinatorV2Mock.sol'],
+  },
+  warnings: {
+    '@chainlink/contracts/src/v0.8/mocks/VRFCoordinatorV2Mock.sol': 'off',
+  },
+  abiExporter: {
+    clear: true,
+    runOnCompile: true,
+    pretty: false,
+    only: ['^contracts'],
+    except: ['^contracts/testing'],
+    path: 'abi',
+    rename: (sourceName) => {
+      return sourceName.replace(/^contracts\/(.*)\.sol$/, '$1');
+    },
   },
   typechain: {
-    target: 'ethers-v5',
+    target: 'ethers-v6',
   },
   gasReporter: {
     enabled: Boolean(process.env.REPORT_GAS),

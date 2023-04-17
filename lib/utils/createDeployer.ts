@@ -4,12 +4,13 @@ import { isNativeError } from 'util/types';
 
 export interface TypeContractFactory<C extends BaseContract, A extends unknown[]> extends ContractFactory {
   connect(signer: Signer): this;
-  deploy(...args: A): Promise<C>;
+  deploy(...args: A): Promise<C & Awaited<ReturnType<ContractFactory['deploy']>>>;
 }
 
 interface DeployerOptions {
   confirmations?: number;
   verify?: boolean;
+  log?: boolean;
 }
 
 /**
@@ -18,15 +19,28 @@ interface DeployerOptions {
  * @param verify If the contract should be verified on Etherscan/Polyscan, etc.
  * @param wait The number of confirmations that we should wait after deployment.
  */
-export default function createDeployer(signer: Signer, { verify = true, confirmations }: DeployerOptions = {}) {
+export default function createDeployer(
+  signer: Signer,
+  { verify = true, confirmations, log = true }: DeployerOptions = {},
+) {
   return async function deploy<C extends BaseContract, A extends unknown[]>(
     factoryClass: { new (): TypeContractFactory<C, A> },
     ...args: A
   ) {
     const factory = new factoryClass();
+    const name = factory.constructor.name.replace('__factory', '');
     const contract = await factory.connect(signer).deploy(...args);
-    await contract.deployed();
-    await contract.deployTransaction.wait(confirmations);
+    contract.deploymentTransaction()?.wait(confirmations);
+
+    if (log) {
+      console.log('Deploying', name, 'with', contract.deploymentTransaction()?.hash);
+    }
+
+    await contract.waitForDeployment();
+
+    if (log) {
+      console.log('Deployed', name, 'at', contract.target);
+    }
 
     if (verify) {
       // Artificial delay before attempting to verify the contracts
@@ -34,7 +48,7 @@ export default function createDeployer(signer: Signer, { verify = true, confirma
 
       try {
         await run('verify:verify', {
-          address: contract.address,
+          address: contract.target,
           constructorArguments: args,
         });
       } catch (err) {
