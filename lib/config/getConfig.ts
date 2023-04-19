@@ -1,7 +1,7 @@
 import { network } from 'hardhat';
 import Config from './Config';
-import goerli from './goerli';
 import mainnet from './mainnet';
+import sepolia from './sepolia';
 
 /**
  * Get the configuration personalized for the current Hardhat network.
@@ -9,11 +9,11 @@ import mainnet from './mainnet';
 export default function getConfig(): Config {
   switch (network.name) {
     case 'hardhat':
-      return { ...goerli, verify: false, confirmations: 0 };
+      return { ...sepolia, verify: false, confirmations: 0 };
     case 'local':
-      return { ...goerli, verify: false, confirmations: 0 };
-    case 'goerli':
-      return goerli;
+      return { ...sepolia, verify: false, confirmations: 0 };
+    case 'sepolia':
+      return sepolia;
     default:
       return mainnet;
   }

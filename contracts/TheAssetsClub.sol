@@ -69,13 +69,6 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
     _transferOwnership(msg.sender);
   }
 
-  modifier onlyMinter() {
-    if (msg.sender != minter) {
-      revert OnlyMinter(minter, msg.sender);
-    }
-    _;
-  }
-
   /**
    * @dev Since the ERC721 token and the minter are deployed sequentially, the ERC721 contract does not know the minter
    * address in advance. This function allow to finish the contract initialization:
@@ -152,7 +145,11 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
    * @param to The recipient account address.
    * @param quantity The number opf tokens to mint.
    */
-  function mint(address to, uint256 quantity) external onlyMinter {
+  function mint(address to, uint256 quantity) external {
+    if (msg.sender != minter) {
+      revert OnlyMinter(minter, msg.sender);
+    }
+
     uint256 totalMinted = _totalMinted();
 
     if (totalMinted + quantity > MAXIMUM_MINTS) {

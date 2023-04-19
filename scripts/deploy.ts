@@ -1,10 +1,13 @@
-import { ethers } from 'hardhat';
 import getConfig from '../lib/config/getConfig';
 import deployContracts from '../lib/deployContracts';
+import getSigner from '../lib/getSigner';
 
 async function main() {
-  const [deployer] = await ethers.getSigners();
-  await deployContracts(deployer, getConfig());
+  const signer = await getSigner();
+  const config = getConfig();
+
+  await deployContracts(signer, config);
+  return;
 }
 
 main().catch((error) => {

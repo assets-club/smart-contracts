@@ -10,6 +10,7 @@ import '@nomicfoundation/hardhat-chai-matchers';
 import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-etherscan';
 import '@typechain/hardhat';
+import './lib/chai/assertions';
 
 loadConfig();
 
@@ -26,6 +27,10 @@ const config: HardhatUserConfig = {
     hardhat: {
       chainId: 1337,
       initialDate: '2023-04-01 00:00:00',
+    },
+    sepolia: {
+      chainId: 11155111,
+      url: 'http://127.0.0.1:1248',
     },
   },
   dependencyCompiler: {

@@ -59,6 +59,7 @@
     "chai": "^4.3.7",
     "dotenv": "^16.0.3",
     "erc721a": "^4.2.3",
+    "eth-provider": "^0.13.6",
     "ethers": "^6.3.0",
     "hardhat": "^2.14.0",
     "hardhat-abi-exporter": "^2.10.1",

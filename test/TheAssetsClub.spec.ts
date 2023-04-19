@@ -1,20 +1,24 @@
 import { expect } from 'chai';
-import { Signer, parseEther } from 'ethers';
+import { parseEther } from 'ethers';
 import { ethers } from 'hardhat';
 import { describe } from 'mocha';
 import { faker } from '@faker-js/faker';
 import { loadFixture, setBalance } from '@nomicfoundation/hardhat-network-helpers';
+import { CustomEthersSigner } from '@nomiclabs/hardhat-ethers/signers';
+import Config from '../lib/config/Config';
 import connect from '../lib/connect';
 import getTestAccounts from '../lib/testing/getTestAccounts';
 import stackFixture from '../lib/testing/stackFixture';
-import { TheAssetsClub, TheAssetsClubMinter, VRFCoordinatorV2Mock } from '../typechain-types';
+import { TheAssetsClub, TheAssetsClubMinter, TheAssetsClub__factory, VRFCoordinatorV2Mock } from '../typechain-types';
 
 describe('TheAssetsClub', () => {
-  let admin: Signer;
-  let treasury: Signer;
-  let user1: Signer;
-  let user2: Signer;
-  let minter: Signer;
+  let admin: CustomEthersSigner;
+  let treasury: CustomEthersSigner;
+  let user1: CustomEthersSigner;
+  let user2: CustomEthersSigner;
+  let minter: CustomEthersSigner;
+
+  let config: Config;
 
   let TheAssetsClub: TheAssetsClub;
   let TheAssetsClubMinter: TheAssetsClubMinter;
@@ -22,7 +26,7 @@ describe('TheAssetsClub', () => {
 
   beforeEach(async () => {
     ({ admin, treasury, user1, user2 } = await getTestAccounts());
-    ({ TheAssetsClub, TheAssetsClubMinter, VRFCoordinatorV2 } = await loadFixture(stackFixture));
+    ({ config, TheAssetsClub, TheAssetsClubMinter, VRFCoordinatorV2 } = await loadFixture(stackFixture));
 
     // Mint a token to be able to call tokenURI
     minter = await ethers.getImpersonatedSigner(TheAssetsClubMinter.target as string);
@@ -38,11 +42,38 @@ describe('TheAssetsClub', () => {
     });
   });
 
+  describe('initialize', () => {
+    beforeEach(async () => {
+      // We need to re-deploy a fresh instance of TheAssetsClub contract since initialize is called during initialization
+      TheAssetsClub = await new TheAssetsClub__factory()
+        .connect(user1)
+        .deploy(config.vrf.coordinator, config.vrf.keyHash, config.vrf.subId, config.treasury);
+    });
+
+    it('should revert if non-owner attempts to initialize the minter', async () => {
+      await expect(connect(TheAssetsClub, user2).initialize(user2, user2)).to.be.revertedOnlyOwner;
+    });
+
+    it('should revert if owner attempts to initialize the minter twice', async () => {
+      // We need to re-deploy a fresh instance of TheAssetsClub contract since initialize is called during initialization
+      TheAssetsClub = await new TheAssetsClub__factory()
+        .connect(user1)
+        .deploy(config.vrf.coordinator, config.vrf.keyHash, config.vrf.subId, config.treasury);
+
+      expect(await TheAssetsClub.owner()).to.eq(user1.address);
+      await connect(TheAssetsClub, user1).initialize(admin, user1); // transfer ownership to admin
+      expect(await TheAssetsClub.owner()).to.eq(admin.address);
+
+      // attempt to change the minter again: fail
+      await expect(connect(TheAssetsClub, admin).initialize(admin, user2))
+        .to.be.revertedWithCustomError(TheAssetsClub, 'MinterAlreadySet')
+        .withArgs();
+    });
+  });
+
   describe('setContractURI', () => {
     it('should revert if a non-owner tries to set the contract URI', async () => {
-      await expect(connect(TheAssetsClub, user1).setContractURI('http://foobar')).to.be.revertedWith(
-        'Ownable: caller is not the owner',
-      );
+      await expect(connect(TheAssetsClub, user1).setContractURI('http://foobar')).to.be.revertedOnlyOwner;
     });
 
     it('should allow a the owner account to set the contract URI', async () => {
@@ -59,10 +90,15 @@ describe('TheAssetsClub', () => {
       );
     });
 
-    it('should allow a the owner account to set the contract URI', async () => {
-      const newContractURI = `${faker.internet.url()}/`;
-      await connect(TheAssetsClub, admin).setContractURI(newContractURI);
-      expect(await TheAssetsClub.contractURI()).to.equal(newContractURI);
+    it('should allow a the owner account to set the base URI', async () => {
+      const newBaseURI = `${faker.internet.url()}/`;
+      await connect(TheAssetsClub, admin).setBaseURI(newBaseURI);
+
+      // mint a token to be 100% sure that the token exists
+      await connect(TheAssetsClub, minter).mint(user1, 1);
+      const tokenId = (await TheAssetsClub.nextTokenId()) - 1n;
+
+      expect(await TheAssetsClub.tokenURI(tokenId)).to.eq(`${newBaseURI}${tokenId}.json`);
     });
   });
 
@@ -72,6 +108,26 @@ describe('TheAssetsClub', () => {
       const quantity = BigInt(faker.datatype.number(10) + 1);
       await connect(TheAssetsClub, minter).mint(user1, quantity);
       expect(current - quantity).to.equal(await TheAssetsClub.remaining());
+    });
+  });
+
+  describe('mint', () => {
+    it('should revert if non-minter attempts to mint a token', async () => {
+      await expect(connect(TheAssetsClub, user1).mint(user1, 5))
+        .to.be.revertedWithCustomError(TheAssetsClub, 'OnlyMinter')
+        .withArgs(minter.address, user1.address);
+    });
+
+    it('should revert if mint would exceed MAXIMUM_MINTS', async () => {
+      const MAXIMUM_MINTS = await TheAssetsClub.MAXIMUM_MINTS();
+      const delta = BigInt(faker.datatype.number({ min: 1, max: 20 }));
+      await connect(TheAssetsClub, minter).mint(user1, MAXIMUM_MINTS - delta); // pass
+
+      await expect(connect(TheAssetsClub, minter).mint(user1, delta + 1n)) // exceed quantity by 1
+        .to.be.revertedWithCustomError(TheAssetsClub, 'MaximumMintsReached')
+        .withArgs(delta + 1n, MAXIMUM_MINTS - delta);
+
+      await expect(connect(TheAssetsClub, minter).mint(user1, delta)).to.not.be.reverted; // pass
     });
   });
 
@@ -97,17 +153,13 @@ describe('TheAssetsClub', () => {
     });
   });
 
-  describe('mint', () => {});
-
   describe('reveal', () => {
     beforeEach(async () => {
       await connect(TheAssetsClub, minter).mint(user1, 1000);
     });
 
-    it('should revert if a non-owner tries to set the base URI', async () => {
-      await expect(connect(TheAssetsClub, user1).setBaseURI('http://foobar')).to.be.revertedWith(
-        'Ownable: caller is not the owner',
-      );
+    it('should revert if a non-owner tries to reveal the collection', async () => {
+      await expect(connect(TheAssetsClub, user1).reveal()).to.be.revertedOnlyOwner;
     });
 
     it('should revert if the owner attempts to trigger the reveal twice', async () => {
