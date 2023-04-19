@@ -69,6 +69,10 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
     _transferOwnership(msg.sender);
   }
 
+  function _startTokenId() internal view virtual override returns (uint256) {
+    return 1;
+  }
+
   /**
    * @dev Since the ERC721 token and the minter are deployed sequentially, the ERC721 contract does not know the minter
    * address in advance. This function allow to finish the contract initialization:

@@ -25,6 +25,7 @@ export default async function deployContracts(signer: Signer, config: Config) {
   const TheAssetsClubMinter = await deploy(
     TheAssetsClubMinter__factory,
     TheAssetsClub.target,
+    config.nftParis,
     config.admin,
     Object.keys(config.shares),
     Object.values(config.shares),

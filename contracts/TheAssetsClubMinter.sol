@@ -75,29 +75,32 @@ contract TheAssetsClubMinter is Ownable, PaymentSplitter {
   error TransferFailed(address from, address to, uint256 value);
 
   // ----- NFT Paris Collection -----
-  /// TheAssetsClub at NFT ERC721 contract
-  IERC721A public constant TACP_ERC721 = IERC721A(0xD13fbE29dbd15Bd0175122a4f8c90072c568511d);
-  /// TheAssetsClub at NFT Paris used tokens
-  mapping(uint256 => bool) public TACP_used;
+  /// TheAssetsClub at NFT ERC721 contract.
+  IERC721A public immutable nftParis;
+  /// TheAssetsClubAtNFTParis used tokens.
+  mapping(uint256 => bool) public nftParisUsed;
 
-  /// Thrown when the minter does not hold a TheAssetsClub at NFT Paris token
-  error TACP_NotHolder(uint256 tokenId);
-  /// Thrown when the minter tries to use TheAssetsClub at NFT Paris token for the second time
-  error TACP_AlreadyUsed(uint256 tokenId);
+  /// Thrown when the minter does not hold a TheAssetsClub at NFT Paris token.
+  error NFTParisNotHolder(uint256 tokenId);
+  /// Thrown when the minter tries to use TheAssetsClub at NFT Paris token for the second time.
+  error NFTParisAlreadyUsed(uint256 tokenId);
 
   /**
    * @param _tac TheAssetsClub ERC721A contract address.
+   * @param _tac TheAssetsClubAtNFTParis ERC721A contract address.
    * @param admin The admin multi-signature wallet.
    * @param payees The payees addresses.
    * @param shares_ The payees shares.
    */
   constructor(
     ITheAssetsClub _tac,
+    IERC721A _tacp,
     address admin,
     address[] memory payees,
     uint256[] memory shares_
   ) PaymentSplitter(payees, shares_) {
     theAssetsClub = _tac;
+    nftParis = _tacp;
 
     // Grant roles
     _transferOwnership(admin);
@@ -130,7 +133,7 @@ contract TheAssetsClubMinter is Ownable, PaymentSplitter {
    * @return The price in Ether wei.
    */
   function getPrice(Tier tier, uint256 quantity, uint256 skip) public pure returns (uint256) {
-    if (tier > Tier.OG || quantity == 0 || quantity + skip > MAXIMUM_MINTS) {
+    if (quantity == 0 || quantity + skip > MAXIMUM_MINTS) {
       revert InvalidPricing(tier, quantity, skip);
     }
 
@@ -192,15 +195,15 @@ contract TheAssetsClubMinter is Ownable, PaymentSplitter {
     Tier _tier;
 
     // for TheAssetsClub at NFT Paris holders
-    if (proof.length == 1 && bytes32toAddress(proof[0]) == address(TACP_ERC721)) {
-      uint256 tokenId = uint256(proof[0] >> 160);
-      if (TACP_ERC721.ownerOf(tokenId) != to) {
-        revert TACP_NotHolder(tokenId);
-      } else if (TACP_used[tokenId]) {
-        revert TACP_AlreadyUsed(tokenId);
+    if (proof.length == 2 && bytes32toAddress(proof[0]) == address(nftParis)) {
+      uint256 tokenId = uint256(proof[1]);
+      if (nftParis.ownerOf(tokenId) != to) {
+        revert NFTParisNotHolder(tokenId);
+      } else if (nftParisUsed[tokenId]) {
+        revert NFTParisAlreadyUsed(tokenId);
       }
 
-      TACP_used[tokenId] = true;
+      nftParisUsed[tokenId] = true;
       _tier = Tier.ACCESS_LIST;
     }
     // claimed tier is greater than PUBLIC, verify the Merkle proof

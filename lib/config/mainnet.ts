@@ -10,6 +10,7 @@ const mainnet: Config = {
 
   admin: treasury, // TBD
   treasury,
+  nftParis: '0xD13fbE29dbd15Bd0175122a4f8c90072c568511d', // see https://etherscan.io/address/0xD13fbE29dbd15Bd0175122a4f8c90072c568511d
 
   vrf: {
     coordinator: '0x271682DEB8C4E0901D1a1550aD2e64D568E69909',

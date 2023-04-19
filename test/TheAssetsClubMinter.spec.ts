@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import { EtherSymbol, Signer, formatEther, parseEther } from 'ethers';
+import { AbiCoder, EtherSymbol, Signer, formatEther, parseEther, toBeHex, zeroPadBytes, zeroPadValue } from 'ethers';
 import { ethers } from 'hardhat';
 import { faker } from '@faker-js/faker';
-import { loadFixture, setBalance } from '@nomicfoundation/hardhat-network-helpers';
+import { loadFixture, setBalance, setCode } from '@nomicfoundation/hardhat-network-helpers';
 import { increaseTo, setNextBlockTimestamp } from '@nomicfoundation/hardhat-network-helpers/dist/src/helpers/time';
 import { CustomEthersSigner } from '@nomiclabs/hardhat-ethers/signers';
 import { StandardMerkleTree } from '@openzeppelin/merkle-tree';
@@ -13,7 +13,14 @@ import stackFixture from '../lib/testing/stackFixture';
 import Phase from '../lib/types/Phase';
 import Proof from '../lib/types/Proof';
 import Tier from '../lib/types/Tier';
-import { PaymentSplitter, TheAssetsClub, TheAssetsClubMinter } from '../typechain-types';
+import {
+  ERC721A__factory,
+  ERC721Mock,
+  ERC721Mock__factory,
+  PaymentSplitter,
+  TheAssetsClub,
+  TheAssetsClubMinter,
+} from '../typechain-types';
 
 describe('TheAssetsClubMinter', () => {
   let admin: CustomEthersSigner;
@@ -31,6 +38,7 @@ describe('TheAssetsClubMinter', () => {
 
   let TheAssetsClub: TheAssetsClub;
   let TheAssetsClubMinter: TheAssetsClubMinter;
+  let NFTParis: ERC721Mock;
 
   let randomProof: string[];
 
@@ -43,7 +51,7 @@ describe('TheAssetsClubMinter', () => {
 
   beforeEach(async () => {
     ({ admin, user1, user2, user3, user4: userOG, user5: userAL, treasury } = await getTestAccounts());
-    ({ TheAssetsClub, TheAssetsClubMinter, config, tree } = await loadFixture(stackFixture));
+    ({ TheAssetsClub, TheAssetsClubMinter, NFTParis, config, tree } = await loadFixture(stackFixture));
 
     START_DATE = Number(await TheAssetsClubMinter.START_DATE());
     PRIVATE_SALE_DURATION = Number(await TheAssetsClubMinter.PRIVATE_SALE_DURATION());
@@ -150,6 +158,12 @@ describe('TheAssetsClubMinter', () => {
     }
   });
 
+  describe('setMintParameters', () => {
+    it('should revert if a non-owner attempts to change the mint parameters', async () => {
+      await expect(connect(TheAssetsClubMinter, user1).setMintParameters(randomProof[0], 10)).to.be.revertedOnlyOwner;
+    });
+  });
+
   describe('mintTo', () => {
     let TheAssetsClubMinter_OG: TheAssetsClubMinter;
     let TheAssetsClubMinter_AL: TheAssetsClubMinter;
@@ -239,6 +253,38 @@ describe('TheAssetsClubMinter', () => {
       });
     }
 
+    function testNFTParis() {
+      let tokenId: bigint;
+
+      beforeEach(async () => {
+        await NFTParis.mintTo(user1, 1); // token zero
+        tokenId = 0n;
+      });
+
+      function getProof(tokenId: bigint) {
+        return [zeroPadValue(NFTParis.target.toString(), 32), toBeHex(tokenId, 32)];
+      }
+
+      it('should revert if a non-holder of a NFT Paris token tries to mint as an access list member', async () => {
+        await expect(connect(TheAssetsClubMinter, user2).mintTo(user2, 2n, Tier.ACCESS_LIST, getProof(tokenId)))
+          .to.revertedWithCustomError(TheAssetsClubMinter, 'NFTParisNotHolder')
+          .withArgs(tokenId);
+      });
+
+      it('should revert if a NFT Paris holder attempts to mint twice with the same token', async () => {
+        connect(TheAssetsClubMinter, user1).mintTo(user1, 2n, Tier.ACCESS_LIST, getProof(tokenId)); // pass
+        await expect(connect(TheAssetsClubMinter, user1).mintTo(user1, 2n, Tier.ACCESS_LIST, getProof(tokenId)))
+          .to.revertedWithCustomError(TheAssetsClubMinter, 'NFTParisAlreadyUsed')
+          .withArgs(tokenId);
+      });
+
+      it('should allow a NFT Paris holder to be considered as an access list member', async () => {
+        await expect(
+          connect(TheAssetsClubMinter, user1).mintTo(user1, 2n, Tier.ACCESS_LIST, getProof(tokenId)),
+        ).to.changeTokenBalance(TheAssetsClub, user1, 2);
+      });
+    }
+
     describe('before private sale', () => {
       beforeEach(async () => {
         await increaseTo(START_DATE - 100);
@@ -252,8 +298,21 @@ describe('TheAssetsClubMinter', () => {
         await increaseTo(START_DATE + 100);
       });
 
+      it('should revert if the proof is invalid', async () => {
+        await expect(TheAssetsClubMinter_AL.mintTo(userAL, 2, Tier.ACCESS_LIST, randomProof))
+          .to.be.revertedWithCustomError(TheAssetsClubMinter, 'InvalidMerkleProof')
+          .withArgs(userAL.address);
+      });
+
+      it('should revert if sender is not a member of the access list nor an OG', async () => {
+        await expect(connect(TheAssetsClubMinter, user1).mintTo(user1, 2, Tier.PUBLIC, []))
+          .to.be.revertedWithCustomError(TheAssetsClubMinter, 'InsufficientTier')
+          .withArgs(user1.address, Tier.PUBLIC);
+      });
+
       testOG();
       testAccessList();
+      testNFTParis();
     });
 
     describe('during the public sale', async () => {
@@ -263,6 +322,29 @@ describe('TheAssetsClubMinter', () => {
 
       testOG();
       testAccessList();
+      testNFTParis();
+
+      it('should revert if mint would exceed maxmimum supply', async () => {
+        const quantity = 5n;
+        const price = await TheAssetsClubMinter.getPrice(Tier.PUBLIC, quantity, 0);
+
+        await connect(TheAssetsClub, minter).mint(user1, (await TheAssetsClub.MAXIMUM_MINTS()) - quantity + 1n);
+        // only 4 tokens left
+
+        await expect(connect(TheAssetsClubMinter, user1).mintTo(user1, quantity, Tier.PUBLIC, [], { value: price }))
+          .to.be.revertedWithCustomError(TheAssetsClubMinter, 'InsufficientSupply')
+          .withArgs(4n, quantity);
+      });
+
+      it('should revert if sender does not forward enough ether with the transaction', async () => {
+        const quantity = 5n;
+        const price = await TheAssetsClubMinter.getPrice(Tier.PUBLIC, quantity, 0);
+        const value = price - 1n;
+
+        await expect(connect(TheAssetsClubMinter, user1).mintTo(user1, quantity, Tier.PUBLIC, [], { value }))
+          .to.be.revertedWithCustomError(TheAssetsClubMinter, 'InsufficientValue')
+          .withArgs(quantity, value, price);
+      });
     });
 
     describe('after the public sale', () => {
@@ -292,23 +374,39 @@ describe('TheAssetsClubMinter', () => {
         await connect(TheAssetsClubMinter, user2).claimTo(user2.address, 1, proof); // pass
         await expect(connect(TheAssetsClubMinter, user2).claimTo(user2.address, 1, proof))
           .to.be.revertedWithCustomError(TheAssetsClubMinter, 'AlreadyClaimed')
-          .withArgs(user1.address, 1);
+          .withArgs(user2.address, 1);
       });
 
       it('should revert if the Merkle Proof is invalid', async () => {
         await expect(connect(TheAssetsClubMinter, user1).claimTo(user1, 1, randomProof))
           .to.be.revertedWithCustomError(TheAssetsClubMinter, 'InvalidMerkleProof')
-          .withArgs();
+          .withArgs(user1.address);
       });
 
       it('should allow user to claim his tokens', async () => {
         const proof = tree.getProof([user2.address, Proof.CLAIM, 1]);
         await expect(connect(TheAssetsClubMinter, user2).claimTo(user2, 1, proof)).to.changeTokenBalance(
           TheAssetsClub,
-          user1,
+          user2.address,
           1,
         );
       });
     }
+
+    describe('during the private sale', async () => {
+      beforeEach(async () => {
+        await increaseTo(START_DATE + 100);
+      });
+
+      testClaimTo();
+    });
+
+    describe('during the public sale', async () => {
+      beforeEach(async () => {
+        await increaseTo(START_DATE + PRIVATE_SALE_DURATION + 100);
+      });
+
+      testClaimTo();
+    });
   });
 });

@@ -7,6 +7,11 @@
         "type": "address"
       },
       {
+        "internalType": "contract IERC721A",
+        "name": "_tacp",
+        "type": "address"
+      },
+      {
         "internalType": "address",
         "name": "admin",
         "type": "address"
@@ -139,7 +144,7 @@
         "type": "uint256"
       }
     ],
-    "name": "TACP_AlreadyUsed",
+    "name": "NFTParisAlreadyUsed",
     "type": "error"
   },
   {
@@ -150,7 +155,7 @@
         "type": "uint256"
       }
     ],
-    "name": "TACP_NotHolder",
+    "name": "NFTParisNotHolder",
     "type": "error"
   },
   {
@@ -367,38 +372,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "TACP_ERC721",
-    "outputs": [
-      {
-        "internalType": "contract IERC721A",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "TACP_used",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "bytes32",
@@ -543,6 +516,38 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nftParis",
+    "outputs": [
+      {
+        "internalType": "contract IERC721A",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "nftParisUsed",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",

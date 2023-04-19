@@ -7,6 +7,7 @@ export default interface Config {
 
   admin: string;
   treasury: string;
+  nftParis: string;
 
   vrf: {
     coordinator: string;
