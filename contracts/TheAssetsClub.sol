@@ -3,38 +3,105 @@ pragma solidity =0.8.18;
 
 import { VRFConsumerBaseV2 } from "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import { VRFCoordinatorV2Interface } from "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import { PaymentSplitter } from "@openzeppelin/contracts/finance/PaymentSplitter.sol";
 import { ERC2981 } from "@openzeppelin/contracts/token/common/ERC2981.sol";
 import { ERC721A } from "erc721a/contracts/ERC721A.sol";
+import { IERC721A } from "erc721a/contracts/IERC721A.sol";
 import { DefaultOperatorFilterer } from "operator-filter-registry/src/DefaultOperatorFilterer.sol";
 import { Ownable } from "solady/src/auth/Ownable.sol";
+import { MerkleProofLib } from "solady/src/utils/MerkleProofLib.sol";
+
+enum Proof {
+  CLAIM,
+  MINT
+}
+
+enum Tier {
+  PUBLIC,
+  ACCESS_LIST,
+  OG
+}
+
+enum Phase {
+  PRIVATE_SALE,
+  PUBLIC_SALE,
+  CLOSED
+}
 
 /**
  * @title TheAssetsClub NFT Collection
  * @author Mathieu "Windyy" Bour
  * @notice The Assets Club NFT collection implementation based Azuki's ERC721A contract.
  * Less gas, more assets, thanks Azuki <3!
+ * We also are optimizing the gas spent using the Vectorized/solady library.
  *
  * In order to enforce the creator fees on secondary sales, we chose to adhere to the Operator Filter Registry
  * standard that was initially developed by OpenSea.
  * For more information, see https://github.com/ProjectOpenSea/operator-filter-registry
  *
+ * Four two phase are planned for the mint process (see {Tier} above)
+ * Our Merkle Tree type is [address, Proof, uint8].
+ * - If proof is Proof.CLAIM, the last param corresponds to the claimable quantity.
+ * - If proof is Proof.MINT, the last param corresponds to the tier (ACCESS_LIST=1,OG=2).
+ *
  * Governance:
- * - TheAssetsClub owner can update the tokens base URI.
+ * - TheAssetsClub uses Ownable to manage the contract.
+ * - Owner is a safe.global multi-signature contract.
+ * - The owner can change the token URIs, especially because we plan to fully move to IPFS in the future.
+ *
+ * milady
  */
-contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultOperatorFilterer {
+contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultOperatorFilterer, PaymentSplitter {
   /// The maximum Assets mints, which effectively caps the total supply.
   uint256 constant MAXIMUM_MINTS = 5777;
 
   /// Royalties 7.7% on secondary sales.
   uint96 constant ROYALTIES = 770;
 
-  /// The address allowed to mint the Assets.
-  address public minter;
+  /// The maximum token mints per account.
+  uint256 constant MAXIMUM_MINTS_PER_ACCOUNT = 7;
+  /// The price per token for paid mints.
+  uint256 constant SALE_PRICE = 0.02 ether;
+
+  /// The private sale duration in seconds.
+  uint256 constant PRIVATE_SALE_DURATION = 24 * 3600; // 1 day in seconds
+  /// The public sale duration in seconds.
+  uint256 constant PUBLIC_SALE_DURATION = 2 * 24 * 3600; // 2 days in seconds
+
+  /// Thu Apr 27 2023 09:00:00 GMT
+  uint256 constant START_DATE = 1682586000;
+  /// Thu Apr 28 2023 09:00:00 GMT
+  uint256 constant PRIVATE_SALE_END_DATE = START_DATE + PRIVATE_SALE_DURATION;
+  /// Thu Apr 30 2023 09:00:00 GMT
+  uint256 constant PUBLIC_SALE_END_DATE = PRIVATE_SALE_END_DATE + PUBLIC_SALE_DURATION;
 
   // Token URIs
   string private _contractURI = "https://static.theassets.club/contract.json";
   string private baseURI = "https://static.theassets.club/tokens/";
 
+  // ----- NFT Paris Collection -----
+  /// TheAssetsClub at NFT ERC721 contract.
+  IERC721A public immutable nftParis;
+  /// TheAssetsClubAtNFTParis used tokens.
+
+  mapping(uint256 => bool) public nftParisUsed;
+  /// Thrown when the minter does not hold a TheAssetsClub at NFT Paris token.
+  error NFTParisNotHolder(uint256 tokenId);
+  /// Thrown when the minter tries to use TheAssetsClub at NFT Paris token for the second time.
+  error NFTParisAlreadyUsed(uint256 tokenId);
+
+  // ----- Mint -----
+  /// The number of reserved, claimable tokens.
+  uint256 public reserved;
+  /// The  Merkle Tree root that controls the OG, access list and the reservations (claims).
+  bytes32 public merkelRoot;
+
+  /// The number of minted tokens per address.
+  mapping(address => uint256) public minted;
+  /// If an address has claimed its reserved tokens.
+  mapping(address => bool) public claimed;
+
+  // ----- Reveal -----
   /// If the collectioon has been reveal.
   /// This state has to seperated from seed since VRF request and fullfilment are written in seperate transactions.
   bool revealed = false;
@@ -50,24 +117,41 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
   uint32 constant callbackGasLimit = 2500000;
   uint256 requestId;
 
+  /// Thrown when the reveal has already been triggered by an admin.
   error OnlyUnrevealed();
-  error MaximumMintsReached(uint256 wanted, uint256 totalSupply);
+  /// Thrown when the reveal request id is invalid.
   error InvalidVRFRequestId(uint256 expected, uint256 actual);
-  error MinterAlreadySet();
-  error OnlyMinter(address expected, address actual);
+  /// Thrown when the mint is not open (before the START_DATE or after the PUBLIC_SALE_END_DATE).
+  error Closed();
+  /// Thrown when the mint quantity is invalid (only allowed values are 1, 2 or 3).
+  error InvalidPricing(Tier tier, uint256 quantity, uint256 skip);
+  /// Thrown when the Merkle Tree provided proof is invalid.
+  error InvalidMerkleProof(address acccount);
+  /// Thrown when the sender tier is insufficient.
+  error InsufficientTier(address acccount, Tier tier);
+  /// Thrown when the transaction value is insufficient.
+  error InsufficientValue(uint256 quantity, uint256 expected, uint256 actual);
+  /// Thrown when the supply is insufficient to execute the transaction.
+  error InsufficientSupply(uint256 remaining, uint256 actual);
+  /// Thrown when the wallet has already claimed his tokens.
+  error AlreadyClaimed(address account, uint256 quantity);
 
   constructor(
+    address admin,
+    address[] memory payees,
+    uint256[] memory shares_,
+    IERC721A _tacp,
     address _coordinator,
     bytes32 _keyHash,
-    uint64 _subId,
-    address treasury
-  ) ERC721A("The Assets Club", "TAC") VRFConsumerBaseV2(_coordinator) {
+    uint64 _subId
+  ) ERC721A("TheAssetsClub", "TAC") VRFConsumerBaseV2(_coordinator) PaymentSplitter(payees, shares_) {
     coordinator = VRFCoordinatorV2Interface(_coordinator);
     keyHash = _keyHash;
     subId = _subId;
+    nftParis = _tacp;
 
-    _setDefaultRoyalty(treasury, ROYALTIES);
-    _initializeOwner(msg.sender);
+    _setDefaultRoyalty(admin, ROYALTIES);
+    _initializeOwner(admin);
   }
 
   /**
@@ -75,24 +159,6 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
    */
   function _startTokenId() internal view virtual override returns (uint256) {
     return 1;
-  }
-
-  /**
-   * @dev Since the ERC721 token and the minter are deployed sequentially, the ERC721 contract does not know the minter
-   * address in advance. This function allow to finish the contract initialization:
-   * 1. Set the minter contract address.
-   * 2. Transfer ownership the the final admin.
-   *
-   * @param admin The new admin address.
-   * @param _minter The {TheAssetsClubMinter} contract address
-   */
-  function initialize(address admin, address _minter) external onlyOwner {
-    if (minter != address(0)) {
-      revert MinterAlreadySet();
-    }
-
-    minter = _minter;
-    _setOwner(admin);
   }
 
   /**
@@ -144,29 +210,51 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
    * @notice The number of remaining tokens avaialble for mint.
    * This is a hard limit that the owner cannot change.
    */
-  function remaining() external view returns (uint256) {
+  function remaining() public view returns (uint256) {
     return MAXIMUM_MINTS - _totalMinted();
   }
 
   /**
-   * @notice Mint {quantity} tokens {to} account.
-   * @dev Only used by {TheAssetsClub} minter.
-   *
-   * @param to The recipient account address.
-   * @param quantity The number opf tokens to mint.
+   * @notice Get the current mint tier.
    */
-  function mint(address to, uint256 quantity) external {
-    if (msg.sender != minter) {
-      revert OnlyMinter(minter, msg.sender);
+  function phase() public view returns (Phase) {
+    uint256 timestamp = block.timestamp;
+    if (timestamp < START_DATE) {
+      return Phase.CLOSED;
     }
 
-    uint256 totalMinted = _totalMinted();
-
-    if (totalMinted + quantity > MAXIMUM_MINTS) {
-      revert MaximumMintsReached(quantity, totalMinted);
+    if (timestamp < PRIVATE_SALE_END_DATE) {
+      return Phase.PRIVATE_SALE;
     }
 
-    _mint(to, quantity);
+    if (timestamp < PUBLIC_SALE_END_DATE) {
+      return Phase.PUBLIC_SALE;
+    }
+
+    return Phase.CLOSED;
+  }
+
+  /**
+   * @notice Get the price to pay to mint.
+   * @param tier The tier to use (OG, WL or PUBLIC). Passing LOCKED will revert.
+   * @param quantity The quantity to mint (maximum 3).
+   * @return The price in Ether wei.
+   */
+  function getPrice(Tier tier, uint256 quantity, uint256 skip) public pure returns (uint256) {
+    if (quantity == 0 || quantity + skip > MAXIMUM_MINTS) {
+      revert InvalidPricing(tier, quantity, skip);
+    }
+
+    unchecked {
+      // 3 free tokens for the OG, 2 for the access list
+      uint256 free = tier == Tier.OG ? 3 : (tier == Tier.ACCESS_LIST ? 2 : 0);
+      // skip cannot be greater than free
+      free = free >= skip ? free - skip : 0;
+      // free cannot be greater than quantity
+      free = free >= quantity ? quantity : free;
+
+      return SALE_PRICE * (quantity - free);
+    }
   }
 
   /**
@@ -178,6 +266,142 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
    */
   function burn(uint256 tokenId) external {
     _burn(tokenId, true);
+  }
+
+  /**
+   * @notice Set the mint parameters.
+   * @param _merkelRoot The new Merkle Tree root that controls the wait list and the reservations.
+   * @param _reserved The total number of reservations.
+   * @dev Requirements:
+   * - Sender must be the owner.
+   * - Mint should not have started yet.
+   */
+  function setMintParameters(bytes32 _merkelRoot, uint256 _reserved) external onlyOwner {
+    merkelRoot = _merkelRoot;
+    reserved = _reserved;
+  }
+
+  /**
+   * @notice Verify if a Merkle proof is valid.
+   *
+   * @param account The account involved into the verification.
+   * @param _type The proof type (0 for claim, 1 for mint).
+   * @param data For claim proofs, the number of tokens to claim. For mint proofs, the wl tier.
+   * @param proof The Merkle proof.
+   * @return true iuf the
+   */
+  function verifyProof(
+    address account,
+    Proof _type,
+    uint256 data,
+    bytes32[] calldata proof
+  ) internal view returns (bool) {
+    bytes32 leaf = keccak256(bytes.concat(keccak256(abi.encode(account, _type, data))));
+    return MerkleProofLib.verifyCalldata(proof, merkelRoot, leaf);
+  }
+
+  /**
+   * @notice Mint tokens for during the private or the public sale.
+   * @dev Since holders of a token from "TheAssetsClub at NFT Paris" are considered as members of the access list,
+   * they can use a special proof.
+   *
+   * proof[0] = 0x00000{TheAssetsClubAtNFTParis}
+   * proof[1] = 0x00000{tokenId}
+   *
+   * Requirements:
+   * - Sale phase be must either private sale or public sale.
+   * - Merkle proof must be valid.
+   */
+  function mintTo(address to, uint256 quantity, Tier tier, bytes32[] calldata proof) external payable {
+    Phase _phase = phase();
+    if (_phase == Phase.CLOSED) {
+      revert Closed();
+    }
+
+    Tier _tier;
+
+    // for TheAssetsClub at NFT Paris holders
+    if (proof.length == 2 && bytes32toAddress(proof[0]) == address(nftParis)) {
+      uint256 tokenId = uint256(proof[1]);
+      if (nftParis.ownerOf(tokenId) != to) {
+        revert NFTParisNotHolder(tokenId);
+      } else if (nftParisUsed[tokenId]) {
+        revert NFTParisAlreadyUsed(tokenId);
+      }
+
+      nftParisUsed[tokenId] = true;
+      _tier = Tier.ACCESS_LIST;
+    }
+    // claimed tier is greater than PUBLIC, verify the Merkle proof
+    else if (tier > Tier.PUBLIC) {
+      if (!verifyProof(to, Proof.MINT, uint256(tier), proof)) {
+        revert InvalidMerkleProof(to);
+      }
+
+      _tier = tier;
+    }
+
+    uint256 _remaining = remaining();
+
+    if (_phase == Phase.PRIVATE_SALE) {
+      // Unprivileged users cannot mint during the private sale
+      if (_tier == Tier.PUBLIC) {
+        revert InsufficientTier(to, tier);
+      }
+
+      // during the private sale, remaining tokens do not include reserved ones
+      _remaining -= reserved;
+    }
+
+    if (_remaining < quantity) {
+      revert InsufficientSupply(_remaining, quantity);
+    }
+
+    uint256 price = getPrice(tier, quantity, minted[to]);
+    if (msg.value < price) {
+      revert InsufficientValue(quantity, msg.value, price);
+    }
+
+    minted[to] += quantity;
+    _mint(to, quantity);
+  }
+
+  /**
+   * @notice Claim reserved tokens for free.
+   * This function only applies to a specific set of privileged members who were personally innvolved with the project.
+   * The claimable tokens are only reserved for the private sale, meaning that if a privileged account does not claim his tokens AND
+   * @dev Requirements:
+   * - Sale phase be must either private sale or public sale.
+   * - Merkle proof must be valid.
+   * - Claim must be only executed once.
+   * - Remaining sypply must be sufficient.
+   *
+   * @param to The token recipient.
+   * @param quantity The amount of tokens to be claimed.
+   * @param proof The Merkle proof that will be check against the {merkelRoot}.
+   */
+  function claimTo(address to, uint256 quantity, bytes32[] calldata proof) external {
+    Phase _phase = phase();
+    if (_phase == Phase.CLOSED) {
+      revert Closed();
+    }
+
+    if (!verifyProof(to, Proof.CLAIM, quantity, proof)) {
+      revert InvalidMerkleProof(to);
+    }
+
+    if (claimed[to]) {
+      revert AlreadyClaimed(to, quantity);
+    }
+
+    uint256 _remaining = remaining();
+    if (_remaining < quantity) {
+      revert InsufficientSupply(_remaining, quantity);
+    }
+
+    reserved -= quantity;
+    claimed[to] = true;
+    _mint(to, quantity);
   }
 
   /**
@@ -204,6 +428,18 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
     }
 
     seed = randomWords[0];
+  }
+
+  // ----- Utility functions ----
+  /**
+   * Convert a bytes32 to address.
+   * @param input The bytes32 to convert.
+   */
+  function bytes32toAddress(bytes32 input) public pure returns (address addr) {
+    assembly {
+      mstore(0, input)
+      addr := mload(0)
+    }
   }
 
   /**

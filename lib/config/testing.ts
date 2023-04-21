@@ -11,6 +11,8 @@ const testing: Omit<Config, 'accounts'> = {
   confirmations: 0,
   verify: false,
 
+  mock: true,
+
   vrf: {
     ...mainnet.vrf,
     keyHash: ethers.solidityPackedKeccak256(['string'], ['RANDOM_KEY_HASH']),
