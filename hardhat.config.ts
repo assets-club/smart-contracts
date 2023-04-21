@@ -58,7 +58,7 @@ const config: HardhatUserConfig = {
     currency: 'USD',
     token: 'ETH',
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
-    excludeContracts: ['ERC721Mock', 'VRFCoordinatorV2Mock'],
+    excludeContracts: ['ERC721Mock', 'VRFCoordinatorV2Mock', 'InvalidReceiver'],
   },
 };
 
