@@ -28,6 +28,14 @@ const config: HardhatUserConfig = {
       chainId: 1337,
       initialDate: '2023-04-01 00:00:00',
     },
+    mainnet: {
+      chainId: 1,
+      url: 'http://127.0.0.1:1248',
+    },
+    goerli: {
+      chainId: 5,
+      url: 'http://127.0.0.1:1248',
+    },
     sepolia: {
       chainId: 11155111,
       url: 'http://127.0.0.1:1248',
@@ -61,22 +69,6 @@ const config: HardhatUserConfig = {
     excludeContracts: ['ERC721Mock', 'VRFCoordinatorV2Mock', 'InvalidReceiver'],
   },
 };
-
-if (process.env.MAINNET_RPC_URL) {
-  set(config, 'networks.mainnet', {
-    url: process.env.MAINNET_RPC_URL,
-    chainId: 1,
-    accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-  });
-}
-
-if (process.env.GOERLI_RPC_URL) {
-  set(config, 'networks.goerli', {
-    url: process.env.GOERLI_RPC_URL,
-    chainId: 5,
-    accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-  });
-}
 
 if (process.env.ETHERSCAN_API_KEY) {
   set(config, 'etherscan.apiKey.mainnet', process.env.ETHERSCAN_API_KEY);
