@@ -1,7 +1,6 @@
 import { config as loadConfig } from 'dotenv';
 import 'hardhat-abi-exporter';
 import 'hardhat-dependency-compiler';
-import 'hardhat-exposed';
 import 'hardhat-gas-reporter';
 import 'hardhat-ignore-warnings';
 import { HardhatUserConfig } from 'hardhat/config';
