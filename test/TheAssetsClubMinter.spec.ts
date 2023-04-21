@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import { AbiCoder, EtherSymbol, Signer, formatEther, parseEther, toBeHex, zeroPadBytes, zeroPadValue } from 'ethers';
+import { EtherSymbol, formatEther, parseEther, toBeHex, zeroPadValue } from 'ethers';
 import { ethers } from 'hardhat';
 import { faker } from '@faker-js/faker';
-import { loadFixture, setBalance, setCode } from '@nomicfoundation/hardhat-network-helpers';
-import { increaseTo, setNextBlockTimestamp } from '@nomicfoundation/hardhat-network-helpers/dist/src/helpers/time';
+import { loadFixture, setBalance } from '@nomicfoundation/hardhat-network-helpers';
+import { increaseTo } from '@nomicfoundation/hardhat-network-helpers/dist/src/helpers/time';
 import { CustomEthersSigner } from '@nomiclabs/hardhat-ethers/signers';
 import { StandardMerkleTree } from '@openzeppelin/merkle-tree';
 import Config from '../lib/config/Config';
@@ -13,14 +13,7 @@ import stackFixture from '../lib/testing/stackFixture';
 import Phase from '../lib/types/Phase';
 import Proof from '../lib/types/Proof';
 import Tier from '../lib/types/Tier';
-import {
-  ERC721A__factory,
-  ERC721Mock,
-  ERC721Mock__factory,
-  PaymentSplitter,
-  TheAssetsClub,
-  TheAssetsClubMinter,
-} from '../typechain-types';
+import { ERC721Mock, TheAssetsClub, TheAssetsClubMinter } from '../typechain-types';
 
 describe('TheAssetsClubMinter', () => {
   let admin: CustomEthersSigner;
@@ -42,20 +35,16 @@ describe('TheAssetsClubMinter', () => {
 
   let randomProof: string[];
 
-  // These constants are hardcoded because they are used into the test names
-  const MAXIMUM_MINTS = 5;
+  // Contract constants
+  const MAXIMUM_MINTS = 5777n;
   const SALE_PRICE = parseEther('0.02');
-  let START_DATE: number;
-  let PRIVATE_SALE_DURATION: number;
-  let PUBLIC_SALE_DURATION: number;
+  const START_DATE = 1682586000n;
+  const PRIVATE_SALE_DURATION = 24n * 3600n;
+  const PUBLIC_SALE_DURATION = 2n * 24n * 3600n;
 
   beforeEach(async () => {
     ({ admin, user1, user2, user3, user4: userOG, user5: userAL, treasury } = await getTestAccounts());
     ({ TheAssetsClub, TheAssetsClubMinter, NFTParis, config, tree } = await loadFixture(stackFixture));
-
-    START_DATE = Number(await TheAssetsClubMinter.START_DATE());
-    PRIVATE_SALE_DURATION = Number(await TheAssetsClubMinter.PRIVATE_SALE_DURATION());
-    PUBLIC_SALE_DURATION = Number(await TheAssetsClubMinter.PUBLIC_SALE_DURATION());
 
     minter = await ethers.getImpersonatedSigner(TheAssetsClubMinter.target as string);
     await setBalance(await minter.getAddress(), parseEther('10'));
@@ -65,22 +54,22 @@ describe('TheAssetsClubMinter', () => {
 
   describe('phase', () => {
     it('should return CLOSED before the private sale', async () => {
-      await increaseTo(START_DATE - 10);
+      await increaseTo(START_DATE - 10n);
       expect(await TheAssetsClubMinter.phase()).to.eq(Phase.CLOSED);
     });
 
     it('should return PRIVATE_SALE after the start date', async () => {
-      await increaseTo(START_DATE + 100);
+      await increaseTo(START_DATE + 100n);
       expect(await TheAssetsClubMinter.phase()).to.eq(Phase.PRIVATE_SALE);
     });
 
     it('should return PUBLIC_SALE after the public sale', async () => {
-      await increaseTo(START_DATE + PRIVATE_SALE_DURATION + 100);
+      await increaseTo(START_DATE + PRIVATE_SALE_DURATION + 100n);
       expect(await TheAssetsClubMinter.phase()).to.eq(Phase.PUBLIC_SALE);
     });
 
     it('should return CLOSED after the public sale', async () => {
-      await increaseTo(START_DATE + PRIVATE_SALE_DURATION + PUBLIC_SALE_DURATION + 100);
+      await increaseTo(START_DATE + PRIVATE_SALE_DURATION + PUBLIC_SALE_DURATION + 100n);
       expect(await TheAssetsClubMinter.phase()).to.eq(Phase.CLOSED);
     });
   });
@@ -287,7 +276,7 @@ describe('TheAssetsClubMinter', () => {
 
     describe('before private sale', () => {
       beforeEach(async () => {
-        await increaseTo(START_DATE - 100);
+        await increaseTo(START_DATE - 100n);
       });
 
       testClosed();
@@ -295,7 +284,7 @@ describe('TheAssetsClubMinter', () => {
 
     describe('during the private sale', async () => {
       beforeEach(async () => {
-        await increaseTo(START_DATE + 100);
+        await increaseTo(START_DATE + 100n);
       });
 
       it('should revert if the proof is invalid', async () => {
@@ -317,7 +306,7 @@ describe('TheAssetsClubMinter', () => {
 
     describe('during the public sale', async () => {
       beforeEach(async () => {
-        await increaseTo(START_DATE + PRIVATE_SALE_DURATION + 100);
+        await increaseTo(START_DATE + PRIVATE_SALE_DURATION + 100n);
       });
 
       testOG();
@@ -328,7 +317,7 @@ describe('TheAssetsClubMinter', () => {
         const quantity = 5n;
         const price = await TheAssetsClubMinter.getPrice(Tier.PUBLIC, quantity, 0);
 
-        await connect(TheAssetsClub, minter).mint(user1, (await TheAssetsClub.MAXIMUM_MINTS()) - quantity + 1n);
+        await connect(TheAssetsClub, minter).mint(user1, MAXIMUM_MINTS - quantity + 1n);
         // only 4 tokens left
 
         await expect(connect(TheAssetsClubMinter, user1).mintTo(user1, quantity, Tier.PUBLIC, [], { value: price }))
@@ -349,7 +338,7 @@ describe('TheAssetsClubMinter', () => {
 
     describe('after the public sale', () => {
       beforeEach(async () => {
-        await increaseTo(START_DATE + PRIVATE_SALE_DURATION + PUBLIC_SALE_DURATION + 100);
+        await increaseTo(START_DATE + PRIVATE_SALE_DURATION + PUBLIC_SALE_DURATION + 100n);
       });
 
       testClosed();
@@ -359,7 +348,7 @@ describe('TheAssetsClubMinter', () => {
   describe('claim', () => {
     describe('before the private sale', () => {
       it('should revert if private sale has not yet started', async () => {
-        increaseTo(START_DATE - 100);
+        increaseTo(START_DATE - 100n);
 
         const proof = tree.getProof([user2.address, Proof.CLAIM, 1]);
         await expect(connect(TheAssetsClubMinter, user2).claimTo(user2, 1, proof))
@@ -395,7 +384,7 @@ describe('TheAssetsClubMinter', () => {
 
     describe('during the private sale', async () => {
       beforeEach(async () => {
-        await increaseTo(START_DATE + 100);
+        await increaseTo(START_DATE + 100n);
       });
 
       testClaimTo();
@@ -403,7 +392,7 @@ describe('TheAssetsClubMinter', () => {
 
     describe('during the public sale', async () => {
       beforeEach(async () => {
-        await increaseTo(START_DATE + PRIVATE_SALE_DURATION + 100);
+        await increaseTo(START_DATE + PRIVATE_SALE_DURATION + 100n);
       });
 
       testClaimTo();

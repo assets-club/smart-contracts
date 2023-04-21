@@ -24,6 +24,9 @@ describe('TheAssetsClub', () => {
   let TheAssetsClubMinter: TheAssetsClubMinter;
   let VRFCoordinatorV2: VRFCoordinatorV2Mock;
 
+  const ROYALTIES = 770n;
+  const MAXIMUM_MINTS = 5777n;
+
   beforeEach(async () => {
     ({ admin, treasury, user1, user2 } = await getTestAccounts());
     ({ config, TheAssetsClub, TheAssetsClubMinter, VRFCoordinatorV2 } = await loadFixture(stackFixture));
@@ -38,7 +41,7 @@ describe('TheAssetsClub', () => {
       const value = parseEther('1');
       const result = await TheAssetsClub.royaltyInfo(1, parseEther('1'));
       expect(result[0]).to.eq(await treasury.getAddress());
-      expect(result[1]).to.eq((value * (await TheAssetsClub.ROYALTIES())) / 10000n);
+      expect(result[1]).to.eq((value * ROYALTIES) / 10000n);
     });
   });
 
@@ -77,28 +80,27 @@ describe('TheAssetsClub', () => {
     });
 
     it('should allow a the owner account to set the contract URI', async () => {
-      const newContractURI = `${faker.internet.url()}/`;
+      const newContractURI = 'ipfs://bafybeihdwdcefgh4dqkjv67uzcmw7ojee6xedzdetojuzjevtenxquvyku';
       await connect(TheAssetsClub, admin).setContractURI(newContractURI);
       expect(await TheAssetsClub.contractURI()).to.equal(newContractURI);
     });
   });
 
   describe('setBaseURI', () => {
+    const newBaseURI = 'ipfs://bafybeihdwdcefgh4dqkjv67uzcmw7ojee6xedzdetojuzjevtenxquvyku/';
+
     it('should revert if a non-owner tries to set the base URI', async () => {
-      await expect(connect(TheAssetsClub, user1).setBaseURI('http://foobar')).to.be.revertedWith(
-        'Ownable: caller is not the owner',
-      );
+      await expect(connect(TheAssetsClub, user1).setBaseURI(newBaseURI)).to.be.revertedOnlyOwner(TheAssetsClub);
     });
 
     it('should allow a the owner account to set the base URI', async () => {
-      const newBaseURI = `${faker.internet.url()}/`;
       await connect(TheAssetsClub, admin).setBaseURI(newBaseURI);
 
       // mint a token to be 100% sure that the token exists
       await connect(TheAssetsClub, minter).mint(user1, 1);
       const tokenId = (await TheAssetsClub.nextTokenId()) - 1n;
 
-      expect(await TheAssetsClub.tokenURI(tokenId)).to.eq(`${newBaseURI}${tokenId}.json`);
+      expect(await TheAssetsClub.tokenURI(tokenId)).to.eq(`${newBaseURI}${tokenId}`);
     });
   });
 
@@ -119,7 +121,6 @@ describe('TheAssetsClub', () => {
     });
 
     it('should revert if mint would exceed MAXIMUM_MINTS', async () => {
-      const MAXIMUM_MINTS = await TheAssetsClub.MAXIMUM_MINTS();
       const delta = BigInt(faker.datatype.number({ min: 1, max: 20 }));
       await connect(TheAssetsClub, minter).mint(user1, MAXIMUM_MINTS - delta); // pass
 
@@ -159,7 +160,7 @@ describe('TheAssetsClub', () => {
     });
 
     it('should revert if a non-owner tries to reveal the collection', async () => {
-      await expect(connect(TheAssetsClub, user1).reveal()).to.be.revertedOnlyOwner;
+      await expect(connect(TheAssetsClub, user1).reveal()).to.be.revertedOnlyOwner(TheAssetsClub);
     });
 
     it('should revert if the owner attempts to trigger the reveal twice', async () => {
@@ -178,7 +179,7 @@ describe('TheAssetsClub', () => {
     let seed: bigint;
 
     beforeEach(async () => {
-      await connect(TheAssetsClub, minter).mint(user1, await TheAssetsClubMinter.MAXIMUM_MINTS());
+      await connect(TheAssetsClub, minter).mint(user1, MAXIMUM_MINTS);
       await connect(TheAssetsClub, admin).reveal();
       seed = await faker.datatype.bigInt(2n ** 256n - 1n);
     });

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.18;
+pragma solidity =0.8.18;
 
 import { VRFConsumerBaseV2 } from "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import { VRFCoordinatorV2Interface } from "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
-import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { ERC2981 } from "@openzeppelin/contracts/token/common/ERC2981.sol";
 import { ERC721A } from "erc721a/contracts/ERC721A.sol";
 import { DefaultOperatorFilterer } from "operator-filter-registry/src/DefaultOperatorFilterer.sol";
+import { Ownable } from "solady/src/auth/Ownable.sol";
 
 /**
  * @title TheAssetsClub NFT Collection
@@ -19,17 +19,16 @@ import { DefaultOperatorFilterer } from "operator-filter-registry/src/DefaultOpe
  * For more information, see https://github.com/ProjectOpenSea/operator-filter-registry
  *
  * Governance:
- * - TheAssetsClub owner can update the tokens base incase of the theassets.club domain is lost.
+ * - TheAssetsClub owner can update the tokens base URI.
  */
 contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultOperatorFilterer {
-  /// The maximum Assets mints, which effectively caps the total supply
-  uint256 public constant MAXIMUM_MINTS = 5777;
-  uint256 public constant MAXIMUM_PER_WALLET = 5;
+  /// The maximum Assets mints, which effectively caps the total supply.
+  uint256 constant MAXIMUM_MINTS = 5777;
 
-  /// Royalties 7.7% on secondary sales
-  uint96 public constant ROYALTIES = 770;
+  /// Royalties 7.7% on secondary sales.
+  uint96 constant ROYALTIES = 770;
 
-  // Contracts
+  /// The address allowed to mint the Assets.
   address public minter;
 
   // Token URIs
@@ -39,6 +38,8 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
   /// If the collectioon has been reveal.
   /// This state has to seperated from seed since VRF request and fullfilment are written in seperate transactions.
   bool revealed = false;
+
+  /// The collection reveal seed.
   uint256 public seed;
 
   // Chainlink VRF parameters
@@ -66,9 +67,12 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
     subId = _subId;
 
     _setDefaultRoyalty(treasury, ROYALTIES);
-    _transferOwnership(msg.sender);
+    _initializeOwner(msg.sender);
   }
 
+  /**
+   * @dev TheAssetsClub collection starts at token 1. This allow to have the token IDs between [1,5777].
+   */
   function _startTokenId() internal view virtual override returns (uint256) {
     return 1;
   }
@@ -88,57 +92,57 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
     }
 
     minter = _minter;
-    _transferOwnership(admin);
+    _setOwner(admin);
   }
 
   /**
-   * @notice The next token ID to be minted.
+   * @return The next token ID to be minted.
+   * @dev This allow to have the upper bound incase of if we want to iterate over the owners.
    */
   function nextTokenId() external view returns (uint256) {
     return _nextTokenId();
   }
 
   /**
-   * @dev The base URI for the tokens.
+   * @return The OpenSea Contract-level metadata URI.
+   * @dev See full specification here: https://docs.opensea.io/docs/contract-level-metadata
    */
   function contractURI() public view returns (string memory) {
     return _contractURI;
   }
 
   /**
-   * @dev Allow to change the collection contractURI, most likely due to URL migration.
-   * We wil try not use this method and use HTTP redirects instead, but we keep it as an escape hatch.
+   * @dev Allow to change the collection contractURI, most likely due to URI migration to IPFS.
+   * Requirements:
+   * - sender must be the contract owner
+   *
+   * @param newContractURI The new contract URI.
    */
   function setContractURI(string memory newContractURI) external onlyOwner {
     _contractURI = newContractURI;
   }
 
   /**
-   * @dev The base URI for the tokens.
+   * @return The base URI for the tokens.
    */
   function _baseURI() internal view override returns (string memory) {
     return baseURI;
   }
 
   /**
-   * @dev Allow to change the collection baseURI, most likely due to URL migration.
-   * We wil try not use this method and use HTTP redirects instead, but we keep it as an escape hatch.
+   * @dev Allow to change the collection base URI, most likely due to URI migration to IPFS.
+   * Requirements:
+   * - Sender must be the owner of the contract.
+   *
+   * @param newBaseURI The new contract base URI.
    */
   function setBaseURI(string memory newBaseURI) external onlyOwner {
     baseURI = newBaseURI;
   }
 
   /**
-   * @notice Returns the Uniform Resource Identifier (URI) for `tokenId` token.
-   * @dev We append a .json extension to host the metadata as JSON files.
-   * @param tokenId The token numeric id.
-   */
-  function tokenURI(uint256 tokenId) public view override returns (string memory) {
-    return string(abi.encodePacked(super.tokenURI(tokenId), ".json"));
-  }
-
-  /**
-   * @notice The number of remaining Asset tokens.
+   * @notice The number of remaining tokens avaialble for mint.
+   * This is a hard limit that the owner cannot change.
    */
   function remaining() external view returns (uint256) {
     return MAXIMUM_MINTS - _totalMinted();
@@ -146,6 +150,8 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
 
   /**
    * @notice Mint {quantity} tokens {to} account.
+   * @dev Only used by {TheAssetsClub} minter.
+   *
    * @param to The recipient account address.
    * @param quantity The number opf tokens to mint.
    */
@@ -167,6 +173,8 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
    * @notice Burn a existing token.
    * @dev Requirements:
    * - Sender must be the owner of the token or should have approved the burn.
+   *
+   * @param tokenId The token id to burn.
    */
   function burn(uint256 tokenId) external {
     _burn(tokenId, true);
@@ -175,8 +183,8 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
   /**
    * @notice Trigger the reveal.
    * @dev Requirements:
-   * - Sender must be the owner of the contract
-   * - Reveal should not have started yet
+   * - Sender must be the owner of the contract.
+   * - Reveal should not have started yet.
    */
   function reveal() external onlyOwner {
     if (revealed) {
@@ -188,12 +196,13 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
   }
 
   /**
-   * @notice Receive the entropy from Chainlink VRF coordinator
+   * @dev Receive the entropy from Chainlink VRF coordinator.
    */
   function fulfillRandomWords(uint256 _requestId, uint256[] memory randomWords) internal override {
     if (requestId != _requestId) {
       revert InvalidVRFRequestId(requestId, _requestId);
     }
+
     seed = randomWords[0];
   }
 

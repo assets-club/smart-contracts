@@ -56,7 +56,9 @@ const config: HardhatUserConfig = {
   gasReporter: {
     enabled: Boolean(process.env.REPORT_GAS),
     currency: 'USD',
+    token: 'ETH',
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+    excludeContracts: ['ERC721Mock', 'VRFCoordinatorV2Mock'],
   },
 };
 

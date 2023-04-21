@@ -1,7 +1,7 @@
 import { ZeroAddress } from 'ethers';
 import Config from './Config';
 
-const treasury = '0x635b5569810356Efa2d9aA3F6B45711a8C3D52ed'; // dummy address for now
+const treasury = '0xFa1fF100Ff5491583f8A0802Dc1F1301ec3B3043';
 
 const mainnet: Config = {
   log: true,
@@ -24,7 +24,7 @@ const mainnet: Config = {
     '0xEDe1dC6D877D5988eC6c9c53028F933ee731AE6b': 11,
     '0x41e2B01600a088ab81a946F6Ec9C7B31048fB1ad': 11,
     '0xA15D66Ba229bD23D814CEc32a138F0a24DB304a9': 11,
-    '0x793DA7e448729d9638c4C9540a89C9099B01e93C': 5,
+    '0x7c5541907c9877a0D24f0B7D4DF77A9aE4373812': 5,
   },
 };
 

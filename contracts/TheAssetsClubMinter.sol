@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity =0.8.18;
 
-import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
-import { MerkleProof } from "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import { PaymentSplitter } from "@openzeppelin/contracts/finance/PaymentSplitter.sol";
 import { IERC721A } from "erc721a/contracts/IERC721A.sol";
+import { Ownable } from "solady/src/auth/Ownable.sol";
+import { MerkleProofLib } from "solady/src/utils/MerkleProofLib.sol";
 import { ITheAssetsClub } from "./interfaces/ITheAssetsClub.sol";
 
 enum Proof {
@@ -28,33 +28,41 @@ enum Phase {
  * @title TheAssetsClub NFT Collection Minter
  * @author Mathieu "Windyy" Bour
  * @notice This contract will manage the mint of the Assets Club NFT collection.
+ * The holders of a "TheAssetsClub at NFT Paris" are automatically considered as part of the access list.
  * @dev Four phases are planned (see {Tier} above)
  * Our Merkle Tree type is [address, Proof, uint8].
- * - If proof is Proof.claim, the last param corresponds to the claimable quantity.
+ * - If proof is Proof.CLAIM, the last param corresponds to the claimable quantity.
  * - If proof is Proof.MINT, the last param corresponds to the tier (ACCESS_LIST=1,OG=2).
  */
 contract TheAssetsClubMinter is Ownable, PaymentSplitter {
-  uint256 public constant MAXIMUM_MINTS = 5;
-  uint256 public constant SALE_PRICE = 0.02 ether;
-  uint256 public constant PRIVATE_SALE_DURATION = 24 * 3600; // 1 day in seconds
-  uint256 public constant PUBLIC_SALE_DURATION = 2 * 24 * 3600; // 2 days in seconds
+  /// The maximum token mints per wallet.
+  uint256 constant MAXIMUM_MINTS = 7;
+  /// The price per token for paid mints.
+  uint256 constant SALE_PRICE = 0.02 ether;
+
+  /// The private sale duration in seconds.
+  uint256 constant PRIVATE_SALE_DURATION = 24 * 3600; // 1 day in seconds
+  /// The public sale duration in seconds.
+  uint256 constant PUBLIC_SALE_DURATION = 2 * 24 * 3600; // 2 days in seconds
 
   /// Thu Apr 27 2023 09:00:00 GMT
-  uint256 public constant START_DATE = 1682586000;
+  uint256 constant START_DATE = 1682586000;
   /// Thu Apr 28 2023 09:00:00 GMT
-  uint256 public constant PRIVATE_SALE_END_DATE = START_DATE + PRIVATE_SALE_DURATION;
-  /// Thu Apr 30 2023 09:00:00 GM
-  uint256 public constant PUBLIC_SALE_END_DATE = PRIVATE_SALE_END_DATE + PUBLIC_SALE_DURATION;
+  uint256 constant PRIVATE_SALE_END_DATE = START_DATE + PRIVATE_SALE_DURATION;
+  /// Thu Apr 30 2023 09:00:00 GMT
+  uint256 constant PUBLIC_SALE_END_DATE = PRIVATE_SALE_END_DATE + PUBLIC_SALE_DURATION;
 
   /// TheAssetsClub smart contract.
   ITheAssetsClub public theAssetsClub;
 
   /// The number of reserved tokens.
   uint256 public reserved;
-  /// The  Merkle Tree root that controls the OG, WL and the reservations.
+  /// The  Merkle Tree root that controls the OG, access list and the reservations (claims).
   bytes32 public merkelRoot;
 
+  /// The number of minted tokens per address.
   mapping(address => uint256) public minted;
+  /// If an address has claimed its reserved tokens.
   mapping(address => bool) public claimed;
 
   /// Thrown when the mint is not open (before the START_DATE or after the PUBLIC_SALE_END_DATE).
@@ -71,8 +79,6 @@ contract TheAssetsClubMinter is Ownable, PaymentSplitter {
   error InsufficientSupply(uint256 remaining, uint256 actual);
   /// Thrown when the wallet has already claimed his tokens.
   error AlreadyClaimed(address account, uint256 quantity);
-  /// Thrown when a native transfer to treasury fails (but it should never happen).
-  error TransferFailed(address from, address to, uint256 value);
 
   // ----- NFT Paris Collection -----
   /// TheAssetsClub at NFT ERC721 contract.
@@ -87,7 +93,7 @@ contract TheAssetsClubMinter is Ownable, PaymentSplitter {
 
   /**
    * @param _tac TheAssetsClub ERC721A contract address.
-   * @param _tac TheAssetsClubAtNFTParis ERC721A contract address.
+   * @param _tacp TheAssetsClubAtNFTParis ERC721A contract address.
    * @param admin The admin multi-signature wallet.
    * @param payees The payees addresses.
    * @param shares_ The payees shares.
@@ -103,7 +109,7 @@ contract TheAssetsClubMinter is Ownable, PaymentSplitter {
     nftParis = _tacp;
 
     // Grant roles
-    _transferOwnership(admin);
+    _initializeOwner(admin);
   }
 
   /**
@@ -163,7 +169,7 @@ contract TheAssetsClubMinter is Ownable, PaymentSplitter {
     bytes32[] calldata proof
   ) public view returns (bool) {
     bytes32 leaf = keccak256(bytes.concat(keccak256(abi.encode(account, _type, data))));
-    return MerkleProof.verifyCalldata(proof, merkelRoot, leaf);
+    return MerkleProofLib.verifyCalldata(proof, merkelRoot, leaf);
   }
 
   /**
