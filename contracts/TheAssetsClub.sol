@@ -3,7 +3,6 @@ pragma solidity =0.8.18;
 
 import { VRFConsumerBaseV2 } from "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import { VRFCoordinatorV2Interface } from "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
-import { PaymentSplitter } from "@openzeppelin/contracts/finance/PaymentSplitter.sol";
 import { ERC2981 } from "@openzeppelin/contracts/token/common/ERC2981.sol";
 import { ERC721A } from "erc721a/contracts/ERC721A.sol";
 import { IERC721A } from "erc721a/contracts/IERC721A.sol";
@@ -51,7 +50,7 @@ enum Phase {
  *
  * milady
  */
-contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultOperatorFilterer, PaymentSplitter {
+contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultOperatorFilterer {
   /// The maximum Assets mints, which effectively caps the total supply.
   uint256 constant MAXIMUM_MINTS = 5777;
 
@@ -135,16 +134,16 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
   error InsufficientSupply(uint256 remaining, uint256 actual);
   /// Thrown when the wallet has already claimed his tokens.
   error AlreadyClaimed(address account, uint256 quantity);
+  /// Thrown when the withdraw to the treasury reverts.
+  error WithdrawFailed();
 
   constructor(
     address admin,
-    address[] memory payees,
-    uint256[] memory shares_,
     IERC721A _tacp,
     address _coordinator,
     bytes32 _keyHash,
     uint64 _subId
-  ) ERC721A("TheAssetsClub", "TAC") VRFConsumerBaseV2(_coordinator) PaymentSplitter(payees, shares_) {
+  ) ERC721A("TheAssetsClub", "TAC") VRFConsumerBaseV2(_coordinator) {
     coordinator = VRFCoordinatorV2Interface(_coordinator);
     keyHash = _keyHash;
     subId = _subId;
@@ -428,6 +427,17 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
     }
 
     seed = randomWords[0];
+  }
+
+  /**
+   * @notice Send the ether stored on the contract to the owner.
+   * @dev Anyone is allow to call this function and pay teh gas for us :)
+   */
+  function withdraw() external {
+    (bool success, ) = payable(owner()).call{ value: address(this).balance }("");
+    if (!success) {
+      revert WithdrawFailed();
+    }
   }
 
   // ----- Utility functions ----

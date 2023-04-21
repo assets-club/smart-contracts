@@ -8,7 +8,6 @@ const config: Config = {
   confirmations: 10,
 
   admin: '0x635b5569810356Efa2d9aA3F6B45711a8C3D52ed',
-  treasury: '0x635b5569810356Efa2d9aA3F6B45711a8C3D52ed',
 
   vrf: {
     coordinator: '0x8103b0a8a00be2ddc778e6e7eaa21791cd364625',

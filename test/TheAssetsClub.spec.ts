@@ -23,7 +23,13 @@ import stackFixture from '../lib/testing/stackFixture';
 import Phase from '../lib/types/Phase';
 import Proof from '../lib/types/Proof';
 import Tier from '../lib/types/Tier';
-import { ERC721Mock, TheAssetsClub, TheAssetsClubMock, VRFCoordinatorV2Mock } from '../typechain-types';
+import {
+  ERC721Mock,
+  InvalidReceiver,
+  TheAssetsClub,
+  TheAssetsClubMock,
+  VRFCoordinatorV2Mock,
+} from '../typechain-types';
 
 describe('TheAssetsClub', () => {
   let admin: CustomEthersSigner;
@@ -38,14 +44,15 @@ describe('TheAssetsClub', () => {
   let tree: StandardMerkleTree<[string, Proof, number]>;
 
   let TheAssetsClub: TheAssetsClubMock;
-  let VRFCoordinatorV2: VRFCoordinatorV2Mock;
   let NFTParis: ERC721Mock;
+  let VRFCoordinatorV2: VRFCoordinatorV2Mock;
+  let InvalidReceiver: InvalidReceiver;
 
   let randomProof: string[];
 
   beforeEach(async () => {
     ({ admin, user1, user2, user3, user4: userOG, user5: userAL } = await getTestAccounts());
-    ({ TheAssetsClub, VRFCoordinatorV2, NFTParis: NFTParis, config, tree } = await loadFixture(stackFixture));
+    ({ TheAssetsClub, NFTParis, VRFCoordinatorV2, InvalidReceiver, config, tree } = await loadFixture(stackFixture));
     randomProof = [ethers.solidityPackedKeccak256(['string'], [faker.datatype.string()])];
   });
 
@@ -536,6 +543,25 @@ describe('TheAssetsClub', () => {
     it('should allow VRFCoordinatorV2 to reveal the collection', async () => {
       await VRFCoordinatorV2.fulfillRandomWordsWithOverride(1, TheAssetsClub.target as string, [seed]);
       expect(await TheAssetsClub.seed()).to.equal(seed);
+    });
+  });
+
+  describe('withdraw', () => {
+    it('should revert if owner cannot receive ether', async () => {
+      const balance = parseEther('10');
+      await setBalance(TheAssetsClub.target.toString(), balance);
+      await connect(TheAssetsClub, admin).transferOwnership(InvalidReceiver.target.toString());
+
+      await expect(connect(TheAssetsClub, user1).withdraw())
+        .to.revertedWithCustomError(TheAssetsClub, 'WithdrawFailed')
+        .withArgs();
+    });
+
+    it('should allow only anyone to send the contract value to the treasury', async () => {
+      const balance = parseEther('10');
+      await setBalance(TheAssetsClub.target.toString(), balance);
+
+      await expect(connect(TheAssetsClub, user1).withdraw()).to.changeEtherBalance(admin.address, balance);
     });
   });
 

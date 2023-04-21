@@ -7,13 +7,11 @@ import { TheAssetsClub } from "../TheAssetsClub.sol";
 contract TheAssetsClubMock is TheAssetsClub {
   constructor(
     address admin,
-    address[] memory payees,
-    uint256[] memory shares_,
     IERC721A _tacp,
     address _coordinator,
     bytes32 _keyHash,
     uint64 _subId
-  ) TheAssetsClub(admin, payees, shares_, _tacp, _coordinator, _keyHash, _subId) {}
+  ) TheAssetsClub(admin, _tacp, _coordinator, _keyHash, _subId) {}
 
   function mint(address to, uint256 quantity) external {
     _mint(to, quantity);

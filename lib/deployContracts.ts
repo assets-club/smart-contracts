@@ -14,8 +14,6 @@ export default async function deployContracts(signer: Signer, config: Config) {
   const TheAssetsClub = await deploy(
     factory,
     config.admin,
-    Object.keys(config.shares),
-    Object.values(config.shares),
     config.nftParis,
     config.vrf.coordinator,
     config.vrf.keyHash,

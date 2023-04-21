@@ -6,7 +6,6 @@ export default interface Config {
   mock?: boolean;
 
   admin: string;
-  treasury: string;
   nftParis: string;
 
   vrf: {
@@ -14,6 +13,4 @@ export default interface Config {
     keyHash: string;
     subId: number;
   };
-
-  shares: Record<string, number>;
 }
