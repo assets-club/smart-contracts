@@ -7,9 +7,24 @@ import normalizeAddresses from './normalizeAddresses';
 
 const data = join(__dirname, '../../data');
 
+async function loadFile(path: string) {
+  const raw = await readFile(path, { encoding: 'utf8' });
+  const clean = raw.split('\n').reduce((acc, line) => {
+    const trimmed = line.trim();
+
+    if (trimmed.length > 0) {
+      acc += trimmed + '\n';
+    }
+
+    return acc;
+  }, '');
+
+  return clean.trim();
+}
+
 export default async function loadData(): Promise<MerkleTreeData> {
   const claimsFile = join(data, 'claims.csv');
-  const claimsData = await neatCsv<{ address: string; quantity: number }>(await readFile(claimsFile), {
+  const claimsData = await neatCsv<{ address: string; quantity: number }>(await loadFile(claimsFile), {
     mapValues({ header, value }) {
       switch (header) {
         case 'address':
@@ -22,10 +37,10 @@ export default async function loadData(): Promise<MerkleTreeData> {
     },
   });
   const ogFile = join(data, 'og.csv');
-  const ogData = await neatCsv<{ address: string }>(await readFile(ogFile));
+  const ogData = await neatCsv<{ address: string }>(await loadFile(ogFile));
 
   const accessListField = join(data, 'access_list.csv');
-  const accessListData = await neatCsv<{ address: string }>(await readFile(accessListField));
+  const accessListData = await neatCsv<{ address: string }>(await loadFile(accessListField));
 
   return {
     claims: claimsData.reduce((map, claim) => {
