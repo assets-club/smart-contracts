@@ -2,9 +2,11 @@
 pragma solidity =0.8.18;
 
 import { IERC721A } from "erc721a/contracts/IERC721A.sol";
-import { TheAssetsClub } from "../TheAssetsClub.sol";
+import { TheAssetsClub, Phase } from "../TheAssetsClub.sol";
 
 contract TheAssetsClubMock is TheAssetsClub {
+  Phase private _phase;
+
   constructor(
     address admin,
     IERC721A _tacp,
@@ -15,5 +17,13 @@ contract TheAssetsClubMock is TheAssetsClub {
 
   function mint(address to, uint256 quantity) external {
     _mint(to, quantity);
+  }
+
+  function setPhase(Phase newPhase) external {
+    _phase = newPhase;
+  }
+
+  function phase() public view override returns (Phase) {
+    return _phase;
   }
 }

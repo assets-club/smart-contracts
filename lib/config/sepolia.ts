@@ -5,7 +5,9 @@ const config: Config = {
   ...mainnet,
   log: true,
   verify: false,
-  confirmations: 10,
+  confirmations: 0,
+
+  mock: true,
 
   admin: '0x635b5569810356Efa2d9aA3F6B45711a8C3D52ed',
 

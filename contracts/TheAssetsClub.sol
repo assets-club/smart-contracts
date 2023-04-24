@@ -368,7 +368,8 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
   /**
    * @notice Claim reserved tokens for free.
    * This function only applies to a specific set of privileged members who were personally innvolved with the project.
-   * The claimable tokens are only reserved for the private sale, meaning that if a privileged account does not claim his tokens AND
+   * The claimable tokens are only reserved for the private sale, meaning that if a privileged account does not claim
+   * his tokens AND the mint sold out, reserved tokens will be lost.
    * @dev Requirements:
    * - Sale phase be must either private sale or public sale.
    * - Merkle proof must be valid.
