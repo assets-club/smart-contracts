@@ -216,7 +216,7 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
   /**
    * @notice Get the current mint tier.
    */
-  function phase() public view returns (Phase) {
+  function phase() public view virtual returns (Phase) {
     uint256 timestamp = block.timestamp;
     if (timestamp < START_DATE) {
       return Phase.CLOSED;
