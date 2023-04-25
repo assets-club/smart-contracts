@@ -4,9 +4,17 @@
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/assets-club/smart-contracts/main?style=for-the-badge)
 [![Codecov](https://img.shields.io/codecov/c/gh/assets-club/smart-contracts?style=for-the-badge&token=oW4DQ9MuUh)](https://app.codecov.io/gh/assets-club/smart-contracts)
 
-## NFT Paris
+## TheAssetsClub collection
 
-We are at the NFT Paris on February 24-25 2023! For this event, we deployed a special collection dedicated to NFT Paris.
+You can find the main collection on the Ethereum blockchain.
+
+- [Etherscan](https://etherscan.io/address/0x81f2e73c790bfb10912151ab5a7b411ed391d0f7)
+- [OpenSea collection](https://opensea.io/collection/theassetsclub-at-nft-paris)
+
+## TheAssetsClub at NFT Paris collection
+
+We were at the NFT Paris on February 24-25 2023!
+For this event, we deployed a special collection dedicated to NFT Paris.
 
 Related links:
 
@@ -38,7 +46,7 @@ This repository is proudly maintained by [@mathieu-bour](https://github.com/math
 
 ## Architecture
 
-The Assets Club has only a single smart contract, that is deployed on the Ethereum blockchain at [insert deployed address].
+The Assets Club has only a single smart contract, that is deployed on the Ethereum blockchain at [`0x81f2e73c790bfb10912151ab5a7b411ed391d0f7`](https://etherscan.io/address/0x81f2e73c790bfb10912151ab5a7b411ed391d0f7).
 
 The contract is [ERC721-compatible](https://eips.ethereum.org/EIPS/eip-721) and is based on Asuki's [ERC721A implementation](https://www.erc721a.org).
 The source can be found in [TheAssetsClub.sol](contracts/TheAssetsClub.sol).
