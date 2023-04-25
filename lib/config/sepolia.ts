@@ -10,6 +10,7 @@ const config: Config = {
   mock: true,
 
   admin: '0x635b5569810356Efa2d9aA3F6B45711a8C3D52ed',
+  nftParis: '0x7ddE30D4d8bD23481E6f92B15A365797891413ed',
 
   vrf: {
     coordinator: '0x8103b0a8a00be2ddc778e6e7eaa21791cd364625',

@@ -30,7 +30,6 @@ export default function createDeployer(
     const factory = new factoryClass();
     const name = factory.constructor.name.replace('__factory', '');
     const contract = await factory.connect(signer).deploy(...args);
-    contract.deploymentTransaction()?.wait(confirmations);
 
     if (log) {
       console.log('Deploying', name, 'with', contract.deploymentTransaction()?.hash);
@@ -43,6 +42,7 @@ export default function createDeployer(
     }
 
     if (verify) {
+      console.log('Waiting 10 seconds before verifiying...');
       // Artificial delay before attempting to verify the contracts
       await new Promise((resolve) => setTimeout(resolve, 10000));
 
