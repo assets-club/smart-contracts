@@ -18,22 +18,15 @@ const metadataSchema = z.object({
 export default async function main() {
   const stats: Record<string, Record<string, number>> = {};
 
-  for (let i = 0; i <= 5776; i++) {
+  for (let i = 1; i <= 5777; i++) {
     const raw = await readFile(join(COLLECTION_PATH, `${i}.json`), { encoding: 'utf-8' });
-    const parsed = JSON.parse(raw) as Record<string, any>;
-
-    if ('attribute' in parsed) {
-      parsed.attributes = parsed.attribute;
-      delete parsed.attribute;
-    }
-
-    const data = await metadataSchema.parseAsync(parsed).catch((err) => {
+    const data = await metadataSchema.parseAsync(JSON.parse(raw)).catch((err) => {
       console.log('err', i);
       throw err;
     });
 
     for (const raw of data.attributes) {
-      const trait_type = raw.trait_type.toLowerCase().trim();
+      const trait_type = raw.trait_type.trim();
       const value = raw.value.trim();
 
       if (!(trait_type in stats)) {
