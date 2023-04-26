@@ -18,7 +18,7 @@ const metadataSchema = z.object({
 export default async function main() {
   const stats: Record<string, Record<string, number>> = {};
 
-  for (let i = 0; i <= 5776; i++) {
+  for (let i = 1; i <= 5777; i++) {
     const raw = await readFile(join(COLLECTION_PATH, `${i}.json`), { encoding: 'utf-8' });
     const parsed = JSON.parse(raw) as Record<string, any>;
 
@@ -47,16 +47,17 @@ export default async function main() {
       stats[trait_type][value]++;
     }
   }
-
   for (const [trait_type, data] of Object.entries(stats)) {
     console.log('Trait type:', trait_type);
-    const table = Object.entries(data).map(([label, count]) => {
-      return {
-        label,
-        count,
-        percentage: ((count * 100) / 5777).toFixed(3) + '%',
-      };
-    });
+    const table = Object.entries(data)
+      .map(([label, count]) => {
+        return {
+          label,
+          count,
+          percentage: ((count * 100) / 5777).toFixed(3) + '%',
+        };
+      })
+      .sort((a, b) => b.count - a.count); // Sort the table in descending order
     console.table(table);
   }
 }
