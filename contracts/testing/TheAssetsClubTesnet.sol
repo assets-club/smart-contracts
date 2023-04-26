@@ -5,11 +5,11 @@ import { IERC721A } from "erc721a/contracts/IERC721A.sol";
 import { TheAssetsClub, Phase } from "../TheAssetsClub.sol";
 
 /**
- * @title TheAssetsClubMock
+ * @title TheAssetsClubTesnet
  * @author Mathieu "Windyy" Bour
- * @notice TheAssetsClub contract with an open mint function, intended to be used in automatited tests.
+ * @notice TheAssetsClub contract with a settable phase an an open mint function, intend to run on testnets.
  */
-contract TheAssetsClubMock is TheAssetsClub {
+contract TheAssetsClubTesnet is TheAssetsClub {
   Phase private _phase;
 
   constructor(
@@ -23,5 +23,13 @@ contract TheAssetsClubMock is TheAssetsClub {
 
   function mint(address to, uint256 quantity) external {
     _mint(to, quantity);
+  }
+
+  function setPhase(Phase newPhase) public onlyOwner {
+    _phase = newPhase;
+  }
+
+  function phase() public view override returns (Phase) {
+    return _phase;
   }
 }

@@ -7,8 +7,13 @@
         "type": "address"
       },
       {
+        "internalType": "address",
+        "name": "treasury",
+        "type": "address"
+      },
+      {
         "internalType": "contract IERC721A",
-        "name": "_tacp",
+        "name": "_paris",
         "type": "address"
       },
       {
@@ -183,28 +188,6 @@
     "type": "error"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "NFTParisAlreadyUsed",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "NFTParisNotHolder",
-    "type": "error"
-  },
-  {
     "inputs": [],
     "name": "NewOwnerIsZeroAddress",
     "type": "error"
@@ -212,6 +195,17 @@
   {
     "inputs": [],
     "name": "NoHandoverRequest",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NotParisHolder",
     "type": "error"
   },
   {
@@ -254,6 +248,17 @@
   {
     "inputs": [],
     "name": "OwnershipNotInitializedForExtraData",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "ParisAlreadyUsed",
     "type": "error"
   },
   {
@@ -459,7 +464,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "to",
+        "name": "operator",
         "type": "address"
       },
       {
@@ -772,38 +777,6 @@
   },
   {
     "inputs": [],
-    "name": "nftParis",
-    "outputs": [
-      {
-        "internalType": "contract IERC721A",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "nftParisUsed",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "owner",
     "outputs": [
       {
@@ -861,6 +834,25 @@
         "internalType": "uint64",
         "name": "",
         "type": "uint64"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "parisUsed",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -1015,7 +1007,7 @@
       },
       {
         "internalType": "bytes",
-        "name": "_data",
+        "name": "data",
         "type": "bytes"
       }
     ],

@@ -28,7 +28,7 @@
   ],
   "repository": "github:assets-club/smart-contracts",
   "scripts": {
-    "clean": "hardhat clean && rimraf dist/",
+    "clean": "hardhat clean && rimraf abi/ coverage/ typechain-types/",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,css,less,sass,scss,json,json5,yml,yaml,md,mdx,graphql,sol}'",
     "format:check": "prettier --check '**/*.{js,jsx,ts,tsx,css,less,sass,scss,json,json5,yml,yaml,md,mdx,graphql,sol}'",
     "lint": "solhint 'contracts/**/*.sol'",

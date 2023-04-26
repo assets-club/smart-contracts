@@ -7,7 +7,6 @@ import { loadFixture, setBalance, time } from '@nomicfoundation/hardhat-network-
 import '@nomicfoundation/hardhat-network-helpers/dist/src/helpers/time';
 import { CustomEthersSigner } from '@nomiclabs/hardhat-ethers/signers';
 import { StandardMerkleTree } from '@openzeppelin/merkle-tree';
-import { getProof } from '@openzeppelin/merkle-tree/dist/core';
 import Config from '../lib/config/Config';
 import connect from '../lib/connect';
 import {
@@ -24,9 +23,9 @@ import Phase from '../lib/types/Phase';
 import Proof from '../lib/types/Proof';
 import Tier from '../lib/types/Tier';
 import {
-  ERC721Mock,
   InvalidReceiver,
   TheAssetsClub,
+  TheAssetsClubAtNFTParisMock,
   TheAssetsClubMock,
   VRFCoordinatorV2Mock,
 } from '../typechain-types';
@@ -44,7 +43,7 @@ describe('TheAssetsClub', () => {
   let tree: StandardMerkleTree<[string, Proof, number]>;
 
   let TheAssetsClub: TheAssetsClubMock;
-  let NFTParis: ERC721Mock;
+  let Paris: TheAssetsClubAtNFTParisMock;
   let VRFCoordinatorV2: VRFCoordinatorV2Mock;
   let InvalidReceiver: InvalidReceiver;
 
@@ -52,7 +51,7 @@ describe('TheAssetsClub', () => {
 
   beforeEach(async () => {
     ({ admin, user1, user2, user3, user4: userOG, user5: userAL } = await getTestAccounts());
-    ({ TheAssetsClub, NFTParis, VRFCoordinatorV2, InvalidReceiver, config, tree } = await loadFixture(stackFixture));
+    ({ TheAssetsClub, Paris, VRFCoordinatorV2, InvalidReceiver, config, tree } = await loadFixture(stackFixture));
     randomProof = [ethers.solidityPackedKeccak256(['string'], [faker.datatype.string()])];
   });
 
@@ -326,29 +325,39 @@ describe('TheAssetsClub', () => {
       });
     }
 
-    function testNFTParis() {
+    function testParis() {
       let tokenId: bigint;
 
       beforeEach(async () => {
-        await NFTParis.mintTo(user1, 1); // token zero
+        await connect(Paris, user1).mint(1); // token zero
         tokenId = 0n;
       });
 
       function getProof(tokenId: bigint) {
-        return [zeroPadValue(NFTParis.target.toString(), 32), toBeHex(tokenId, 32)];
+        return [zeroPadValue(Paris.target.toString(), 32), toBeHex(tokenId, 32)];
       }
 
       it('should revert if a non-holder of a NFT Paris token tries to mint as an access list member', async () => {
         await expect(connect(TheAssetsClub, user2).mintTo(user2, 2n, Tier.ACCESS_LIST, getProof(tokenId)))
-          .to.revertedWithCustomError(TheAssetsClub, 'NFTParisNotHolder')
+          .to.revertedWithCustomError(TheAssetsClub, 'NotParisHolder')
           .withArgs(tokenId);
       });
 
-      it('should revert if a NFT Paris holder attempts to mint twice with the same token', async () => {
-        connect(TheAssetsClub, user1).mintTo(user1, 2n, Tier.ACCESS_LIST, getProof(tokenId)); // pass
-        await expect(connect(TheAssetsClub, user1).mintTo(user1, 2n, Tier.ACCESS_LIST, getProof(tokenId)))
-          .to.revertedWithCustomError(TheAssetsClub, 'NFTParisAlreadyUsed')
+      it('should revert if a NFT Paris holder mints, then transfers the Paris toke to some else, and he attempts to mint with the same token', async () => {
+        await connect(TheAssetsClub, user1).mintTo(user1, 2n, Tier.ACCESS_LIST, getProof(tokenId)); // pass
+        await connect(Paris, user1).transferFrom(user1, user2, tokenId); // pass
+        await expect(connect(TheAssetsClub, user2).mintTo(user2, 2n, Tier.ACCESS_LIST, getProof(tokenId)))
+          .to.be.revertedWithCustomError(TheAssetsClub, 'ParisAlreadyUsed')
           .withArgs(tokenId);
+      });
+
+      it('should allow if a NFT Paris holder to mint twice with the same token', async () => {
+        await connect(TheAssetsClub, user1).mintTo(user1, 2n, Tier.ACCESS_LIST, getProof(tokenId)); // pass
+        await expect(
+          connect(TheAssetsClub, user1).mintTo(user1, 2n, Tier.ACCESS_LIST, getProof(tokenId), {
+            value: await TheAssetsClub.getPrice(Tier.ACCESS_LIST, 2n, 2n),
+          }),
+        ).to.changeTokenBalance(TheAssetsClub, user1, 2);
       });
 
       it('should allow a NFT Paris holder to be considered as an access list member', async () => {
@@ -385,7 +394,7 @@ describe('TheAssetsClub', () => {
 
       testOG();
       testAccessList();
-      testNFTParis();
+      testParis();
     });
 
     describe('during the public sale', async () => {
@@ -395,7 +404,7 @@ describe('TheAssetsClub', () => {
 
       testOG();
       testAccessList();
-      testNFTParis();
+      testParis();
 
       it('should revert if mint would exceed maxmimum supply', async () => {
         const quantity = 5n;

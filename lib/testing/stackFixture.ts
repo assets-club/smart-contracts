@@ -1,6 +1,6 @@
 import {
-  ERC721Mock__factory,
   InvalidReceiver__factory,
+  TheAssetsClubAtNFTParisMock__factory,
   TheAssetsClubMock,
   VRFCoordinatorV2Mock__factory,
 } from '../../typechain-types';
@@ -20,13 +20,13 @@ export default async function stackFixture() {
   await VRFCoordinatorV2.createSubscription();
   const subId = 1;
 
-  const NFTParis = await new ERC721Mock__factory().connect(deployer).deploy();
-  await NFTParis.waitForDeployment();
+  const Paris = await new TheAssetsClubAtNFTParisMock__factory().connect(deployer).deploy();
+  await Paris.waitForDeployment();
 
   const { TheAssetsClub, ...contracts } = await deployContracts(deployer, {
     ...testing,
     admin: admin.address,
-    nftParis: NFTParis.target.toString(),
+    paris: Paris.target.toString(),
     vrf: {
       ...testing.vrf,
       coordinator: VRFCoordinatorV2.target as string,
@@ -52,7 +52,7 @@ export default async function stackFixture() {
 
   return {
     TheAssetsClub: TheAssetsClub as TheAssetsClubMock,
-    NFTParis,
+    Paris,
     VRFCoordinatorV2,
     InvalidReceiver,
     tree,

@@ -74,20 +74,19 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
   /// Thu Apr 30 2023 09:00:00 GMT
   uint256 constant PUBLIC_SALE_END_DATE = PRIVATE_SALE_END_DATE + PUBLIC_SALE_DURATION;
 
-  // Token URIs
+  // Token URIs; they might be migrated to IPFS
   string private _contractURI = "https://static.theassets.club/contract.json";
   string private baseURI = "https://static.theassets.club/tokens/";
 
   // ----- NFT Paris Collection -----
   /// TheAssetsClub at NFT ERC721 contract.
-  IERC721A public immutable nftParis;
-  /// TheAssetsClubAtNFTParis used tokens.
-
-  mapping(uint256 => bool) public nftParisUsed;
+  IERC721A immutable paris;
+  /// The addresses which used a certain TheAssetsClub at NFT Paris token.
+  mapping(uint256 => address) public parisUsed;
   /// Thrown when the minter does not hold a TheAssetsClub at NFT Paris token.
-  error NFTParisNotHolder(uint256 tokenId);
+  error NotParisHolder(uint256 tokenId);
   /// Thrown when the minter tries to use TheAssetsClub at NFT Paris token for the second time.
-  error NFTParisAlreadyUsed(uint256 tokenId);
+  error ParisAlreadyUsed(uint256 tokenId);
 
   // ----- Mint -----
   /// The number of reserved, claimable tokens.
@@ -139,7 +138,8 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
 
   constructor(
     address admin,
-    IERC721A _tacp,
+    address treasury,
+    IERC721A _paris,
     address _coordinator,
     bytes32 _keyHash,
     uint64 _subId
@@ -147,10 +147,10 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
     coordinator = VRFCoordinatorV2Interface(_coordinator);
     keyHash = _keyHash;
     subId = _subId;
-    nftParis = _tacp;
+    paris = _paris;
 
-    _setDefaultRoyalty(admin, ROYALTIES);
     _initializeOwner(admin);
+    _setDefaultRoyalty(treasury, ROYALTIES);
   }
 
   /**
@@ -216,7 +216,7 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
   /**
    * @notice Get the current mint tier.
    */
-  function phase() public view returns (Phase) {
+  function phase() public view virtual returns (Phase) {
     uint256 timestamp = block.timestamp;
     if (timestamp < START_DATE) {
       return Phase.CLOSED;
@@ -320,15 +320,18 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
     Tier _tier;
 
     // for TheAssetsClub at NFT Paris holders
-    if (proof.length == 2 && bytes32toAddress(proof[0]) == address(nftParis)) {
+    if (proof.length == 2 && bytes32toAddress(proof[0]) == address(paris)) {
       uint256 tokenId = uint256(proof[1]);
-      if (nftParis.ownerOf(tokenId) != to) {
-        revert NFTParisNotHolder(tokenId);
-      } else if (nftParisUsed[tokenId]) {
-        revert NFTParisAlreadyUsed(tokenId);
+      if (paris.ownerOf(tokenId) != to) {
+        revert NotParisHolder(tokenId);
       }
 
-      nftParisUsed[tokenId] = true;
+      address used = parisUsed[tokenId];
+      if (used != address(0) && used != to) {
+        revert ParisAlreadyUsed(tokenId);
+      }
+
+      parisUsed[tokenId] = to;
       _tier = Tier.ACCESS_LIST;
     }
     // claimed tier is greater than PUBLIC, verify the Merkle proof
@@ -451,6 +454,102 @@ contract TheAssetsClub is ERC721A, ERC2981, Ownable, VRFConsumerBaseV2, DefaultO
       mstore(0, input)
       addr := mload(0)
     }
+  }
+
+  // ----- Operator Filter Registry -----
+  /**
+   * @notice Enable or disable approval for a third party ("operator") to manage all of `msg.sender`'s assets
+   * @dev Emits the ApprovalForAll event. The contract MUST allow multiple operators per owner.
+   *
+   * Overloaded method as instructed the Operator Filter Registry.
+   * See: https://github.com/ProjectOpenSea/operator-filter-registry/tree/1bc335867da2695ec447e68cb894a0cfda127bc8
+   *
+   * @param operator Address to add to the set of authorized operators.
+   * @param approved True if the operator is approved, false to revoke approval.
+   */
+  function setApprovalForAll(address operator, bool approved) public override onlyAllowedOperatorApproval(operator) {
+    super.setApprovalForAll(operator, approved);
+  }
+
+  /**
+   * @notice Change or reaffirm the approved address for an token.
+   * @dev The zero address indicates there is no approved address. Throws unless `msg.sender` is the current token
+   * owner, or an authorized operator of the current owner.
+   *
+   * Overloaded method as instructed the Operator Filter Registry.
+   * See: https://github.com/ProjectOpenSea/operator-filter-registry/tree/1bc335867da2695ec447e68cb894a0cfda127bc8
+   *
+   * @param operator The new approved token controller.
+   * @param tokenId The token to approve.
+   */
+  function approve(address operator, uint256 tokenId) public payable override onlyAllowedOperatorApproval(operator) {
+    super.approve(operator, tokenId);
+  }
+
+  /**
+   * @notice Transfer ownership of an NFT without any check on the destination address.
+   * @dev Throws unless `msg.sender` is the current owner, an authorized operator, or the approved address for this
+   * token. Throws if `_from` is not the current owner. Throws if `_to` is the zero address. Throws if `_tokenId` is
+   * not a valid token.
+   *
+   * Overloaded method as instructed the Operator Filter Registry.
+   * See: https://github.com/ProjectOpenSea/operator-filter-registry/tree/1bc335867da2695ec447e68cb894a0cfda127bc8
+   *
+   * @param from The current owner of the token.
+   * @param to The new owner.
+   * @param tokenId The token to transfer.
+   */
+  function transferFrom(address from, address to, uint256 tokenId) public payable override onlyAllowedOperator(from) {
+    super.transferFrom(from, to, tokenId);
+  }
+
+  /**
+   * @notice Transfers the ownership of an token from one address to another address.
+   * @dev Throws unless `msg.sender` is the current owner, an authorized operator, or the approved address for
+   * this token.
+   * Throws if `from` is not the current owner.
+   * Throws if `to` is the zero address.
+   * Throws if `tokenId` is not a valid token.
+   *
+   * When transfer is complete, this function checks if `_to` is a smart contract (code size > 0).
+   * If so, it calls `onERC721Received` on `_to` and throws if the return value is not
+   * `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))`.
+   *
+   * Overloaded method as instructed the Operator Filter Registry.
+   * See: https://github.com/ProjectOpenSea/operator-filter-registry/tree/1bc335867da2695ec447e68cb894a0cfda127bc8
+   *
+   * @param from The current owner of the token.
+   * @param to The new owner.
+   * @param tokenId The token to transfer.
+   * @param data Additional data with no specified format, sent in call to `_to`.
+   */
+  function safeTransferFrom(
+    address from,
+    address to,
+    uint256 tokenId,
+    bytes memory data
+  ) public payable override onlyAllowedOperator(from) {
+    super.safeTransferFrom(from, to, tokenId, data);
+  }
+
+  /**
+   * @notice Transfers the ownership of an token from one address to another address.
+   * @dev This works identically to the other function with an extra data parameter, except this function just sets
+   * data to "".
+   *
+   * Overloaded method as instructed the Operator Filter Registry.
+   * See: https://github.com/ProjectOpenSea/operator-filter-registry/tree/1bc335867da2695ec447e68cb894a0cfda127bc8
+   *
+   * @param from The current owner of the token.
+   * @param to The new owner.
+   * @param tokenId The token to transfer.
+   */
+  function safeTransferFrom(
+    address from,
+    address to,
+    uint256 tokenId
+  ) public payable override onlyAllowedOperator(from) {
+    super.safeTransferFrom(from, to, tokenId);
   }
 
   /**

@@ -6,7 +6,8 @@ export default interface Config {
   mock?: boolean;
 
   admin: string;
-  nftParis: string;
+  treasury?: string;
+  paris: string;
 
   vrf: {
     coordinator: string;

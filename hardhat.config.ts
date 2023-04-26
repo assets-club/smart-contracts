@@ -72,6 +72,7 @@ const config: HardhatUserConfig = {
 
 if (process.env.ETHERSCAN_API_KEY) {
   set(config, 'etherscan.apiKey.mainnet', process.env.ETHERSCAN_API_KEY);
+  set(config, 'etherscan.apiKey.sepolia', process.env.ETHERSCAN_API_KEY);
   set(config, 'etherscan.apiKey.goerli', process.env.ETHERSCAN_API_KEY);
 }
 
