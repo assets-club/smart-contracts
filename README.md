@@ -8,7 +8,7 @@
 
 You can find the main collection on the Ethereum blockchain.
 
-- [Etherscan](https://etherscan.io/address/0x81f2e73c790bfb10912151ab5a7b411ed391d0f7)
+- [Etherscan](https://etherscan.io/address/0xe6eb4cFd8600832edd617F6D86ab9D63A4fb7bDA)
 - [OpenSea collection](https://opensea.io/collection/theassetsclub-at-nft-paris)
 
 ## TheAssetsClub at NFT Paris collection
@@ -46,7 +46,7 @@ This repository is proudly maintained by [@mathieu-bour](https://github.com/math
 
 ## Architecture
 
-The Assets Club has only a single smart contract, that is deployed on the Ethereum blockchain at [`0x81f2e73c790bfb10912151ab5a7b411ed391d0f7`](https://etherscan.io/address/0x81f2e73c790bfb10912151ab5a7b411ed391d0f7).
+The Assets Club has only a single smart contract, that is deployed on the Ethereum blockchain at [`0xe6eb4cFd8600832edd617F6D86ab9D63A4fb7bDA`](https://etherscan.io/address/0xe6eb4cFd8600832edd617F6D86ab9D63A4fb7bDA).
 
 The contract is [ERC721-compatible](https://eips.ethereum.org/EIPS/eip-721) and is based on Asuki's [ERC721A implementation](https://www.erc721a.org).
 The source can be found in [TheAssetsClub.sol](contracts/TheAssetsClub.sol).
