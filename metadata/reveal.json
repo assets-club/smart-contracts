@@ -1,0 +1,6 @@
+{
+  "name": "Asset #{number}",
+  "description": "Asset #{number}",
+  "image": "https://static.theassets.club/tokens/reveal.gif",
+  "external_url": "https://assetsclub.club/gallery/{number}"
+}
