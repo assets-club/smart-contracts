@@ -1,0 +1,32 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apricots"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Gold Blockchain"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "AssTronaut"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/554",
+  "image": "https://static.theassets.club/tokens/554.png",
+  "name": "Asset #554",
+  "description": "Asset #554, part of TheAssetClub Original collection."
+}

@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Strawberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Watermelon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/550",
+  "image": "https://static.theassets.club/tokens/550.png",
+  "name": "Asset #550",
+  "description": "Asset #550, part of TheAssetClub Original collection."
+}
