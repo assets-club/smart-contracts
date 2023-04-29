@@ -1,6 +1,23 @@
 {
-  "name": "Asset #428",
-  "description": "Asset #428",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/428"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Plums"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Sachs"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/428",
+  "image": "https://static.theassets.club/tokens/428.png",
+  "name": "Asset #428"
 }

@@ -1,6 +1,23 @@
 {
-  "name": "Asset #84",
-  "description": "Asset #84",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/84"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Oranges"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Neat"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/84",
+  "image": "https://static.theassets.club/tokens/84.png",
+  "name": "Asset #84"
 }

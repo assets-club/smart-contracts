@@ -1,6 +1,23 @@
 {
-  "name": "Asset #95",
-  "description": "Asset #95",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/95"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/95",
+  "image": "https://static.theassets.club/tokens/95.png",
+  "name": "Asset #95"
 }

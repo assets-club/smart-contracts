@@ -1,6 +1,31 @@
 {
-  "name": "Asset #410",
-  "description": "Asset #410",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/410"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Passion Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "5mL"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Double Collant"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "2000"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/410",
+  "image": "https://static.theassets.club/tokens/410.png",
+  "name": "Asset #410"
 }

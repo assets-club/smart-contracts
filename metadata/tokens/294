@@ -1,6 +1,27 @@
 {
-  "name": "Asset #294",
-  "description": "Asset #294",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/294"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bicolor"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bra"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/294",
+  "image": "https://static.theassets.club/tokens/294.png",
+  "name": "Asset #294"
 }

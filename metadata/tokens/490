@@ -1,6 +1,19 @@
 {
-  "name": "Asset #490",
-  "description": "Asset #490",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/490"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Kiwis"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/490",
+  "image": "https://static.theassets.club/tokens/490.png",
+  "name": "Asset #490"
 }

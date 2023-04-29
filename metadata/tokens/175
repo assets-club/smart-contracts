@@ -1,6 +1,23 @@
 {
-  "name": "Asset #175",
-  "description": "Asset #175",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/175"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Miami Pool Party"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Shorty"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/175",
+  "image": "https://static.theassets.club/tokens/175.png",
+  "name": "Asset #175"
 }

@@ -1,6 +1,23 @@
 {
-  "name": "Asset #316",
-  "description": "Asset #316",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/316"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Passion Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Soros"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/316",
+  "image": "https://static.theassets.club/tokens/316.png",
+  "name": "Asset #316"
 }

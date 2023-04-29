@@ -1,6 +1,23 @@
 {
-  "name": "Asset #467",
-  "description": "Asset #467",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/467"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bicolor"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/467",
+  "image": "https://static.theassets.club/tokens/467.png",
+  "name": "Asset #467"
 }

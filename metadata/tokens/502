@@ -1,6 +1,31 @@
 {
-  "name": "Asset #502",
-  "description": "Asset #502",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/502"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "5mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "The G"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Hips Necklace"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/502",
+  "image": "https://static.theassets.club/tokens/502.png",
+  "name": "Asset #502"
 }

@@ -1,6 +1,27 @@
 {
-  "name": "Asset #418",
-  "description": "Asset #418",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/418"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Plums"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Monokini"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Cupidon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/418",
+  "image": "https://static.theassets.club/tokens/418.png",
+  "name": "Asset #418"
 }

@@ -1,6 +1,31 @@
 {
-  "name": "Asset #108",
-  "description": "Asset #108",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/108"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "5mL"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Leo Socks"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Sativa"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/108",
+  "image": "https://static.theassets.club/tokens/108.png",
+  "name": "Asset #108"
 }

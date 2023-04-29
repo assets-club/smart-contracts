@@ -1,6 +1,19 @@
 {
-  "name": "Asset #72",
-  "description": "Asset #72",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/72"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/72",
+  "image": "https://static.theassets.club/tokens/72.png",
+  "name": "Asset #72"
 }

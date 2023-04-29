@@ -1,6 +1,27 @@
 {
-  "name": "Asset #266",
-  "description": "Asset #266",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/266"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cherry"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Miss Univers 2030"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/266",
+  "image": "https://static.theassets.club/tokens/266.png",
+  "name": "Asset #266"
 }

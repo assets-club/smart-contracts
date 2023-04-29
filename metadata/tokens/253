@@ -1,6 +1,31 @@
 {
-  "name": "Asset #253",
-  "description": "Asset #253",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/253"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pomegranates"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Shorty"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "432 Hz"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/253",
+  "image": "https://static.theassets.club/tokens/253.png",
+  "name": "Asset #253"
 }

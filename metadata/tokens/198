@@ -1,6 +1,27 @@
 {
-  "name": "Asset #198",
-  "description": "Asset #198",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/198"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Passion Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Cash Flow"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Egyptian"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/198",
+  "image": "https://static.theassets.club/tokens/198.png",
+  "name": "Asset #198"
 }

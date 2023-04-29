@@ -1,6 +1,23 @@
 {
-  "name": "Asset #333",
-  "description": "Asset #333",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/333"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Prunes"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Fresh Thong"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/333",
+  "image": "https://static.theassets.club/tokens/333.png",
+  "name": "Asset #333"
 }

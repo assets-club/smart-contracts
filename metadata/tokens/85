@@ -1,6 +1,23 @@
 {
-  "name": "Asset #85",
-  "description": "Asset #85",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/85"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pumpkins"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Lazy"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/85",
+  "image": "https://static.theassets.club/tokens/85.png",
+  "name": "Asset #85"
 }

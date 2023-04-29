@@ -1,6 +1,27 @@
 {
-  "name": "Asset #100",
-  "description": "Asset #100",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/100"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Grapes TH"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "2000"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Pinch"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/100",
+  "image": "https://static.theassets.club/tokens/100.png",
+  "name": "Asset #100"
 }

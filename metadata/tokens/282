@@ -1,6 +1,23 @@
 {
-  "name": "Asset #282",
-  "description": "Asset #282",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/282"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Organs"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Sachs"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/282",
+  "image": "https://static.theassets.club/tokens/282.png",
+  "name": "Asset #282"
 }

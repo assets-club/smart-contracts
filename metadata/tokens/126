@@ -1,6 +1,23 @@
 {
-  "name": "Asset #126",
-  "description": "Asset #126",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/126"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Ready"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/126",
+  "image": "https://static.theassets.club/tokens/126.png",
+  "name": "Asset #126"
 }

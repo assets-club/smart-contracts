@@ -1,6 +1,23 @@
 {
-  "name": "Asset #369",
-  "description": "Asset #369",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/369"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "T-1000"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Copper Wonderwoman"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/369",
+  "image": "https://static.theassets.club/tokens/369.png",
+  "name": "Asset #369"
 }

@@ -1,6 +1,27 @@
 {
-  "name": "Asset #424",
-  "description": "Asset #424",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/424"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Kiwis"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/424",
+  "image": "https://static.theassets.club/tokens/424.png",
+  "name": "Asset #424"
 }

@@ -1,6 +1,27 @@
 {
-  "name": "Asset #483",
-  "description": "Asset #483",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/483"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Prunes"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Zombie"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bluepill"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bondage"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/483",
+  "image": "https://static.theassets.club/tokens/483.png",
+  "name": "Asset #483"
 }

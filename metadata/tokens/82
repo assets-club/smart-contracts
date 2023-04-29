@@ -1,6 +1,11 @@
 {
-  "name": "Asset #82",
-  "description": "Asset #82",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/82"
+  "attributes": [
+    {
+      "trait_type": "Unique",
+      "value": "BTTA"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/82",
+  "image": "https://static.theassets.club/tokens/82.png",
+  "name": "Asset #82"
 }

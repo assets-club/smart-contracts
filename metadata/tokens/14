@@ -1,6 +1,27 @@
 {
-  "name": "Asset #14",
-  "description": "Asset #14",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/14"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Kiwis"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Triangle"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/14",
+  "image": "https://static.theassets.club/tokens/14.png",
+  "name": "Asset #14"
 }

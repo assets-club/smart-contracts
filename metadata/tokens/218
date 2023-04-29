@@ -1,6 +1,23 @@
 {
-  "name": "Asset #218",
-  "description": "Asset #218",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/218"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "The Eye"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/218",
+  "image": "https://static.theassets.club/tokens/218.png",
+  "name": "Asset #218"
 }

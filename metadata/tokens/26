@@ -1,6 +1,23 @@
 {
-  "name": "Asset #26",
-  "description": "Asset #26",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/26"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Square Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Chill"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/26",
+  "image": "https://static.theassets.club/tokens/26.png",
+  "name": "Asset #26"
 }

@@ -1,6 +1,27 @@
 {
-  "name": "Asset #221",
-  "description": "Asset #221",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/221"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apricots"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Triangle"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/221",
+  "image": "https://static.theassets.club/tokens/221.png",
+  "name": "Asset #221"
 }

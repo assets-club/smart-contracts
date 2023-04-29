@@ -1,6 +1,23 @@
 {
-  "name": "Asset #453",
-  "description": "Asset #453",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/453"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apricots"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Triangle"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/453",
+  "image": "https://static.theassets.club/tokens/453.png",
+  "name": "Asset #453"
 }

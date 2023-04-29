@@ -9,7 +9,7 @@
 You can find the main collection on the Ethereum blockchain.
 
 - [Etherscan](https://etherscan.io/address/0xe6eb4cFd8600832edd617F6D86ab9D63A4fb7bDA)
-- [OpenSea collection](https://opensea.io/collection/theassetsclub-at-nft-paris)
+- [OpenSea collection](https://opensea.io/collection/theassetsclub)
 
 ## TheAssetsClub at NFT Paris collection
 

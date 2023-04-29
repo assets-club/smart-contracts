@@ -1,6 +1,23 @@
 {
-  "name": "Asset #459",
-  "description": "Asset #459",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/459"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Dragon Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "5mL"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/459",
+  "image": "https://static.theassets.club/tokens/459.png",
+  "name": "Asset #459"
 }

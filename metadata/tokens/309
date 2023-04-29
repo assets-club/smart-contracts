@@ -1,6 +1,23 @@
 {
-  "name": "Asset #309",
-  "description": "Asset #309",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/309"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Kiwis"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic Tanga"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/309",
+  "image": "https://static.theassets.club/tokens/309.png",
+  "name": "Asset #309"
 }

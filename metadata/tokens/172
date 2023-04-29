@@ -1,6 +1,27 @@
 {
-  "name": "Asset #172",
-  "description": "Asset #172",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/172"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Exotic Tanga"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/172",
+  "image": "https://static.theassets.club/tokens/172.png",
+  "name": "Asset #172"
 }

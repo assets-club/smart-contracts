@@ -1,6 +1,27 @@
 {
-  "name": "Asset #36",
-  "description": "Asset #36",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/36"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Passion Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Collant"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/36",
+  "image": "https://static.theassets.club/tokens/36.png",
+  "name": "Asset #36"
 }

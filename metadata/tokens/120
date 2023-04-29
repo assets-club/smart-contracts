@@ -1,6 +1,23 @@
 {
-  "name": "Asset #120",
-  "description": "Asset #120",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/120"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Plums"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bicolor"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/120",
+  "image": "https://static.theassets.club/tokens/120.png",
+  "name": "Asset #120"
 }

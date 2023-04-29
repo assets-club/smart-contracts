@@ -1,6 +1,23 @@
 {
-  "name": "Asset #21",
-  "description": "Asset #21",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/21"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Super High Waist"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/21",
+  "image": "https://static.theassets.club/tokens/21.png",
+  "name": "Asset #21"
 }

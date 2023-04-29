@@ -1,6 +1,23 @@
 {
-  "name": "Asset #106",
-  "description": "Asset #106",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/106"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Copper Wonderwoman"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/106",
+  "image": "https://static.theassets.club/tokens/106.png",
+  "name": "Asset #106"
 }

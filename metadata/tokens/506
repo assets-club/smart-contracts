@@ -1,6 +1,35 @@
 {
-  "name": "Asset #506",
-  "description": "Asset #506",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/506"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Arbitrator Socks"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Neat"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Wind"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/506",
+  "image": "https://static.theassets.club/tokens/506.png",
+  "name": "Asset #506"
 }

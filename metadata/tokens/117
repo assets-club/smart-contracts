@@ -1,6 +1,27 @@
 {
-  "name": "Asset #117",
-  "description": "Asset #117",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/117"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Monokini"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Rescue"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/117",
+  "image": "https://static.theassets.club/tokens/117.png",
+  "name": "Asset #117"
 }

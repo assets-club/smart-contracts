@@ -1,6 +1,27 @@
 {
-  "name": "Asset #255",
-  "description": "Asset #255",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/255"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Grapes TH"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "2000"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "2030"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/255",
+  "image": "https://static.theassets.club/tokens/255.png",
+  "name": "Asset #255"
 }

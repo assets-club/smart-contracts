@@ -1,6 +1,19 @@
 {
-  "name": "Asset #75",
-  "description": "Asset #75",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/75"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Dragon Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/75",
+  "image": "https://static.theassets.club/tokens/75.png",
+  "name": "Asset #75"
 }

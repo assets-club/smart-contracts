@@ -1,6 +1,35 @@
 {
-  "name": "Asset #297",
-  "description": "Asset #297",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/297"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Passion Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Bubblegum"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Collant"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Soros"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "The Holes"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/297",
+  "image": "https://static.theassets.club/tokens/297.png",
+  "name": "Asset #297"
 }

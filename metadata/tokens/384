@@ -1,6 +1,27 @@
 {
-  "name": "Asset #384",
-  "description": "Asset #384",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/384"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Fish"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Miss Univers 2030"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/384",
+  "image": "https://static.theassets.club/tokens/384.png",
+  "name": "Asset #384"
 }

@@ -1,6 +1,35 @@
 {
-  "name": "Asset #112",
-  "description": "Asset #112",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/112"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Dagger"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Bling Stocking"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Flat String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/112",
+  "image": "https://static.theassets.club/tokens/112.png",
+  "name": "Asset #112"
 }

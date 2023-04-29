@@ -1,6 +1,27 @@
 {
-  "name": "Asset #501",
-  "description": "Asset #501",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/501"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pumpkins"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cheeky"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/501",
+  "image": "https://static.theassets.club/tokens/501.png",
+  "name": "Asset #501"
 }

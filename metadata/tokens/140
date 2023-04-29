@@ -1,6 +1,23 @@
 {
-  "name": "Asset #140",
-  "description": "Asset #140",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/140"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Flufy"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/140",
+  "image": "https://static.theassets.club/tokens/140.png",
+  "name": "Asset #140"
 }

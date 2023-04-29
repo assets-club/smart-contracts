@@ -1,6 +1,23 @@
 {
-  "name": "Asset #415",
-  "description": "Asset #415",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/415"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Flat String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/415",
+  "image": "https://static.theassets.club/tokens/415.png",
+  "name": "Asset #415"
 }

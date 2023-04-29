@@ -1,6 +1,27 @@
 {
-  "name": "Asset #374",
-  "description": "Asset #374",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/374"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Miami Pool Night"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Arbitrator Socks"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Arbitrator"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/374",
+  "image": "https://static.theassets.club/tokens/374.png",
+  "name": "Asset #374"
 }

@@ -1,6 +1,27 @@
 {
-  "name": "Asset #488",
-  "description": "Asset #488",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/488"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Square Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Flat String"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Plant"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/488",
+  "image": "https://static.theassets.club/tokens/488.png",
+  "name": "Asset #488"
 }

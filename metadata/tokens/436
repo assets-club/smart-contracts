@@ -1,6 +1,27 @@
 {
-  "name": "Asset #436",
-  "description": "Asset #436",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/436"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apricots"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Spider Tanga"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "AssTronaut"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/436",
+  "image": "https://static.theassets.club/tokens/436.png",
+  "name": "Asset #436"
 }

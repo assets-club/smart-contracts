@@ -1,6 +1,23 @@
 {
-  "name": "Asset #125",
-  "description": "Asset #125",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/125"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Prunes"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/125",
+  "image": "https://static.theassets.club/tokens/125.png",
+  "name": "Asset #125"
 }

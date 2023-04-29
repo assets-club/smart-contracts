@@ -1,6 +1,27 @@
 {
-  "name": "Asset #470",
-  "description": "Asset #470",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/470"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Heaume"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/470",
+  "image": "https://static.theassets.club/tokens/470.png",
+  "name": "Asset #470"
 }

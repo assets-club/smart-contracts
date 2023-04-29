@@ -1,6 +1,23 @@
 {
-  "name": "Asset #388",
-  "description": "Asset #388",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/388"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Watermelons"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cutie"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/388",
+  "image": "https://static.theassets.club/tokens/388.png",
+  "name": "Asset #388"
 }

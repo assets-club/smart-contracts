@@ -1,6 +1,31 @@
 {
-  "name": "Asset #52",
-  "description": "Asset #52",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/52"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Dagger"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Bling Stocking"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cutie"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/52",
+  "image": "https://static.theassets.club/tokens/52.png",
+  "name": "Asset #52"
 }

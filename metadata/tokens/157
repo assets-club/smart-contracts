@@ -1,6 +1,23 @@
 {
-  "name": "Asset #157",
-  "description": "Asset #157",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/157"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/157",
+  "image": "https://static.theassets.club/tokens/157.png",
+  "name": "Asset #157"
 }

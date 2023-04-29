@@ -1,6 +1,23 @@
 {
-  "name": "Asset #158",
-  "description": "Asset #158",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/158"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pomegranates"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/158",
+  "image": "https://static.theassets.club/tokens/158.png",
+  "name": "Asset #158"
 }

@@ -1,6 +1,31 @@
 {
-  "name": "Asset #495",
-  "description": "Asset #495",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/495"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pomegranates"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Shorty"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "2001"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/495",
+  "image": "https://static.theassets.club/tokens/495.png",
+  "name": "Asset #495"
 }

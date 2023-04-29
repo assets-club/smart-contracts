@@ -1,6 +1,27 @@
 {
-  "name": "Asset #344",
-  "description": "Asset #344",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/344"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apples"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Triangle"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Deadpool"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/344",
+  "image": "https://static.theassets.club/tokens/344.png",
+  "name": "Asset #344"
 }

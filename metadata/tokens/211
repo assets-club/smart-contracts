@@ -1,6 +1,27 @@
 {
-  "name": "Asset #211",
-  "description": "Asset #211",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/211"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apricots"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Vitiligo"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Redpill"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/211",
+  "image": "https://static.theassets.club/tokens/211.png",
+  "name": "Asset #211"
 }

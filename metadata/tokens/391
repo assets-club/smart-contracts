@@ -1,6 +1,23 @@
 {
-  "name": "Asset #391",
-  "description": "Asset #391",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/391"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Strawberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Bubblegum"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/391",
+  "image": "https://static.theassets.club/tokens/391.png",
+  "name": "Asset #391"
 }

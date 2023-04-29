@@ -1,6 +1,31 @@
 {
-  "name": "Asset #146",
-  "description": "Asset #146",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/146"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Oranges"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Watermelon"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Angel"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/146",
+  "image": "https://static.theassets.club/tokens/146.png",
+  "name": "Asset #146"
 }

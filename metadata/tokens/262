@@ -1,6 +1,23 @@
 {
-  "name": "Asset #262",
-  "description": "Asset #262",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/262"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Grapes"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/262",
+  "image": "https://static.theassets.club/tokens/262.png",
+  "name": "Asset #262"
 }

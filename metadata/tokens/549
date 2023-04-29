@@ -1,6 +1,31 @@
 {
-  "name": "Asset #549",
-  "description": "Asset #549",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/549"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Bling Stocking"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Tie Rising Sun"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/549",
+  "image": "https://static.theassets.club/tokens/549.png",
+  "name": "Asset #549"
 }

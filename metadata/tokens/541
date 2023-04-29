@@ -1,6 +1,23 @@
 {
-  "name": "Asset #541",
-  "description": "Asset #541",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/541"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Plums"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Soros"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/541",
+  "image": "https://static.theassets.club/tokens/541.png",
+  "name": "Asset #541"
 }

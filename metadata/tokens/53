@@ -1,6 +1,27 @@
 {
-  "name": "Asset #53",
-  "description": "Asset #53",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/53"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Dagger"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Rising Sun"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/53",
+  "image": "https://static.theassets.club/tokens/53.png",
+  "name": "Asset #53"
 }

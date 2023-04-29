@@ -1,6 +1,23 @@
 {
-  "name": "Asset #137",
-  "description": "Asset #137",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/137"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Neat"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/137",
+  "image": "https://static.theassets.club/tokens/137.png",
+  "name": "Asset #137"
 }

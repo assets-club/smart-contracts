@@ -1,6 +1,31 @@
 {
-  "name": "Asset #184",
-  "description": "Asset #184",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/184"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "5mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Trident"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bra"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/184",
+  "image": "https://static.theassets.club/tokens/184.png",
+  "name": "Asset #184"
 }

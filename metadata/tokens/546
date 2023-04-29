@@ -1,6 +1,27 @@
 {
-  "name": "Asset #546",
-  "description": "Asset #546",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/546"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Copper Wonderwoman"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/546",
+  "image": "https://static.theassets.club/tokens/546.png",
+  "name": "Asset #546"
 }

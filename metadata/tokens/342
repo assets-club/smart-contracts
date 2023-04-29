@@ -1,6 +1,23 @@
 {
-  "name": "Asset #342",
-  "description": "Asset #342",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/342"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Plums"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Watermelon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/342",
+  "image": "https://static.theassets.club/tokens/342.png",
+  "name": "Asset #342"
 }

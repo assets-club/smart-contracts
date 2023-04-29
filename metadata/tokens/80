@@ -1,6 +1,31 @@
 {
-  "name": "Asset #80",
-  "description": "Asset #80",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/80"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Water War"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "IDK"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/80",
+  "image": "https://static.theassets.club/tokens/80.png",
+  "name": "Asset #80"
 }

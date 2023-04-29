@@ -1,6 +1,23 @@
 {
-  "name": "Asset #9",
-  "description": "Asset #9",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/9"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Damier"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cheeky"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/9",
+  "image": "https://static.theassets.club/tokens/9.png",
+  "name": "Asset #9"
 }

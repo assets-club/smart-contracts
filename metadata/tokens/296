@@ -1,6 +1,23 @@
 {
-  "name": "Asset #296",
-  "description": "Asset #296",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/296"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Sachs"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/296",
+  "image": "https://static.theassets.club/tokens/296.png",
+  "name": "Asset #296"
 }

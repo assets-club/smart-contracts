@@ -1,6 +1,27 @@
 {
-  "name": "Asset #477",
-  "description": "Asset #477",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/477"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Dragon Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Double Lc"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Miami Day"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/477",
+  "image": "https://static.theassets.club/tokens/477.png",
+  "name": "Asset #477"
 }

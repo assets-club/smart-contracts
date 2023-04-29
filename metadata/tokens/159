@@ -1,6 +1,27 @@
 {
-  "name": "Asset #159",
-  "description": "Asset #159",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/159"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pumpkins"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic String"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Cupidon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/159",
+  "image": "https://static.theassets.club/tokens/159.png",
+  "name": "Asset #159"
 }

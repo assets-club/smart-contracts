@@ -1,6 +1,23 @@
 {
-  "name": "Asset #480",
-  "description": "Asset #480",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/480"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Triangle"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/480",
+  "image": "https://static.theassets.club/tokens/480.png",
+  "name": "Asset #480"
 }

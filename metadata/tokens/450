@@ -1,6 +1,23 @@
 {
-  "name": "Asset #450",
-  "description": "Asset #450",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/450"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Square Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Red Letsgo"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/450",
+  "image": "https://static.theassets.club/tokens/450.png",
+  "name": "Asset #450"
 }

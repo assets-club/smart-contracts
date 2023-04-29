@@ -1,6 +1,23 @@
 {
-  "name": "Asset #482",
-  "description": "Asset #482",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/482"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bra"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/482",
+  "image": "https://static.theassets.club/tokens/482.png",
+  "name": "Asset #482"
 }

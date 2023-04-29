@@ -1,6 +1,27 @@
 {
-  "name": "Asset #337",
-  "description": "Asset #337",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/337"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Dragon Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Kulot"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Knife"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/337",
+  "image": "https://static.theassets.club/tokens/337.png",
+  "name": "Asset #337"
 }

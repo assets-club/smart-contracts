@@ -1,6 +1,23 @@
 {
-  "name": "Asset #207",
-  "description": "Asset #207",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/207"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Prunes"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/207",
+  "image": "https://static.theassets.club/tokens/207.png",
+  "name": "Asset #207"
 }

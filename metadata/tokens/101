@@ -1,6 +1,27 @@
 {
-  "name": "Asset #101",
-  "description": "Asset #101",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/101"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Heaume"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Hips Necklace"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/101",
+  "image": "https://static.theassets.club/tokens/101.png",
+  "name": "Asset #101"
 }

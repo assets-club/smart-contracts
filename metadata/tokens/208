@@ -1,6 +1,31 @@
 {
-  "name": "Asset #208",
-  "description": "Asset #208",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/208"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apples"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Monokini"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Cupidon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/208",
+  "image": "https://static.theassets.club/tokens/208.png",
+  "name": "Asset #208"
 }

@@ -1,6 +1,23 @@
 {
-  "name": "Asset #520",
-  "description": "Asset #520",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/520"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Trident"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/520",
+  "image": "https://static.theassets.club/tokens/520.png",
+  "name": "Asset #520"
 }

@@ -1,6 +1,27 @@
 {
-  "name": "Asset #509",
-  "description": "Asset #509",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/509"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1L"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bonny"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/509",
+  "image": "https://static.theassets.club/tokens/509.png",
+  "name": "Asset #509"
 }

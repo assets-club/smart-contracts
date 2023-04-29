@@ -1,6 +1,27 @@
 {
-  "name": "Asset #162",
-  "description": "Asset #162",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/162"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Plums"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Super Girl"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/162",
+  "image": "https://static.theassets.club/tokens/162.png",
+  "name": "Asset #162"
 }

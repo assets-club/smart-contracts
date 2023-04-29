@@ -1,6 +1,23 @@
 {
-  "name": "Asset #361",
-  "description": "Asset #361",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/361"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Prunes"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cutie"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/361",
+  "image": "https://static.theassets.club/tokens/361.png",
+  "name": "Asset #361"
 }

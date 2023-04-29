@@ -1,6 +1,23 @@
 {
-  "name": "Asset #67",
-  "description": "Asset #67",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/67"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Trident"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/67",
+  "image": "https://static.theassets.club/tokens/67.png",
+  "name": "Asset #67"
 }

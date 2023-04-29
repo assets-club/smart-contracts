@@ -1,6 +1,23 @@
 {
-  "name": "Asset #33",
-  "description": "Asset #33",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/33"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pomegranates"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "2001"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/33",
+  "image": "https://static.theassets.club/tokens/33.png",
+  "name": "Asset #33"
 }

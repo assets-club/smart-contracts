@@ -1,6 +1,23 @@
 {
-  "name": "Asset #463",
-  "description": "Asset #463",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/463"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Prunes"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/463",
+  "image": "https://static.theassets.club/tokens/463.png",
+  "name": "Asset #463"
 }

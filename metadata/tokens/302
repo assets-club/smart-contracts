@@ -1,6 +1,27 @@
 {
-  "name": "Asset #302",
-  "description": "Asset #302",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/302"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cheeky"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/302",
+  "image": "https://static.theassets.club/tokens/302.png",
+  "name": "Asset #302"
 }

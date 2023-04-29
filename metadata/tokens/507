@@ -1,6 +1,23 @@
 {
-  "name": "Asset #507",
-  "description": "Asset #507",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/507"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Bubblegum"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Watermelon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/507",
+  "image": "https://static.theassets.club/tokens/507.png",
+  "name": "Asset #507"
 }

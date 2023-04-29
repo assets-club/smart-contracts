@@ -1,6 +1,23 @@
 {
-  "name": "Asset #156",
-  "description": "Asset #156",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/156"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "IDK"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/156",
+  "image": "https://static.theassets.club/tokens/156.png",
+  "name": "Asset #156"
 }

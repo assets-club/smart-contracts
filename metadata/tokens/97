@@ -1,6 +1,27 @@
 {
-  "name": "Asset #97",
-  "description": "Asset #97",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/97"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pumpkins"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Watermelon"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Cupidon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/97",
+  "image": "https://static.theassets.club/tokens/97.png",
+  "name": "Asset #97"
 }

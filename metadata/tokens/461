@@ -1,6 +1,31 @@
 {
-  "name": "Asset #461",
-  "description": "Asset #461",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/461"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Passion Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Collant"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Chill"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Charge"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/461",
+  "image": "https://static.theassets.club/tokens/461.png",
+  "name": "Asset #461"
 }

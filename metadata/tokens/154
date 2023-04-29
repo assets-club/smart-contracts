@@ -1,6 +1,27 @@
 {
-  "name": "Asset #154",
-  "description": "Asset #154",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/154"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Kiwis"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic Tanga"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/154",
+  "image": "https://static.theassets.club/tokens/154.png",
+  "name": "Asset #154"
 }

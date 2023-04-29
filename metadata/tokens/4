@@ -1,6 +1,27 @@
 {
-  "name": "Asset #4",
-  "description": "Asset #4",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/4"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bicolor"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bra"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/4",
+  "image": "https://static.theassets.club/tokens/4.png",
+  "name": "Asset #4"
 }

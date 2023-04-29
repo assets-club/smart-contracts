@@ -1,6 +1,11 @@
 {
-  "name": "Asset #508",
-  "description": "Asset #508",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/508"
+  "attributes": [
+    {
+      "trait_type": "Unique",
+      "value": "AquaSense"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/508",
+  "image": "https://static.theassets.club/tokens/508.png",
+  "name": "Asset #508"
 }

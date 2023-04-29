@@ -1,6 +1,27 @@
 {
-  "name": "Asset #295",
-  "description": "Asset #295",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/295"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Bubblegum"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Water War"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Ring String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/295",
+  "image": "https://static.theassets.club/tokens/295.png",
+  "name": "Asset #295"
 }

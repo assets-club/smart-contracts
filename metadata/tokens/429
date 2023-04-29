@@ -1,6 +1,27 @@
 {
-  "name": "Asset #429",
-  "description": "Asset #429",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/429"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Bubblegum"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Off Fields"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Hips Necklace"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/429",
+  "image": "https://static.theassets.club/tokens/429.png",
+  "name": "Asset #429"
 }

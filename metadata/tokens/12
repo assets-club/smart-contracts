@@ -1,6 +1,27 @@
 {
-  "name": "Asset #12",
-  "description": "Asset #12",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/12"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Grapes TH"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Miami Pool Party"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Arielle"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Dbz"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/12",
+  "image": "https://static.theassets.club/tokens/12.png",
+  "name": "Asset #12"
 }

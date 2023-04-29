@@ -1,6 +1,27 @@
 {
-  "name": "Asset #183",
-  "description": "Asset #183",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/183"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Dragon Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Left LC"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "The Assets Official"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/183",
+  "image": "https://static.theassets.club/tokens/183.png",
+  "name": "Asset #183"
 }

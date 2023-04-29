@@ -1,6 +1,23 @@
 {
-  "name": "Asset #380",
-  "description": "Asset #380",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/380"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Watermelons"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Flat String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/380",
+  "image": "https://static.theassets.club/tokens/380.png",
+  "name": "Asset #380"
 }

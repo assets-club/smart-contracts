@@ -1,6 +1,27 @@
 {
-  "name": "Asset #220",
-  "description": "Asset #220",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/220"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "2000"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Angel"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/220",
+  "image": "https://static.theassets.club/tokens/220.png",
+  "name": "Asset #220"
 }

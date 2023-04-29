@@ -1,6 +1,23 @@
 {
-  "name": "Asset #394",
-  "description": "Asset #394",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/394"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "IDK"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/394",
+  "image": "https://static.theassets.club/tokens/394.png",
+  "name": "Asset #394"
 }

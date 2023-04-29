@@ -1,6 +1,27 @@
 {
-  "name": "Asset #233",
-  "description": "Asset #233",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/233"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apples"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "2000"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/233",
+  "image": "https://static.theassets.club/tokens/233.png",
+  "name": "Asset #233"
 }

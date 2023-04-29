@@ -1,6 +1,35 @@
 {
-  "name": "Asset #43",
-  "description": "Asset #43",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/43"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Dragon Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Left LC"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Miami Night"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Knife"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/43",
+  "image": "https://static.theassets.club/tokens/43.png",
+  "name": "Asset #43"
 }

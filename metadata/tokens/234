@@ -1,6 +1,27 @@
 {
-  "name": "Asset #234",
-  "description": "Asset #234",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/234"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Square Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Shorty"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/234",
+  "image": "https://static.theassets.club/tokens/234.png",
+  "name": "Asset #234"
 }

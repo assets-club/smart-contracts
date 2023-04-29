@@ -1,6 +1,23 @@
 {
-  "name": "Asset #168",
-  "description": "Asset #168",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/168"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Avocados"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Bubblegum"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Sachs"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/168",
+  "image": "https://static.theassets.club/tokens/168.png",
+  "name": "Asset #168"
 }

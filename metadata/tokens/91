@@ -1,6 +1,23 @@
 {
-  "name": "Asset #91",
-  "description": "Asset #91",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/91"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Neat"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/91",
+  "image": "https://static.theassets.club/tokens/91.png",
+  "name": "Asset #91"
 }

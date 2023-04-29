@@ -1,6 +1,27 @@
 {
-  "name": "Asset #420",
-  "description": "Asset #420",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/420"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pomegranates"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic Tanga"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/420",
+  "image": "https://static.theassets.club/tokens/420.png",
+  "name": "Asset #420"
 }

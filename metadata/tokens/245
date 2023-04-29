@@ -1,6 +1,23 @@
 {
-  "name": "Asset #245",
-  "description": "Asset #245",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/245"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pumpkins"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Cupidon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/245",
+  "image": "https://static.theassets.club/tokens/245.png",
+  "name": "Asset #245"
 }

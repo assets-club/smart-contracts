@@ -1,6 +1,23 @@
 {
-  "name": "Asset #10",
-  "description": "Asset #10",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/10"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Plums"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Monokini"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/10",
+  "image": "https://static.theassets.club/tokens/10.png",
+  "name": "Asset #10"
 }

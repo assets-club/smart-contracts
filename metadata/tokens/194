@@ -1,6 +1,23 @@
 {
-  "name": "Asset #194",
-  "description": "Asset #194",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/194"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Square Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Super High Waist"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/194",
+  "image": "https://static.theassets.club/tokens/194.png",
+  "name": "Asset #194"
 }

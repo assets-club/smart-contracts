@@ -1,6 +1,23 @@
 {
-  "name": "Asset #548",
-  "description": "Asset #548",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/548"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Bubblegum"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Trident"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/548",
+  "image": "https://static.theassets.club/tokens/548.png",
+  "name": "Asset #548"
 }

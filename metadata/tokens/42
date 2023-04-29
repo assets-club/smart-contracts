@@ -1,6 +1,23 @@
 {
-  "name": "Asset #42",
-  "description": "Asset #42",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/42"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Strawberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Brazilian Short"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/42",
+  "image": "https://static.theassets.club/tokens/42.png",
+  "name": "Asset #42"
 }

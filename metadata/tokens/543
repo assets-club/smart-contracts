@@ -1,6 +1,27 @@
 {
-  "name": "Asset #543",
-  "description": "Asset #543",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/543"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Oranges"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Sachs"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/543",
+  "image": "https://static.theassets.club/tokens/543.png",
+  "name": "Asset #543"
 }

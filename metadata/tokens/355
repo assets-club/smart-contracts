@@ -1,6 +1,23 @@
 {
-  "name": "Asset #355",
-  "description": "Asset #355",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/355"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Plums"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Lace Thong"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/355",
+  "image": "https://static.theassets.club/tokens/355.png",
+  "name": "Asset #355"
 }

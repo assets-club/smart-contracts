@@ -1,6 +1,27 @@
 {
-  "name": "Asset #193",
-  "description": "Asset #193",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/193"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pumpkins"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bluepill"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/193",
+  "image": "https://static.theassets.club/tokens/193.png",
+  "name": "Asset #193"
 }

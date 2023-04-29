@@ -1,6 +1,23 @@
 {
-  "name": "Asset #251",
-  "description": "Asset #251",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/251"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Oranges"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Watermelon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/251",
+  "image": "https://static.theassets.club/tokens/251.png",
+  "name": "Asset #251"
 }

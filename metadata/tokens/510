@@ -1,6 +1,23 @@
 {
-  "name": "Asset #510",
-  "description": "Asset #510",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/510"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Leo Socks"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/510",
+  "image": "https://static.theassets.club/tokens/510.png",
+  "name": "Asset #510"
 }

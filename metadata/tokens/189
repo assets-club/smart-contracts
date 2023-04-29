@@ -1,6 +1,23 @@
 {
-  "name": "Asset #189",
-  "description": "Asset #189",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/189"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Grapes"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Arielle"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/189",
+  "image": "https://static.theassets.club/tokens/189.png",
+  "name": "Asset #189"
 }

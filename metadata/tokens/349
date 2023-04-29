@@ -1,6 +1,27 @@
 {
-  "name": "Asset #349",
-  "description": "Asset #349",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/349"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Panier"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Hips Necklace"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/349",
+  "image": "https://static.theassets.club/tokens/349.png",
+  "name": "Asset #349"
 }

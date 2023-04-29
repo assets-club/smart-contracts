@@ -1,6 +1,23 @@
 {
-  "name": "Asset #476",
-  "description": "Asset #476",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/476"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/476",
+  "image": "https://static.theassets.club/tokens/476.png",
+  "name": "Asset #476"
 }

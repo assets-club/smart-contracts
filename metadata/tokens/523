@@ -1,6 +1,23 @@
 {
-  "name": "Asset #523",
-  "description": "Asset #523",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/523"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Square Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Super High Waist"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/523",
+  "image": "https://static.theassets.club/tokens/523.png",
+  "name": "Asset #523"
 }

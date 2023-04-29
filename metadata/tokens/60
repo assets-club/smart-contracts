@@ -1,6 +1,23 @@
 {
-  "name": "Asset #60",
-  "description": "Asset #60",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/60"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pomegranates"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "2001"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/60",
+  "image": "https://static.theassets.club/tokens/60.png",
+  "name": "Asset #60"
 }

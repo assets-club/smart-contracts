@@ -1,6 +1,27 @@
 {
-  "name": "Asset #465",
-  "description": "Asset #465",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/465"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Violetpill"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Hips Necklace"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/465",
+  "image": "https://static.theassets.club/tokens/465.png",
+  "name": "Asset #465"
 }

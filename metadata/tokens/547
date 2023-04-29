@@ -1,6 +1,23 @@
 {
-  "name": "Asset #547",
-  "description": "Asset #547",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/547"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Jackfruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Minty"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Sachs"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/547",
+  "image": "https://static.theassets.club/tokens/547.png",
+  "name": "Asset #547"
 }

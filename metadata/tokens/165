@@ -1,6 +1,27 @@
 {
-  "name": "Asset #165",
-  "description": "Asset #165",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/165"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Leo Socks"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Triangle"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/165",
+  "image": "https://static.theassets.club/tokens/165.png",
+  "name": "Asset #165"
 }

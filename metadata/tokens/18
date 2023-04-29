@@ -1,6 +1,27 @@
 {
-  "name": "Asset #18",
-  "description": "Asset #18",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/18"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Watermelon"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/18",
+  "image": "https://static.theassets.club/tokens/18.png",
+  "name": "Asset #18"
 }

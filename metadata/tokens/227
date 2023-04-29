@@ -1,6 +1,23 @@
 {
-  "name": "Asset #227",
-  "description": "Asset #227",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/227"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apples"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "2000"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/227",
+  "image": "https://static.theassets.club/tokens/227.png",
+  "name": "Asset #227"
 }

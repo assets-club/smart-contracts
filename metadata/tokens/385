@@ -1,6 +1,23 @@
 {
-  "name": "Asset #385",
-  "description": "Asset #385",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/385"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bretelle"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/385",
+  "image": "https://static.theassets.club/tokens/385.png",
+  "name": "Asset #385"
 }

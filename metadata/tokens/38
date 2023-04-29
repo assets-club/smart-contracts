@@ -1,6 +1,23 @@
 {
-  "name": "Asset #38",
-  "description": "Asset #38",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/38"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Bubblegum"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Peachy String"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/38",
+  "image": "https://static.theassets.club/tokens/38.png",
+  "name": "Asset #38"
 }

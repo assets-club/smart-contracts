@@ -1,6 +1,19 @@
 {
-  "name": "Asset #329",
-  "description": "Asset #329",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/329"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Prunes"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/329",
+  "image": "https://static.theassets.club/tokens/329.png",
+  "name": "Asset #329"
 }

@@ -1,6 +1,23 @@
 {
-  "name": "Asset #224",
-  "description": "Asset #224",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/224"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Passion Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Soros"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/224",
+  "image": "https://static.theassets.club/tokens/224.png",
+  "name": "Asset #224"
 }

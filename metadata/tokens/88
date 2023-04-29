@@ -1,6 +1,23 @@
 {
-  "name": "Asset #88",
-  "description": "Asset #88",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/88"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Perfection Of Nature"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/88",
+  "image": "https://static.theassets.club/tokens/88.png",
+  "name": "Asset #88"
 }

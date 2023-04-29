@@ -1,6 +1,27 @@
 {
-  "name": "Asset #401",
-  "description": "Asset #401",
-  "image": "https://static.theassets.club/tokens/reveal.gif",
-  "external_url": "https://assetsclub.club/gallery/401"
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Trident"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Wind"
+    }
+  ],
+  "external_url": "https://theassets.club/gallery/401",
+  "image": "https://static.theassets.club/tokens/401.png",
+  "name": "Asset #401"
 }
