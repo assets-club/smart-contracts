@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Kiwis"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Triangle"
+    }
+  ]
+}

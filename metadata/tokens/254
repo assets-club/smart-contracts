@@ -29,8 +29,8 @@
       "value": "Watermelon"
     }
   ],
-  "external_url": "https://theassets.club/gallery/254",
-  "image": "https://static.theassets.club/tokens/254.png",
   "name": "Asset #254",
-  "description": "Asset #254, part of TheAssetClub Original collection."
+  "description": "Asset #254, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/254.png",
+  "external_url": "https://theassets.club/gallery/254"
 }

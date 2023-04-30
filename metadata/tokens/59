@@ -21,8 +21,8 @@
       "value": "Blue Beam"
     }
   ],
-  "external_url": "https://theassets.club/gallery/59",
-  "image": "https://static.theassets.club/tokens/59.png",
   "name": "Asset #59",
-  "description": "Asset #59, part of TheAssetClub Original collection."
+  "description": "Asset #59, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/59.png",
+  "external_url": "https://theassets.club/gallery/59"
 }

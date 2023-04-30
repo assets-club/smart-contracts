@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bicolor"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bra"
+    }
+  ]
+}

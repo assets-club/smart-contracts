@@ -1,0 +1,32 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Elderberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Arbitrator Socks"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "2000"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Kaneda"
+    }
+  ]
+}

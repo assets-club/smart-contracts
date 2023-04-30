@@ -21,8 +21,8 @@
       "value": "2030"
     }
   ],
-  "external_url": "https://theassets.club/gallery/255",
-  "image": "https://static.theassets.club/tokens/255.png",
   "name": "Asset #255",
-  "description": "Asset #255, part of TheAssetClub Original collection."
+  "description": "Asset #255, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/255.png",
+  "external_url": "https://theassets.club/gallery/255"
 }

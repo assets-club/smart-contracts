@@ -1,0 +1,20 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Damier"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cheeky"
+    }
+  ]
+}

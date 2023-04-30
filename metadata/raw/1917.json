@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Guavas"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Gun"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Fish"
+    }
+  ]
+}

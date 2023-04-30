@@ -21,8 +21,8 @@
       "value": "Hips Necklace"
     }
   ],
-  "external_url": "https://theassets.club/gallery/465",
-  "image": "https://static.theassets.club/tokens/465.png",
   "name": "Asset #465",
-  "description": "Asset #465, part of TheAssetClub Original collection."
+  "description": "Asset #465, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/465.png",
+  "external_url": "https://theassets.club/gallery/465"
 }

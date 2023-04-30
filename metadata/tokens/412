@@ -17,8 +17,8 @@
       "value": "Flat String"
     }
   ],
-  "external_url": "https://theassets.club/gallery/412",
-  "image": "https://static.theassets.club/tokens/412.png",
   "name": "Asset #412",
-  "description": "Asset #412, part of TheAssetClub Original collection."
+  "description": "Asset #412, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/412.png",
+  "external_url": "https://theassets.club/gallery/412"
 }

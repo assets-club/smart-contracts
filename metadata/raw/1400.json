@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pumpkins"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cheeky"
+    }
+  ]
+}

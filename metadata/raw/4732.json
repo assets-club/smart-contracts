@@ -1,0 +1,20 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Eggplants"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cutie"
+    }
+  ]
+}

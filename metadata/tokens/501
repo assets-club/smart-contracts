@@ -21,8 +21,8 @@
       "value": "Cheeky"
     }
   ],
-  "external_url": "https://theassets.club/gallery/501",
-  "image": "https://static.theassets.club/tokens/501.png",
   "name": "Asset #501",
-  "description": "Asset #501, part of TheAssetClub Original collection."
+  "description": "Asset #501, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/501.png",
+  "external_url": "https://theassets.club/gallery/501"
 }

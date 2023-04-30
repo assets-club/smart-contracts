@@ -29,8 +29,8 @@
       "value": "Wind"
     }
   ],
-  "external_url": "https://theassets.club/gallery/506",
-  "image": "https://static.theassets.club/tokens/506.png",
   "name": "Asset #506",
-  "description": "Asset #506, part of TheAssetClub Original collection."
+  "description": "Asset #506, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/506.png",
+  "external_url": "https://theassets.club/gallery/506"
 }

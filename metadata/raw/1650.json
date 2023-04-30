@@ -1,0 +1,32 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Bling Stocking"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Spider"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bra"
+    }
+  ]
+}

@@ -21,8 +21,8 @@
       "value": "Monokini"
     }
   ],
-  "external_url": "https://theassets.club/gallery/132",
-  "image": "https://static.theassets.club/tokens/132.png",
   "name": "Asset #132",
-  "description": "Asset #132, part of TheAssetClub Original collection."
+  "description": "Asset #132, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/132.png",
+  "external_url": "https://theassets.club/gallery/132"
 }

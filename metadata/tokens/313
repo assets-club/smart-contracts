@@ -17,8 +17,8 @@
       "value": "Blue V"
     }
   ],
-  "external_url": "https://theassets.club/gallery/313",
-  "image": "https://static.theassets.club/tokens/313.png",
   "name": "Asset #313",
-  "description": "Asset #313, part of TheAssetClub Original collection."
+  "description": "Asset #313, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/313.png",
+  "external_url": "https://theassets.club/gallery/313"
 }

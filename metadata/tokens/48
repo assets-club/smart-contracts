@@ -21,8 +21,8 @@
       "value": "Deadpool"
     }
   ],
-  "external_url": "https://theassets.club/gallery/48",
-  "image": "https://static.theassets.club/tokens/48.png",
   "name": "Asset #48",
-  "description": "Asset #48, part of TheAssetClub Original collection."
+  "description": "Asset #48, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/48.png",
+  "external_url": "https://theassets.club/gallery/48"
 }

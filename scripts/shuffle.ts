@@ -9,14 +9,13 @@ import { shuffle } from 'shuffle-seed';
 // see https://etherscan.io/tx/0xc19f80906d944a0efd27e0c6d479d3320a9986aaad024ccfc35f80be8aeb7f00
 const seed = '0xc19f80906d944a0efd27e0c6d479d3320a9986aaad024ccfc35f80be8aeb7f00';
 const original = range(1, 5778);
-const size = 555;
+const size = 557;
 
-const inputDir = join(__dirname, '../metadata/collection');
+const inputDir = join(__dirname, '../metadata/raw');
 const outputDir = join(__dirname, '../metadata/tokens');
 
 async function generate(tokenId: number, destination: number) {
   const metadata = JSON.parse(await readFile(join(inputDir, destination + '.json'), { encoding: 'utf8' }));
-
   metadata.name = `Asset #${tokenId}`;
   metadata.description = `Asset #${tokenId}, part of TheAssetClub Original collection.`;
   metadata.image = `https://static.theassets.club/tokens/${tokenId}.png`;

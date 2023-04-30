@@ -21,8 +21,8 @@
       "value": "Angel"
     }
   ],
-  "external_url": "https://theassets.club/gallery/3",
-  "image": "https://static.theassets.club/tokens/3.png",
   "name": "Asset #3",
-  "description": "Asset #3, part of TheAssetClub Original collection."
+  "description": "Asset #3, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/3.png",
+  "external_url": "https://theassets.club/gallery/3"
 }

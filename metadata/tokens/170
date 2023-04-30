@@ -17,8 +17,8 @@
       "value": "Trident"
     }
   ],
-  "external_url": "https://theassets.club/gallery/170",
-  "image": "https://static.theassets.club/tokens/170.png",
   "name": "Asset #170",
-  "description": "Asset #170, part of TheAssetClub Original collection."
+  "description": "Asset #170, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/170.png",
+  "external_url": "https://theassets.club/gallery/170"
 }

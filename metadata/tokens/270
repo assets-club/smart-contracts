@@ -21,8 +21,8 @@
       "value": "Adjusted"
     }
   ],
-  "external_url": "https://theassets.club/gallery/270",
-  "image": "https://static.theassets.club/tokens/270.png",
   "name": "Asset #270",
-  "description": "Asset #270, part of TheAssetClub Original collection."
+  "description": "Asset #270, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/270.png",
+  "external_url": "https://theassets.club/gallery/270"
 }

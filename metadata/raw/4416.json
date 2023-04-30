@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Pumpkins"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Watermelon"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Cupidon"
+    }
+  ]
+}

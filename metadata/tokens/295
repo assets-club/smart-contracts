@@ -21,8 +21,8 @@
       "value": "Ring String"
     }
   ],
-  "external_url": "https://theassets.club/gallery/295",
-  "image": "https://static.theassets.club/tokens/295.png",
   "name": "Asset #295",
-  "description": "Asset #295, part of TheAssetClub Original collection."
+  "description": "Asset #295, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/295.png",
+  "external_url": "https://theassets.club/gallery/295"
 }

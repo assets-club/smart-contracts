@@ -17,8 +17,8 @@
       "value": "Bretelle"
     }
   ],
-  "external_url": "https://theassets.club/gallery/127",
-  "image": "https://static.theassets.club/tokens/127.png",
   "name": "Asset #127",
-  "description": "Asset #127, part of TheAssetClub Original collection."
+  "description": "Asset #127, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/127.png",
+  "external_url": "https://theassets.club/gallery/127"
 }

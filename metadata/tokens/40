@@ -17,8 +17,8 @@
       "value": "Classic String"
     }
   ],
-  "external_url": "https://theassets.club/gallery/40",
-  "image": "https://static.theassets.club/tokens/40.png",
   "name": "Asset #40",
-  "description": "Asset #40, part of TheAssetClub Original collection."
+  "description": "Asset #40, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/40.png",
+  "external_url": "https://theassets.club/gallery/40"
 }

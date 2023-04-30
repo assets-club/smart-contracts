@@ -17,8 +17,8 @@
       "value": "Bikini"
     }
   ],
-  "external_url": "https://theassets.club/gallery/6",
-  "image": "https://static.theassets.club/tokens/6.png",
   "name": "Asset #6",
-  "description": "Asset #6, part of TheAssetClub Original collection."
+  "description": "Asset #6, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/6.png",
+  "external_url": "https://theassets.club/gallery/6"
 }

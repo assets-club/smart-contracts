@@ -17,8 +17,8 @@
       "value": "Chill"
     }
   ],
-  "external_url": "https://theassets.club/gallery/26",
-  "image": "https://static.theassets.club/tokens/26.png",
   "name": "Asset #26",
-  "description": "Asset #26, part of TheAssetClub Original collection."
+  "description": "Asset #26, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/26.png",
+  "external_url": "https://theassets.club/gallery/26"
 }

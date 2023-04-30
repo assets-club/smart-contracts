@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apples"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "2000"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Cupidon"
+    }
+  ]
+}

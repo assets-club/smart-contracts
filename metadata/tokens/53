@@ -21,8 +21,8 @@
       "value": "Rising Sun"
     }
   ],
-  "external_url": "https://theassets.club/gallery/53",
-  "image": "https://static.theassets.club/tokens/53.png",
   "name": "Asset #53",
-  "description": "Asset #53, part of TheAssetClub Original collection."
+  "description": "Asset #53, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/53.png",
+  "external_url": "https://theassets.club/gallery/53"
 }

@@ -1,0 +1,20 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apples"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic String"
+    }
+  ]
+}

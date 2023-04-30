@@ -17,8 +17,8 @@
       "value": "Blockchain"
     }
   ],
-  "external_url": "https://theassets.club/gallery/148",
-  "image": "https://static.theassets.club/tokens/148.png",
   "name": "Asset #148",
-  "description": "Asset #148, part of TheAssetClub Original collection."
+  "description": "Asset #148, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/148.png",
+  "external_url": "https://theassets.club/gallery/148"
 }

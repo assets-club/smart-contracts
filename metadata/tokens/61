@@ -21,8 +21,8 @@
       "value": "Bra"
     }
   ],
-  "external_url": "https://theassets.club/gallery/61",
-  "image": "https://static.theassets.club/tokens/61.png",
   "name": "Asset #61",
-  "description": "Asset #61, part of TheAssetClub Original collection."
+  "description": "Asset #61, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/61.png",
+  "external_url": "https://theassets.club/gallery/61"
 }

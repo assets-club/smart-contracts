@@ -1,0 +1,20 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Square Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Yellow Letsgo"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Shorty"
+    }
+  ]
+}

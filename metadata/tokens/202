@@ -21,8 +21,8 @@
       "value": "Arielle"
     }
   ],
-  "external_url": "https://theassets.club/gallery/202",
-  "image": "https://static.theassets.club/tokens/202.png",
   "name": "Asset #202",
-  "description": "Asset #202, part of TheAssetClub Original collection."
+  "description": "Asset #202, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/202.png",
+  "external_url": "https://theassets.club/gallery/202"
 }

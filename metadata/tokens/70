@@ -17,8 +17,8 @@
       "value": "Peachy String"
     }
   ],
-  "external_url": "https://theassets.club/gallery/70",
-  "image": "https://static.theassets.club/tokens/70.png",
   "name": "Asset #70",
-  "description": "Asset #70, part of TheAssetClub Original collection."
+  "description": "Asset #70, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/70.png",
+  "external_url": "https://theassets.club/gallery/70"
 }

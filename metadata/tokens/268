@@ -21,8 +21,8 @@
       "value": "Ready"
     }
   ],
-  "external_url": "https://theassets.club/gallery/268",
-  "image": "https://static.theassets.club/tokens/268.png",
   "name": "Asset #268",
-  "description": "Asset #268, part of TheAssetClub Original collection."
+  "description": "Asset #268, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/268.png",
+  "external_url": "https://theassets.club/gallery/268"
 }

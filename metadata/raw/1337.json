@@ -1,0 +1,20 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bra"
+    }
+  ]
+}

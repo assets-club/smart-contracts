@@ -21,8 +21,8 @@
       "value": "Triangle"
     }
   ],
-  "external_url": "https://theassets.club/gallery/409",
-  "image": "https://static.theassets.club/tokens/409.png",
   "name": "Asset #409",
-  "description": "Asset #409, part of TheAssetClub Original collection."
+  "description": "Asset #409, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/409.png",
+  "external_url": "https://theassets.club/gallery/409"
 }

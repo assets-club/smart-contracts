@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Oranges"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Ready"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Dark Angel"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Jour"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Accessory Skin",
+      "value": "Dagger"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Bling Stocking"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cutie"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bra"
+    }
+  ]
+}

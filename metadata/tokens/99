@@ -17,8 +17,8 @@
       "value": "Short Jean"
     }
   ],
-  "external_url": "https://theassets.club/gallery/99",
-  "image": "https://static.theassets.club/tokens/99.png",
   "name": "Asset #99",
-  "description": "Asset #99, part of TheAssetClub Original collection."
+  "description": "Asset #99, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/99.png",
+  "external_url": "https://theassets.club/gallery/99"
 }

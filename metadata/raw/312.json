@@ -1,0 +1,20 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Apples"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Sea Storm"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Triangle"
+    }
+  ]
+}

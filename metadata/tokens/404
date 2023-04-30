@@ -21,8 +21,8 @@
       "value": "Fish"
     }
   ],
-  "external_url": "https://theassets.club/gallery/404",
-  "image": "https://static.theassets.club/tokens/404.png",
   "name": "Asset #404",
-  "description": "Asset #404, part of TheAssetClub Original collection."
+  "description": "Asset #404, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/404.png",
+  "external_url": "https://theassets.club/gallery/404"
 }

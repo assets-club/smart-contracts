@@ -21,8 +21,8 @@
       "value": "Pinch"
     }
   ],
-  "external_url": "https://theassets.club/gallery/100",
-  "image": "https://static.theassets.club/tokens/100.png",
   "name": "Asset #100",
-  "description": "Asset #100, part of TheAssetClub Original collection."
+  "description": "Asset #100, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/100.png",
+  "external_url": "https://theassets.club/gallery/100"
 }

@@ -21,8 +21,8 @@
       "value": "Fresh Thong"
     }
   ],
-  "external_url": "https://theassets.club/gallery/20",
-  "image": "https://static.theassets.club/tokens/20.png",
   "name": "Asset #20",
-  "description": "Asset #20, part of TheAssetClub Original collection."
+  "description": "Asset #20, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/20.png",
+  "external_url": "https://theassets.club/gallery/20"
 }

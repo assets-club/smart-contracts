@@ -21,8 +21,8 @@
       "value": "The Assets Official"
     }
   ],
-  "external_url": "https://theassets.club/gallery/183",
-  "image": "https://static.theassets.club/tokens/183.png",
   "name": "Asset #183",
-  "description": "Asset #183, part of TheAssetClub Original collection."
+  "description": "Asset #183, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/183.png",
+  "external_url": "https://theassets.club/gallery/183"
 }

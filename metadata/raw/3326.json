@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Kiwis"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Sunstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Black"
+    }
+  ]
+}

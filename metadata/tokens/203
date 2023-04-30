@@ -25,8 +25,8 @@
       "value": "Cherry"
     }
   ],
-  "external_url": "https://theassets.club/gallery/203",
-  "image": "https://static.theassets.club/tokens/203.png",
   "name": "Asset #203",
-  "description": "Asset #203, part of TheAssetClub Original collection."
+  "description": "Asset #203, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/203.png",
+  "external_url": "https://theassets.club/gallery/203"
 }

@@ -17,8 +17,8 @@
       "value": "2001"
     }
   ],
-  "external_url": "https://theassets.club/gallery/33",
-  "image": "https://static.theassets.club/tokens/33.png",
   "name": "Asset #33",
-  "description": "Asset #33, part of TheAssetClub Original collection."
+  "description": "Asset #33, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/33.png",
+  "external_url": "https://theassets.club/gallery/33"
 }

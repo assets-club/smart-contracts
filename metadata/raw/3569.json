@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Bicolor"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Bra"
+    }
+  ]
+}

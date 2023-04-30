@@ -25,8 +25,8 @@
       "value": "Cutie"
     }
   ],
-  "external_url": "https://theassets.club/gallery/52",
-  "image": "https://static.theassets.club/tokens/52.png",
   "name": "Asset #52",
-  "description": "Asset #52, part of TheAssetClub Original collection."
+  "description": "Asset #52, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/52.png",
+  "external_url": "https://theassets.club/gallery/52"
 }

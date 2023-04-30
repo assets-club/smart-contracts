@@ -17,8 +17,8 @@
       "value": "Brand"
     }
   ],
-  "external_url": "https://theassets.club/gallery/145",
-  "image": "https://static.theassets.club/tokens/145.png",
   "name": "Asset #145",
-  "description": "Asset #145, part of TheAssetClub Original collection."
+  "description": "Asset #145, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/145.png",
+  "external_url": "https://theassets.club/gallery/145"
 }

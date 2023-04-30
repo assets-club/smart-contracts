@@ -21,8 +21,8 @@
       "value": "Bonny"
     }
   ],
-  "external_url": "https://theassets.club/gallery/27",
-  "image": "https://static.theassets.club/tokens/27.png",
   "name": "Asset #27",
-  "description": "Asset #27, part of TheAssetClub Original collection."
+  "description": "Asset #27, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/27.png",
+  "external_url": "https://theassets.club/gallery/27"
 }

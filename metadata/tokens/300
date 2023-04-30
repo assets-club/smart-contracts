@@ -21,8 +21,8 @@
       "value": "Tinder"
     }
   ],
-  "external_url": "https://theassets.club/gallery/300",
-  "image": "https://static.theassets.club/tokens/300.png",
   "name": "Asset #300",
-  "description": "Asset #300, part of TheAssetClub Original collection."
+  "description": "Asset #300, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/300.png",
+  "external_url": "https://theassets.club/gallery/300"
 }

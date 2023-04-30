@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Grapes TH"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Nebulite"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "2000"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "2030"
+    }
+  ]
+}

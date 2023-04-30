@@ -1,0 +1,28 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Peaches"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "1mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Cutie"
+    }
+  ],
+  "name": "Asset #557",
+  "description": "Asset #557, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/557.png",
+  "external_url": "https://theassets.club/gallery/557"
+}

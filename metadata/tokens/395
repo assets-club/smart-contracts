@@ -21,8 +21,8 @@
       "value": "Soros"
     }
   ],
-  "external_url": "https://theassets.club/gallery/395",
-  "image": "https://static.theassets.club/tokens/395.png",
   "name": "Asset #395",
-  "description": "Asset #395, part of TheAssetClub Original collection."
+  "description": "Asset #395, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/395.png",
+  "external_url": "https://theassets.club/gallery/395"
 }

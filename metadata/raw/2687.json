@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Panier"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Hips Necklace"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "5mL"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Leo Socks"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Sativa"
+    }
+  ]
+}

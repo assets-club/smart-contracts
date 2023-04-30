@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Monokini"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Rescue"
+    }
+  ]
+}

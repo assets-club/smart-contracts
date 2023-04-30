@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Mangos"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Crepuscule"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Callisto"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Heaume"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Hips Necklace"
+    }
+  ]
+}

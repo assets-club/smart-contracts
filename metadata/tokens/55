@@ -17,8 +17,8 @@
       "value": "Classic Tanga"
     }
   ],
-  "external_url": "https://theassets.club/gallery/55",
-  "image": "https://static.theassets.club/tokens/55.png",
   "name": "Asset #55",
-  "description": "Asset #55, part of TheAssetClub Original collection."
+  "description": "Asset #55, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/55.png",
+  "external_url": "https://theassets.club/gallery/55"
 }

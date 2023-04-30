@@ -21,8 +21,8 @@
       "value": "Indian Short"
     }
   ],
-  "external_url": "https://theassets.club/gallery/503",
-  "image": "https://static.theassets.club/tokens/503.png",
   "name": "Asset #503",
-  "description": "Asset #503, part of TheAssetClub Original collection."
+  "description": "Asset #503, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/503.png",
+  "external_url": "https://theassets.club/gallery/503"
 }

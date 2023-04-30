@@ -21,8 +21,8 @@
       "value": "Shorty"
     }
   ],
-  "external_url": "https://theassets.club/gallery/234",
-  "image": "https://static.theassets.club/tokens/234.png",
   "name": "Asset #234",
-  "description": "Asset #234, part of TheAssetClub Original collection."
+  "description": "Asset #234, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/234.png",
+  "external_url": "https://theassets.club/gallery/234"
 }

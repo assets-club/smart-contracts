@@ -21,8 +21,8 @@
       "value": "Dbz"
     }
   ],
-  "external_url": "https://theassets.club/gallery/12",
-  "image": "https://static.theassets.club/tokens/12.png",
   "name": "Asset #12",
-  "description": "Asset #12, part of TheAssetClub Original collection."
+  "description": "Asset #12, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/12.png",
+  "external_url": "https://theassets.club/gallery/12"
 }

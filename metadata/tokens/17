@@ -21,8 +21,8 @@
       "value": "Redpill"
     }
   ],
-  "external_url": "https://theassets.club/gallery/17",
-  "image": "https://static.theassets.club/tokens/17.png",
   "name": "Asset #17",
-  "description": "Asset #17, part of TheAssetClub Original collection."
+  "description": "Asset #17, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/17.png",
+  "external_url": "https://theassets.club/gallery/17"
 }

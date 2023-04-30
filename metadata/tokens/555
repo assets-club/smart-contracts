@@ -17,8 +17,8 @@
       "value": "Turkie Snake"
     }
   ],
-  "external_url": "https://theassets.club/gallery/555",
-  "image": "https://static.theassets.club/tokens/555.png",
   "name": "Asset #555",
-  "description": "Asset #555, part of TheAssetClub Original collection."
+  "description": "Asset #555, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/555.png",
+  "external_url": "https://theassets.club/gallery/555"
 }

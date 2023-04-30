@@ -17,8 +17,8 @@
       "value": "Panier"
     }
   ],
-  "external_url": "https://theassets.club/gallery/365",
-  "image": "https://static.theassets.club/tokens/365.png",
   "name": "Asset #365",
-  "description": "Asset #365, part of TheAssetClub Original collection."
+  "description": "Asset #365, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/365.png",
+  "external_url": "https://theassets.club/gallery/365"
 }

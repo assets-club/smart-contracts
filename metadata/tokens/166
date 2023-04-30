@@ -21,8 +21,8 @@
       "value": "The Monarch"
     }
   ],
-  "external_url": "https://theassets.club/gallery/166",
-  "image": "https://static.theassets.club/tokens/166.png",
   "name": "Asset #166",
-  "description": "Asset #166, part of TheAssetClub Original collection."
+  "description": "Asset #166, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/166.png",
+  "external_url": "https://theassets.club/gallery/166"
 }

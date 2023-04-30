@@ -21,8 +21,8 @@
       "value": "Bicolor"
     }
   ],
-  "external_url": "https://theassets.club/gallery/7",
-  "image": "https://static.theassets.club/tokens/7.png",
   "name": "Asset #7",
-  "description": "Asset #7, part of TheAssetClub Original collection."
+  "description": "Asset #7, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/7.png",
+  "external_url": "https://theassets.club/gallery/7"
 }

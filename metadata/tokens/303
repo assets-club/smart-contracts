@@ -25,8 +25,8 @@
       "value": "Charge"
     }
   ],
-  "external_url": "https://theassets.club/gallery/303",
-  "image": "https://static.theassets.club/tokens/303.png",
   "name": "Asset #303",
-  "description": "Asset #303, part of TheAssetClub Original collection."
+  "description": "Asset #303, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/303.png",
+  "external_url": "https://theassets.club/gallery/303"
 }

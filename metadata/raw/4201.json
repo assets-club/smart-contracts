@@ -1,0 +1,20 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Square Fruits"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Nuit"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Obsidian"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Classic String"
+    }
+  ]
+}

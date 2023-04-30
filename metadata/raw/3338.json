@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Aube"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Andromeda"
+    },
+    {
+      "trait_type": "Underwear",
+      "value": "Leo Socks"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Triangle"
+    }
+  ]
+}

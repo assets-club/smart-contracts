@@ -1,0 +1,24 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Strawberries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Flat"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Avatar"
+    },
+    {
+      "trait_type": "Tattoo",
+      "value": "3mL"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Blue Beam"
+    }
+  ]
+}

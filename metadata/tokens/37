@@ -17,8 +17,8 @@
       "value": "Black"
     }
   ],
-  "external_url": "https://theassets.club/gallery/37",
-  "image": "https://static.theassets.club/tokens/37.png",
   "name": "Asset #37",
-  "description": "Asset #37, part of TheAssetClub Original collection."
+  "description": "Asset #37, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/37.png",
+  "external_url": "https://theassets.club/gallery/37"
 }

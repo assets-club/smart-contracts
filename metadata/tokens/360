@@ -21,8 +21,8 @@
       "value": "Miss Univers 2025"
     }
   ],
-  "external_url": "https://theassets.club/gallery/360",
-  "image": "https://static.theassets.club/tokens/360.png",
   "name": "Asset #360",
-  "description": "Asset #360, part of TheAssetClub Original collection."
+  "description": "Asset #360, part of TheAssetClub Original collection.",
+  "image": "https://static.theassets.club/tokens/360.png",
+  "external_url": "https://theassets.club/gallery/360"
 }

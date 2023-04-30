@@ -1,0 +1,20 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Body",
+      "value": "Cherries"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Miami Pool Party"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Moonstone"
+    },
+    {
+      "trait_type": "Cloth",
+      "value": "Shorty"
+    }
+  ]
+}
